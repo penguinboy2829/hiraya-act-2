@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { CSSTransitionGroup } from 'react-transition-group';
+import { Link } from "react-router-dom";
 import '../OJT.css';
 
 function Landing({}) {
     return (
-      <div className='col p-5 border m-2'>
+      <div className='col d-flex border m-2 align-items-center justify-content-center' style={{ height: "100vh" }}>
           <div className="container" id="container">
             <div className="form-container sign-up-container">
               <form action="#">
@@ -48,7 +49,10 @@ function Landing({}) {
                 <input type="email" placeholder="Email" />
                 <input type="password" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
-                <button><a href = "/">Log In</a></button>
+                <a href = '/' className = 'button'>
+                  Log In
+                </a>
+                
               </form>
             </div>
             <div className="overlay-container">

@@ -8,7 +8,6 @@ import React, { useState } from 'react';
 import SideNav from "./Sidenav";
 import './App.css';
 
-
 export default function App() {
   return (
     <BrowserRouter>

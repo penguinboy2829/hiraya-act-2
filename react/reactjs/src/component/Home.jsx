@@ -1,26 +1,22 @@
 import logo from './logo.svg';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 
 const user = {
   _id: 123,
   name: 'Mc'
 };
 
-const taskinfo = [{
+const taskinfo = {
   _id: 12345,
   name: 'task',
   pname: 'hoh',
-},{
-  _id: 1234,
-  name: 'task1',
-  pname: 'hah',
-}];
+  };
 
 const TaskCard = () =>  {
   return(
-    <div className = 'col border rounded m-2'>
-        <a href = "/project">
+    <div className = 'col d-flex border rounded m-2 align-items-center'>
+        <a href = "/project" style = {{textDecoration: "none" }}>
         <h4>Example</h4>
         <p>{taskinfo.pname}</p>
         </a>
@@ -30,9 +26,13 @@ const TaskCard = () =>  {
 
 const ProjectCards = () => {
     return(
-        <div className='col-auto m-3 border w-25'>
-        <h1>Name</h1>
-        <p>Date Created</p>
+        <div className='col-auto d-flex m-3 border w-25 h-25 align-items-center '>
+        <Link to = '/project' style = {{textDecoration: "none" }}>
+          <a style = {{textDecoration: "none" }}>
+            <h4>Name</h4>
+            <p>Date Created</p>
+          </a>
+        </Link>
         </div>
     );
 }
@@ -50,10 +50,17 @@ function Taskspace() {
     };
 
     return (
-        <div className='col-auto border m-2'>
-          <h2>Task of the Day</h2>
-          <p>{currentDate.toLocaleString()}</p>
-          <div className='container border'>
+        <div className='col-auto border m-2 pr-10'>
+          <div className = 'd-flex justify-content-start'>
+            <h4 className = 'pr-4'>Task of the Day</h4>
+            <div className="d-flex align-items-center">
+              <i className="fa-solid fa-calendar-days text-md" />
+            </div>
+          </div>
+          <div className = 'd-flex justify-content-start'>
+            <p>{currentDate.toLocaleString()}</p>
+          </div>
+          <div className=''>
             <TaskCard />
             {cards}
               <button className='col border rounded m-2' onClick={addTaskCard}>
@@ -73,9 +80,13 @@ function Projectspace() {
     };
 
     return (
-        <div className='col border m-2 float-right width-100'>
-          <h2>Projects</h2>
-          <p>Lorem Ipsum</p>
+        <div className='col border m-2 width-100'>
+          <div className = 'd-flex justify-content-start'>
+            <h2>Projects</h2>
+          </div>
+          <div className = 'd-flex justify-content-start'>
+            <p>Lorem Ipsum</p>
+          </div>
           <div className='row border m-2'>
             <ProjectCards />
             {projects}
@@ -93,6 +104,7 @@ function Home() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const currentDay = daysOfWeek[currentDate.getDay()];
+  currentDate.setHours(0, 0, 0, 0);
 
   const [projects,setProjects] = useState ([]);
 
@@ -102,10 +114,14 @@ function Home() {
   };
 
   return (
-    <div className='col min-vh-100 p-5 border m-2'>
+    <div className='col min-vh-100 p-5 border'>
       <div id='greet' className='row border justify-content-start'>
-        <h1>Hello, {user.name}!</h1>
-        <p>Today is {currentDay.toLocaleString()}</p>
+        <div className = 'd-flex justify-content-start'>
+          <h1>Hello, {user.name}!</h1>
+        </div>
+        <div className = 'd-flex justify-content-start'>
+          <p>Today is {currentDay.toLocaleString()} ({currentDate.toLocaleString()})</p>
+        </div>
       </div>
 
       <div className='row border mt-3'>

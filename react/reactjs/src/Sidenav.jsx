@@ -10,10 +10,10 @@ export default function SideNav({}){
             <img src = {logo} />
             <ul className="nav nav-pills pt-2 flex-column">
               <li className="nav-item p-3 mt-5 nav-outline">
-                <Link className="nav-link fas fa-home fa-lg" exact to = "/"></Link>
+                <Link className="nav-link fas fa-home fa-lg" to = "/"></Link>
               </li>
               <li className="nav-item p-3 mt-3">
-                <Link className="nav-link fas fa-layer-group fa-lg" exact to = "/project"></Link>
+                <Link className="nav-link fas fa-layer-group fa-lg" to = "/project"></Link>
               </li>
               <li className="nav-item p-3 mt-3">
                 <a className="nav-link fas fa-cog fa-lg" href="/landing"> </a>
