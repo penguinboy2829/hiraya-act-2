@@ -75,7 +75,7 @@ function Landing({}) {
               <span>or use your account</span>
               <input id="login" type="email" placeholder="Email" />
               <input type="password" placeholder="Password" />
-              <a href="#">Forgot your password?</a>
+              <a id="forgot" href="#">Forgot your password?</a>
               <a href = '/' className = 'button'>
                 Log In
               </a>
