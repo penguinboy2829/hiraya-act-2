@@ -10,15 +10,15 @@ const user = {
 const taskinfo = {
   _id: 12345,
   name: 'task',
-  pname: 'hoh',
+  pname: 'Project Name',
   };
 
 const TaskCard = () =>  {
   return(
-    <div className = 'col d-flex border rounded m-2 align-items-center'>
+    <div className = 'col d-flex border rounded ms-1  align-items-center shadow mb-2 bg-body rounded '>
         <a href = "/project" style = {{textDecoration: "none" }}>
-        <h4>Example</h4>
-        <p>{taskinfo.pname}</p>
+        <h5 class="text-dark">Task Name</h5>
+        <p class="text-black-50">{taskinfo.pname}</p>
         </a>
     </div>
   );
@@ -26,11 +26,11 @@ const TaskCard = () =>  {
 
 const ProjectCards = () => {
     return(
-        <div className='col-auto d-flex m-3 border w-25 h-25 align-items-center '>
+        <div className='col-auto d-flex m-3 border p-4 w-25 h-25 align-items-center bg-light'>
         <Link to = '/project' style = {{textDecoration: "none" }}>
           <a style = {{textDecoration: "none" }}>
-            <h4>Name</h4>
-            <p>Date Created</p>
+            <h4 class="text-dark" >Name</h4>
+            <p class="text-black-50" > Date Created</p>
           </a>
         </Link>
         </div>
@@ -50,20 +50,20 @@ function Taskspace() {
     };
 
     return (
-        <div className='col-auto border m-2 pr-10'>
+        <div className='col-auto pr-10' >
           <div className = 'd-flex justify-content-start'>
-            <h4 className = 'pr-4'>Task of the Day</h4>
+            <h4 className = 'pr-4 -b'>Task of the Day</h4>
             <div className="d-flex align-items-center">
               <i className="fa-solid fa-calendar-days text-md" />
             </div>
           </div>
           <div className = 'd-flex justify-content-start'>
-            <p>{currentDate.toLocaleString()}</p>
+            <p class="text-black-50">{currentDate.toLocaleString()}</p>
           </div>
-          <div className=''>
+          <div className='align-items-center justify-content-middle'>
             <TaskCard />
             {cards}
-              <button className='col border rounded m-2' onClick={addTaskCard}>
+              <button className='col border rounded m-2 ms-1 align-items-center' onClick={addTaskCard}>
                 <h4>Create</h4>
               </button>
           </div>
@@ -80,18 +80,18 @@ function Projectspace() {
     };
 
     return (
-        <div className='col border m-2 width-100'>
+        <div className='col width-100 ml-5'>
           <div className = 'd-flex justify-content-start'>
             <h2>Projects</h2>
           </div>
           <div className = 'd-flex justify-content-start'>
-            <p>Lorem Ipsum</p>
+            <p class="text-black-50">All Projects</p>
           </div>
-          <div className='row border m-2'>
+          <div className='row bg-secondary '>
             <ProjectCards />
             {projects}
-            <div className='col-auto m-3 border w-25'>
-              <button className='col border rounded m-2' onClick={addProjectCard}>
+            <div className='col-auto m-3 w-25 bg-light align-items-center'>
+              <button className='col rounded' onClick={addProjectCard}>
                 <h4>Create</h4>
               </button>
             </div>
@@ -114,17 +114,17 @@ function Home() {
   };
 
   return (
-    <div className='col min-vh-100 p-5 border'>
-      <div id='greet' className='row border justify-content-start'>
+    <div className='col min-vh-100 p-2 ml-5'>
+      <div id='greet' className='row justify-content-start'>
         <div className = 'd-flex justify-content-start'>
           <h1>Hello, {user.name}!</h1>
         </div>
         <div className = 'd-flex justify-content-start'>
-          <p>Today is {currentDay.toLocaleString()} ({currentDate.toLocaleString()})</p>
+          <p class="text-black-50">Today is {currentDay.toLocaleString()} ({currentDate.toLocaleString()})</p>
         </div>
       </div>
 
-      <div className='row border mt-3'>
+      <div className='row mt-3'>
         <Taskspace />
         <Projectspace />
       </div>
@@ -132,4 +132,4 @@ function Home() {
   );
 }
 
-export default Home
+export default Home;
