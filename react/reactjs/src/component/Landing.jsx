@@ -49,12 +49,12 @@ function Landing({}) {
                 </a>
               </div>
               <span>or use your email for registration</span>
-              <input type="text" placeholder="First Name" />
-              <input type="text" placeholder="Last Name" />
-              <input type="text" placeholder="Username" />
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
-              <button>Sign Up</button>
+              <input id="login" type="text" placeholder="First Name" />
+              <input id="login" type="text" placeholder="Last Name" />
+              <input id="login" type="text" placeholder="Username" />
+              <input id="login" type="email" placeholder="Email" />
+              <input id="login" type="password" placeholder="Password" />
+              <button className = 'button'>Sign Up</button>
             </form>
           </div>
 
@@ -73,7 +73,7 @@ function Landing({}) {
                 </a>
               </div>
               <span>or use your account</span>
-              <input type="email" placeholder="Email" />
+              <input id="login" type="email" placeholder="Email" />
               <input type="password" placeholder="Password" />
               <a href="#">Forgot your password?</a>
               <a href = '/' className = 'button'>
