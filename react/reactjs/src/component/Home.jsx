@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import '../home.css';
 
 const user = {
   _id: 123,
@@ -15,9 +16,9 @@ const taskinfo = {
 
 const TaskCard = () =>  {
   return(
-    <div className = 'col d-flex border rounded ms-1  align-items-center shadow mb-2 bg-body rounded '>
+    <div id="task" className = 'col d-flex border rounded ms-1  align-items-center shadow mb-2 bg-body rounded p-3 h-10'>
         <a href = "/project" style = {{textDecoration: "none" }}>
-        <h5 class="text-dark">Task Name</h5>
+        <h5 id="h5"class="text-dark">Task Name</h5>
         <p class="text-black-50">{taskinfo.pname}</p>
         </a>
     </div>
@@ -26,11 +27,29 @@ const TaskCard = () =>  {
 
 const ProjectCards = () => {
     return(
-        <div className='col-auto d-flex m-3 border p-4 w-25 h-25 align-items-center bg-light'>
+        <div id ="row" className='col-auto d-flex m-2 border w-25 h-25 bg-white'>
         <Link to = '/project' style = {{textDecoration: "none" }}>
           <a style = {{textDecoration: "none" }}>
-            <h4 class="text-dark" >Name</h4>
-            <p class="text-black-50" > Date Created</p>
+          <div class="dropdown">
+              <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" >
+              </i>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Open</a></li>
+                <li><a class="dropdown-item" href="#">Edit</a></li>
+                <li><a class="dropdown-item" href="#">Delete</a></li>
+              </ul>
+            </div>
+            <h4 id ="name" class="text-dark" >Mobile App Design</h4>
+            <i id="date" class="fa fa-calendar-minus" aria-hidden="true"></i>
+            <p class="date-created">Date Created</p>
+            <br></br>
+            <i id="duedate" class='fas fa-calendar-check'></i>
+            <p class="date-created">Due Date</p>
+            <br></br>
+            <p class="Percentage">32% </p>
+            <p class="sub-task">Task |</p>
+            
+            <progress id="file" value="32" max="100"> 32% </progress>
           </a>
         </Link>
         </div>
@@ -52,9 +71,9 @@ function Taskspace() {
     return (
         <div className='col-auto pr-10' >
           <div className = 'd-flex justify-content-start'>
-            <h4 className = 'pr-4 -b'>Task of the Day</h4>
+            <h4 className = 'pl-4'>Task of the Day</h4>
             <div className="d-flex align-items-center">
-              <i className="fa-solid fa-calendar-days text-md" />
+              <i id="calendar" className="fa-solid fa-calendar-days text-md" />
             </div>
           </div>
           <div className = 'd-flex justify-content-start'>
@@ -63,7 +82,7 @@ function Taskspace() {
           <div className='align-items-center justify-content-middle'>
             <TaskCard />
             {cards}
-              <button className='col border rounded m-2 ms-1 align-items-center' onClick={addTaskCard}>
+              <button class="create" onClick={addTaskCard}>
                 <h4>Create</h4>
               </button>
           </div>
@@ -87,13 +106,13 @@ function Projectspace() {
           <div className = 'd-flex justify-content-start'>
             <p class="text-black-50">All Projects</p>
           </div>
-          <div className='row bg-secondary '>
+          <div id="div"className='row bg-light'>
             <ProjectCards />
             {projects}
-            <div className='col-auto m-3 w-25 bg-light align-items-center'>
-              <button className='col rounded' onClick={addProjectCard}>
-                <h4>Create</h4>
-              </button>
+            <div id="row" className='col-auto m-3 w-25 bg-white align-items-center'>
+            
+              <i id ="plus" class="fa fa-plus-circle" aria-hidden="true" onClick={addProjectCard}></i>
+              
             </div>
           </div>
         </div>
@@ -114,7 +133,7 @@ function Home() {
   };
 
   return (
-    <div className='col min-vh-100 p-2 ml-5'>
+    <div className='col min-vh-100 p-3 ml-5'>
       <div id='greet' className='row justify-content-start'>
         <div className = 'd-flex justify-content-start'>
           <h1>Hello, {user.name}!</h1>
