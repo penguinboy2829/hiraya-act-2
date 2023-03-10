@@ -1,0 +1,94 @@
+#add{
+    margin: 50px;
+    border: none;
+     
+}
+
+#row{
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+#row:hover{
+    background-color: #00B7EB;
+    color: white;
+}
+#div{
+    height: auto;
+    width: 95%;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+
+}
+
+#task{
+    height: 90px;
+    width: 180px;
+    margin-right: 60px;
+}
+.create{
+    margin-left: -60px;
+    border-radius: 8px;
+    width: 180px;
+    height: 50px;
+}
+#h5{
+    margin-top: 12px;
+    margin-bottom: 0px;
+    
+}
+#plus{
+    font-size: 60px;
+    margin-top: 50px;
+    color:  #00B7EB;
+  }
+#plus:hover{
+    color: grey;
+}
+#calendar{
+    margin-left: 20px;
+    margin-bottom: 7px;
+    font-size: 20px;
+}
+
+#date{
+    color: black;
+    float: left;
+}
+#duedate{
+    color: black;
+    float: left;
+}
+#file{
+    width: 200px;
+    margin-bottom: 0px;
+}
+#name{
+    text-align: left;
+}
+#ellipsis{
+    float: right;
+    font-size: 20px;
+    color: black;
+    border: none;
+    
+}
+.date-created{
+    color: black;
+    float: left;
+    text-indent: 5px;
+    margin-top: -2px;
+    margin-bottom: 0px;
+}
+.Percentage{
+    float: right;
+    color: grey;
+    text-indent: 3px;
+    margin-bottom: 0px;
+}
+.sub-task{
+    float: right;
+    color: grey;
+    margin-bottom: 0px;
+}
+.dropdown-menu{
+    background-color: #00B7EB;
+}
