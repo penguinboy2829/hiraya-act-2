@@ -1,4 +1,3 @@
-
 const AddToDoButton = document.getElementById('new-to-do');
 // Columns
 const ToDoColumn = document.getElementById('to-do-column');
@@ -31,11 +30,6 @@ function AddNewTask(){
   NewTaskProgress.setAttribute("max", "100");
   NewTaskProgress.setAttribute("value", "0");
   NewTaskSubTask.id = 'form';
-
- 
-
-
-  
 
 // adding drag
   NewTaskContainer.setAttribute('draggable', 'true');

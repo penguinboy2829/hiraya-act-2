@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import './icon4.svg';
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import '../home.css';
@@ -16,42 +16,53 @@ const taskinfo = {
 
 const TaskCard = () =>  {
   return(
-    <div id="task" className = 'col d-flex border rounded ms-1  align-items-center shadow mb-2 bg-body rounded p-3 h-10'>
+    <div id="task" className = 'col d-flex border mb-2 w-100 rounded align-items-center justify-content-center shadow bg-body rounded'>
         <a href = "/project" style = {{textDecoration: "none" }}>
-        <h5 id="h5"class="text-dark">Task Name</h5>
-        <p class="text-black-50">{taskinfo.pname}</p>
+          <div id="left-task-card">
+              <h5 id="h5"class="text-dark">Task Name</h5>
+              <p class="text-black-50">{taskinfo.pname}</p>
+          </div>
+          <div id="right-task-card" style = {{marginLeft: "10px"}}>
+              <p class="text-dark" style = {{marginBottom: "0px", marginTop: "14px"}}>Due</p>
+              <p class="text-black-50">Mem</p>
+          </div>
+          
         </a>
+      
     </div>
   );
 }
 
 const ProjectCards = () => {
     return(
-        <div id ="row" className='col-auto d-flex m-2 border w-25 h-25 bg-white'>
-        <Link to = '/project' style = {{textDecoration: "none" }}>
-          <a style = {{textDecoration: "none" }}>
-          <div class="dropdown">
-              <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" >
-              </i>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Open</a></li>
-                <li><a class="dropdown-item" href="#">Edit</a></li>
-                <li><a class="dropdown-item" href="#">Delete</a></li>
-              </ul>
-            </div>
-            <h4 id ="name" class="text-dark" >Mobile App Design</h4>
-            <i id="date" class="fa fa-calendar-minus" aria-hidden="true"></i>
-            <p class="date-created">Date Created</p>
-            <br></br>
-            <i id="duedate" class='fas fa-calendar-check'></i>
-            <p class="date-created">Due Date</p>
-            <br></br>
-            <p class="Percentage">32% </p>
-            <p class="sub-task">Task |</p>
-            
-            <progress id="file" value="32" max="100"> 32% </progress>
-          </a>
-        </Link>
+        <div id ="row" className='col-auto d-flex py-2 px-4 my-1 mx-2 border h-80 bg-white'>
+          <Link to = '/project' style = {{textDecoration: "none" }}>
+            <a style = {{textDecoration: "none" }}>
+              <div class="dropdown">
+                <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" >
+                </i>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Open</a></li>
+                  <li><a class="dropdown-item" href="/edit-p">Edit</a></li>
+                  <li><a class="dropdown-item" href="#">Delete</a></li>
+                </ul>
+              </div>
+                <h5 id ="name" class="text-dark" >Mobile App Design</h5>
+                <i id="date" class="fa fa-calendar-minus" aria-hidden="true"></i>
+                <p class="date-created">Date Created</p>
+                <br></br>
+                <i id="duedate" class='fas fa-calendar-check'></i>
+                <p class="date-created">Due Date</p>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <p class="Percentage">32% </p>
+                <p class="sub-task">Task |</p>
+                
+                <progress id="file" value="32" max="100"> 32% </progress>
+              </a>
+          </Link>
         </div>
     );
 }
@@ -69,17 +80,14 @@ function Taskspace() {
     };
 
     return (
-        <div className='col-auto pr-10' >
+        <div className='col-auto' >
           <div className = 'd-flex justify-content-start'>
-            <h4 className = 'pl-4'>Task of the Day</h4>
-            <div className="d-flex align-items-center">
-              <i id="calendar" className="fa-solid fa-calendar-days text-md" />
-            </div>
+            <h4 className = 'fw-bold text-black-80'>Task of the Day</h4>
           </div>
           <div className = 'd-flex justify-content-start'>
             <p class="text-black-50">{currentDate.toLocaleString()}</p>
           </div>
-          <div className='align-items-center justify-content-middle'>
+          <div className=' justify-content-center'>
             <TaskCard />
             {cards}
               <button class="create" onClick={addTaskCard}>
@@ -99,21 +107,21 @@ function Projectspace() {
     };
 
     return (
-        <div className='col width-100 ml-5'>
+        <div className='col w-80 px-5'>
           <div className = 'd-flex justify-content-start'>
-            <h2>Projects</h2>
+            <h4 className = 'fw-bold text-black-80'>Projects</h4>
           </div>
           <div className = 'd-flex justify-content-start'>
             <p class="text-black-50">All Projects</p>
           </div>
           <div id="div"className='row bg-light'>
+            <div id="row" className='col-auto d-flex m-2 bg-white align-items-center justify-content-center'>
+              <i id ="plus" class="fa fa-plus-circle mb-5" aria-hidden="true" onClick={addProjectCard}></i>
+              <br></br>
+            </div>
             <ProjectCards />
             {projects}
-            <div id="row" className='col-auto m-3 w-25 bg-white align-items-center'>
             
-              <i id ="plus" class="fa fa-plus-circle" aria-hidden="true" onClick={addProjectCard}></i>
-              
-            </div>
           </div>
         </div>
     );
@@ -133,7 +141,7 @@ function Home() {
   };
 
   return (
-    <div className='col min-vh-100 p-3 ml-5'>
+    <div className='col min-vh-100 mx-5 py-5'>
       <div id='greet' className='row justify-content-start'>
         <div className = 'd-flex justify-content-start'>
           <h1>Hello, {user.name}!</h1>

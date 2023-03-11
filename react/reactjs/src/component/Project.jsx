@@ -1,6 +1,7 @@
 import React from 'react';
 import '../sidebar.css';
 
+
 function Project() {
   return (
     <div className='col min-vh-100 p-5 border m-2'>
