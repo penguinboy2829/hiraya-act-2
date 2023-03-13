@@ -34,7 +34,7 @@ const TaskCard = () =>  {
 
 const ProjectCards = () => {
     return(
-        <div id ="row" className='col-auto d-flex py-4 px-4 my-2 mx-2 h-50 bg-white '>
+        <div id ="row" className='col-auto d-flex py-4 px-4 my-2 mx-2 h-50 bg-white shadow-sm '>
             <div>
               <Link to = '/project' style = {{textDecoration: "none" }}>
                 <a style = {{textDecoration: "none" }}>
