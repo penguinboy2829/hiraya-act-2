@@ -34,7 +34,7 @@ const TaskCard = () =>  {
 
 const ProjectCards = () => {
     return(
-        <div id ="row" className='col-auto d-flex py-2 px-4 my-1 mx-2 border h-80 bg-white'>
+        <div id ="row" className='col-auto d-flex py-2 px-4 my-1 mx-2 border h-80 bg-white shadow-sm'>
           <Link to = '/project' style = {{textDecoration: "none" }}>
             <a style = {{textDecoration: "none" }}>
               <div class="dropdown">
@@ -114,7 +114,7 @@ function Projectspace() {
             <p class="text-black-50">All Projects</p>
           </div>
           <div id="div"className='row bg-light'>
-            <div id="row" className='col-auto d-flex m-2 bg-white align-items-center justify-content-center'>
+            <div id="row" className='col-auto d-flex m-2 bg-white align-items-center justify-content-center shadow-sm'>
               <i id ="plus" class="fa fa-plus-circle mb-5" aria-hidden="true" onClick={addProjectCard}></i>
               <br></br>
             </div>
