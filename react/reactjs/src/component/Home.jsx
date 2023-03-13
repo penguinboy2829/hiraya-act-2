@@ -1,3 +1,4 @@
+import './icon4.svg';
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import '../home.css';
@@ -15,7 +16,7 @@ const taskinfo = {
 
 const TaskCard = () =>  {
   return(
-    <div id="task" className = 'col d-flex border mb-2 w-100 rounded align-items-center justify-content-center shadow bg-body rounded'>
+    <div id="task" className = 'col d-flex border mb-2 w-100 align-items-center justify-content-center'>
         <a href = "/project" style = {{textDecoration: "none" }}>
           <div id="left-task-card">
               <h5 id="h5"class="text-dark">Task Name</h5>
@@ -114,7 +115,7 @@ function Projectspace() {
             <p class="text-black-50">All Projects</p>
           </div>
           <div id="div"className='row bg-light'>
-            <div id="row" className='col-auto d-flex m-2 bg-white align-items-center justify-content-center shadow-sm'>
+            <div id="row" className='col-auto d-flex m-2 bg-white align-items-center justify-content-center shadow-sm bg-body-tertiary'>
               <i id ="plus" class="fa fa-plus-circle mb-5" aria-hidden="true" onClick={addProjectCard}></i>
               <br></br>
             </div>
