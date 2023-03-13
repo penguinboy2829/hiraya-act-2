@@ -59,14 +59,20 @@ const ProjectCards = () => {
           <div class="dropdown">
                 <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/addtask">Open</a></li>
-                  <li><a class="dropdown-item" href="/edit-p">Edit</a></li>
-                  <li><a class="dropdown-item" href="#">Delete</a></li>
+                  <li><a class="dropdown-item" href="/project">Open</a></li>
+                  <li><a class="dropdown-item" href="/addtask">Edit</a></li>
+                  <li><a class="dropdown-item" href="" onClick="">Delete</a></li>
                 </ul>
               </div>
         </div>
+
+      
     );
+  
 }
+
+
+
 
 function Taskspace() {
     const [cards, setCards] = useState([]);
@@ -81,7 +87,7 @@ function Taskspace() {
           <br/>
           <div className = 'd-flex justify-content-start'>
             
-            <h4 className = 'fw-bold text-black-80'>Task of the Day</h4>
+            <h4 id="task-day" className = 'fw-bold text-black-80'>Task of the Day</h4>
           </div>
           
           <div className=' justify-content-center'>
@@ -105,17 +111,16 @@ function Projectspace() {
 
     return (
         <div className='col w-80 px-5'>
+           <i id ="plus" class="fa fa-plus-square mb-3" aria-hidden="true" onClick={addProjectCard}></i>
           <div className = 'd-flex justify-content-start'>
             <h4 className = 'fw-bold text-black-80'>Projects</h4>
+           
           </div>
           <div className = 'd-flex justify-content-start'>
             <p class="text-black-50">All Projects</p>
           </div>
           <div id="div"className='row bg-light'>
-            <div id="row" className='col-auto d-flex m-2 bg-white align-items-center justify-content-center bg-body-tertiary'>
-              <i id ="plus" class="fa fa-plus-circle mb-5" aria-hidden="true" onClick={addProjectCard}></i>
-              <br></br>
-            </div>
+            
             <ProjectCards />
             {projects}
             
@@ -137,6 +142,10 @@ function Home() {
     setProjects([projects,newProject]);
   };
 
+
+ 
+  
+
   return (
     <div className='col min-vh-100 mx-5 py-5'>
       <div id='greet' className='row justify-content-start'>
@@ -147,6 +156,8 @@ function Home() {
           <p class="text-black-50">Today is {currentDay.toLocaleString()} ({currentDate.toLocaleString()})</p>
         </div>
       </div>
+    
+    
 
       <div className='row mt-3'>
         <Taskspace />
