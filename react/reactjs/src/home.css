@@ -24,6 +24,8 @@
 #task{
     height: 80px;
     margin-right: 50px;
+    border-radius: 16px 16px 0px 16px;
+    border-shadow: -5px 2px 0px 0px rgba(0, 241, 229, 0.25);
 }
 .create{
     border-radius: 8px;
