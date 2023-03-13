@@ -4,6 +4,7 @@ import Layout from "./component/Layout";
 import Home from "./component/Home";
 import Landing from "./component/Landing";
 import Project from "./component/Project";
+import Addtask from './component/Addtask.js';
 import React, { useState } from 'react';
 import SideNav from "./Sidenav";
 import './App.css';
@@ -16,6 +17,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="project" element={<Project />} />
           <Route path="landing" element={<Landing />} />
+          <Route path="addtask" element={<Addtask />} />
         </Route>
       </Routes>
     </BrowserRouter>

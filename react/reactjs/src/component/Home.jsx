@@ -34,43 +34,41 @@ const TaskCard = () =>  {
 
 const ProjectCards = () => {
     return(
-        <div id ="row" className='col-auto d-flex py-2 px-4 my-1 mx-2 border h-80 bg-white'>
-          <Link to = '/project' style = {{textDecoration: "none" }}>
-            <a style = {{textDecoration: "none" }}>
-              <div class="dropdown">
-                <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" >
-                </i>
+        <div id ="row" className='col-auto d-flex py-4 px-4 my-2 mx-2 border h-50 bg-white'>
+            <div>
+              <Link to = '/project' style = {{textDecoration: "none" }}>
+                <a style = {{textDecoration: "none" }}>
+                  <h5 id ="name" class="text-dark" >Mobile App Design</h5>
+                    <i id="date" class="fa fa-calendar-minus" aria-hidden="true"></i>
+                    <p class="date-created">Date Created</p>
+                    <br></br>
+                  <i id="duedate" class='fas fa-calendar-check'></i>
+                  <p class="date-created">Due Date</p>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <p class="Percentage">32% </p>
+                  <p class="sub-task">Task |</p>
+                  
+                  <progress id="file" value="32" max="100"> 32% </progress>
+                </a>
+              </Link>
+            </div>
+          
+          <div class="dropdown">
+                <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Open</a></li>
+                  <li><a class="dropdown-item" href="/addtask">Open</a></li>
                   <li><a class="dropdown-item" href="/edit-p">Edit</a></li>
                   <li><a class="dropdown-item" href="#">Delete</a></li>
                 </ul>
               </div>
-                <h5 id ="name" class="text-dark" >Mobile App Design</h5>
-                <i id="date" class="fa fa-calendar-minus" aria-hidden="true"></i>
-                <p class="date-created">Date Created</p>
-                <br></br>
-                <i id="duedate" class='fas fa-calendar-check'></i>
-                <p class="date-created">Due Date</p>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <p class="Percentage">32% </p>
-                <p class="sub-task">Task |</p>
-                
-                <progress id="file" value="32" max="100"> 32% </progress>
-              </a>
-          </Link>
         </div>
     );
 }
 
 function Taskspace() {
-    const [currentDate, setCurrentDate] = useState(new Date());
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const currentDay = daysOfWeek[currentDate.getDay()];
-
     const [cards, setCards] = useState([]);
     
     const addTaskCard = () => {
@@ -80,12 +78,12 @@ function Taskspace() {
 
     return (
         <div className='col-auto' >
+          <br/>
           <div className = 'd-flex justify-content-start'>
+            
             <h4 className = 'fw-bold text-black-80'>Task of the Day</h4>
           </div>
-          <div className = 'd-flex justify-content-start'>
-            <p class="text-black-50">{currentDate.toLocaleString()}</p>
-          </div>
+          
           <div className=' justify-content-center'>
             <TaskCard />
             {cards}

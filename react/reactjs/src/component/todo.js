@@ -113,7 +113,7 @@ console.log(count)
 });
   
 //class for css
-   NewTaskContainer.classList.add('task');
+  NewTaskContainer.classList.add('task');
   NewTaskHead.classList.add('task-head');
   NewTaskDeleteButton.classList.add('delete-task');
   NewTaskDescription.classList.add('task-description');
@@ -142,7 +142,6 @@ console.log(count)
   NewTaskContainer.appendChild(NewTaskPercentage);
 
   NewTasksCheck();
-  
 }
 
 
