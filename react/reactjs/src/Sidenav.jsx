@@ -1,6 +1,5 @@
 import React, { useState,useEffect }  from "react";
-import icon4 from './logo.svg';
-import icon5 from './icon2.png';
+import logo from './logo.svg';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import "./sidebar.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,7 +21,7 @@ export default function SideNav({}){
       <header class="image-text d-flex justify-content-between align-items-center mt-2">
         <div class="image-text">
           <span class="image">
-            <img src={icon4} alt=""/>
+            <img src={logo} alt=""/>
           </span>
           <div class="text logo-text d-flex align-items-center">
             <span class="name">Workspace</span>
@@ -32,7 +31,6 @@ export default function SideNav({}){
         <div>
           <i
             className="fa-solid fa-angle-right text-white border rounded-circle px-2 py-1 toggle" 
-            style = {{right: "-25px"}}
             onClick = {toggleClick}>
           </i>
         </div>
@@ -83,7 +81,7 @@ export default function SideNav({}){
           <div class="image-text ">
 
             <span class="image1">
-              <img id="profile" src={icon5} alt=""/>
+              <img id="profile" src={logo} alt=""/>
             </span>
             <div class="text-white">
               Steven j.
