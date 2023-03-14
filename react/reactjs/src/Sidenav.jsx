@@ -42,7 +42,7 @@ export default function SideNav({}){
       </header>
       <hr className="sidebar-divider my-0" />
 
-      <ul className="nav nav-pills flex-column d-flex justify-content-center mt-5">
+      <ul className="nav nav-pills flex-column d-flex justify-content-center align-items-center mt-5">
         <Link className="nav-item py-3 px-3 mt-5 nav-outline d-flex justify-content-start align-items-center" 
           to = "/" 
           style = {{textDecoration: "none"}}>
@@ -79,14 +79,17 @@ export default function SideNav({}){
         <hr className="sidebar-divider my-0" />
 
         <div class="position-absolute bottom-0 start-0 mb-5 p-4">
-          <div class="image-text ">
+          <div class="image-text d-flex justify-content-between align-items-center">
 
-            <span class="image1">
+            <div class="image1">
               <img id="profile" src={pficon} alt=""/>
-            </span>
-            <div class="text-white">
-              Steven j.
             </div>
+            {isClosed ?(<div class="text-white py-2">
+              Steven j.
+            </div>)
+            :
+            (null)}
+            
                 </div>
 
         <Link className="nav-item py-3 px-3 mt-2 nav-outline d-flex justify-content-start align-items-center" 
