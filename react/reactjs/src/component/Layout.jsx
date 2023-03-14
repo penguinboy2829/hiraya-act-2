@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Outlet, useLocation} from "react-router-dom";
-import Addtask from './Addtask.js';
+import Addtask from './Addtask';
 import SideNav from "../Sidenav";
 import SideNav2 from '../Sidenav2';
 import Home from "./Home";

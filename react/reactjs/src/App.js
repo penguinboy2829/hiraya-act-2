@@ -4,7 +4,7 @@ import Layout from "./component/Layout";
 import Home from "./component/Home";
 import Landing from "./component/Landing";
 import Project from "./component/Project";
-import Addtask from './component/Addtask.js';
+import Addtask from './component/Addtask';
 import React, { useState } from 'react';
 import SideNav from "./Sidenav";
 import './App.css';

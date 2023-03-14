@@ -1,5 +1,6 @@
 import React, { useState,useEffect }  from "react";
 import logo from './logo.svg';
+import pficon from './icon2.png';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import "./sidebar.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -81,7 +82,7 @@ export default function SideNav({}){
           <div class="image-text ">
 
             <span class="image1">
-              <img id="profile" src={logo} alt=""/>
+              <img id="profile" src={pficon} alt=""/>
             </span>
             <div class="text-white">
               Steven j.
