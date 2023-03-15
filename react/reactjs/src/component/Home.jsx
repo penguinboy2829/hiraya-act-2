@@ -34,16 +34,16 @@ const TaskCard = () =>  {
 
 const ProjectCards = () => {
     return(
-        <div id ="row" className='col-auto d-flex py-4 px-4 my-2 mx-2 h-50 bg-white shadow-sm '>
-            <div>
+        <div id ="row" className='col-auto d-flex py-4 px-4 my-2 mx-2 h-50 bg-white shadow-sm ' aria-hidden="true">
+            <div id="row " aria-hidden="true">
               <Link to = '/project' style = {{textDecoration: "none" }}>
                 <a style = {{textDecoration: "none" }}>
                   <h5 id ="name" class="text-dark" >Mobile App Design</h5>
-                    <i id="date" class="fa fa-calendar-minus" aria-hidden="true"></i>
-                    <p class="date-created">Date Created</p>
+                    <i id="date" class="fa fa-calendar-minus text-black-50" aria-hidden="true"></i>
+                    <p class="date-created text-black-50">Date Created</p>
                     <br></br>
-                  <i id="duedate" class='fas fa-calendar-check'></i>
-                  <p class="date-created">Due Date</p>
+                  <i id="duedate" class='fas fa-calendar-check text-black-50'></i>
+                  <p class="date-created text-black-50">Due Date</p>
                   <br></br>
                   <br></br>
                   <br></br>
@@ -129,6 +129,7 @@ function Projectspace() {
     );
 }
 
+
 function Home() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -151,6 +152,8 @@ function Home() {
       <div id='greet' className='row justify-content-start'>
         <div className = 'd-flex justify-content-start'>
           <h1>Hello, {user.name}!</h1>
+          <span id="bell" class="position-absolute top-0 end-0 fa fa-bell mt-5"> </span>
+
         </div>
         <div className = 'd-flex justify-content-start'>
           <p class="text-black-50">Today is {currentDay.toLocaleString()} ({currentDate.toLocaleString()})</p>

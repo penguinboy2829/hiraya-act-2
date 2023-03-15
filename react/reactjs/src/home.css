@@ -8,11 +8,12 @@
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     border: none;
     width: 18vw;
+    color:white;
     
 }
 #row:hover{
-    background-color: #00B7EB;
-    color: white;
+    background-color: #f7208b;
+    color: rgb(233, 26, 78);
 }
 #div{
     height: 500px;
@@ -35,6 +36,13 @@
 #h5{
     margin-top: 12px;
     margin-bottom: 0px;
+}
+#projects{
+    color: white;
+
+}
+#projects:hover{
+    color:rgba(231, 46, 101, 0.952)
 }
 #plus{
     float: right;
@@ -108,4 +116,14 @@
 #task-day{
     margin-top: -25px;
     margin-bottom: 12px;
+}
+#bell{
+    font-size: 40px;
+}
+.p {
+    color: gray;
+
+}
+.i{
+    color: gray;
 }
