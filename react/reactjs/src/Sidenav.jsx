@@ -21,14 +21,15 @@ export default function SideNav({}){
       }}>
       <header class="image-text d-flex justify-content-between align-items-center mt-2">
         <div class="image-text">
-          <span class="image">
+          <div class="image">
             <img src={logo} alt=""/>
-          </span>
-          <div class="text logo-text d-flex align-items-center">
-            <span class="name">Workspace</span>
           </div>
+          {isClosed 
+          ? (<div class="text logo-text">
+          <span class="name">Workspace</span>
+          </div>)
+          :(null)}
         </div>
-
         <div>
           <i
             className="fa-solid fa-angle-right text-white border rounded-circle px-2 py-1 toggle" 

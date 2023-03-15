@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./component/Layout";
 import Home from "./component/Home";
 import Landing from "./component/Landing";
-import Project from "./component/Project";
+import Project2 from "./component/Project2";
 import Addtask from './component/Addtask';
 import React, { useState } from 'react';
 import SideNav from "./Sidenav";
@@ -15,7 +15,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="project" element={<Project />} />
+          <Route path="project" element={<Project2 />} />
           <Route path="landing" element={<Landing />} />
           <Route path="addtask" element={<Addtask />} />
         </Route>
