@@ -13,7 +13,7 @@ const Layout = () => {
     <div className="App">
       <div className = 'container-fluid'>
         <div className = 'row'>
-          {location.pathname !== '/landing' && <SideNav />}
+          {location.pathname !== '/landing' && <SideNavBar />}
           <Outlet />
         </div>
       </div>
