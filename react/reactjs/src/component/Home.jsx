@@ -71,9 +71,6 @@ const ProjectCards = () => {
   
 }
 
-
-
-
 function Taskspace() {
     const [cards, setCards] = useState([]);
     
@@ -141,18 +138,14 @@ function Home() {
   const addProjectCard = () => {
     const newProject = <ProjectCards />;
     setProjects([projects,newProject]);
-  };
-
-
- 
-  
+  }; 
 
   return (
     <div className='col min-vh-100 mx-5 py-5'>
       <div id='greet' className='row justify-content-start'>
         <div className = 'd-flex justify-content-start'>
-          <h1>Hello, {user.name}!</h1>
-          <span id="bell" class="position-absolute top-0 end-0 fa fa-bell mt-5"> </span>
+          <div className = 'col d-flex justify-content-start'> <h1>Hello, {user.name}!</h1></div>
+          <div className = 'col d-flex justify-content-end align-items-center mx-4'> <span id="bell" class="fa fa-bell"> </span></div>
 
         </div>
         <div className = 'd-flex justify-content-start'>
