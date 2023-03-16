@@ -38,7 +38,6 @@ function Addtask() {
                         <div class="mt-5">
                             Attachments
                             <div>
-
                             </div>
                         </div>
                         <div class="">

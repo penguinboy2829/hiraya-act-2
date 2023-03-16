@@ -1,27 +1,44 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import '../sidebar.css';
-
-const tasks = [
-    {   
-    name : "Hello", description : "Lorem Ipsum", due : "",
-    progressval : 50, _id : 0, p_id: 0
-    },
-    { name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
-    progressval : 50, _id : 1, p_id: 0
-    },
-    { name : "Bye", description : "Lorem Ipsum Lorem Ipsum", due : "",
-    progressval : 80, _id : 2, p_id: 0
-    }
-];
 
 const projects = [
     {
         title: "Project", _id: 0
-    },
-    {
-        title: "Noject", _id: 1
     }
 ]
+
+const subtasks = [
+    {
+        description: "", _id: 0, t_id: 0
+    }
+]
+
+const tasks = [
+    {   
+        name : "Hello", description : "Lorem Ipsum", due : "",
+        progressval : 0, _id : 0, p_id: 0
+    },
+    { 
+        name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
+        progressval : 50, _id : 1, p_id: 1
+    },
+    { 
+        name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
+        progressval : 50, _id : 1, p_id: 0
+    },
+    { 
+        name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
+        progressval : 50, _id : 1, p_id: 3
+    },
+    { 
+        name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
+        progressval : 50, _id : 1, p_id: 4
+    },
+    { 
+        name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
+        progressval : 50, _id : 1, p_id: 2
+    },
+];
 
 const lists = [
     {
@@ -38,72 +55,71 @@ const lists = [
     }
 ]
 
-const ProjectHead = ({addTaskCard}) => {
 
+const ProjectHead = ({}) => {
     return (
-            <div className = 'row border d-flex align-items-center'>
-                <div className = 'col border d-flex justify-content-start align-items-center'>
-                    <h2>PROJECT TITLE</h2>
-                </div>
-                <div className = 'col border d-flex justify-content-end align-items-center'>
-                    <button className = 'rounded' onClick = {addTaskCard}>ADD TASK BUTTON</button>
-                </div>
+        <div className = 'row d-flex align-items-center'>
+            <div className = 'col d-flex justify-content-start align-items-center'>
+                <h2>PROJECT TITLE</h2>
             </div>
+            <div className = 'col d-flex justify-content-end align-items-center'>
+                <button className = 'rounded' onClick = {""}>ADD TASK BUTTON</button>
+            </div>
+        </div>
     )
 }
 
 const TaskCard = ({task}) => {
     return(
-    <div className = 'row border rounded m-2 d-flex justify-content-center shadow-2'>                    
+        <div className = 'row border rounded m-2 py-1 d-flex justify-content-center shadow-2'
+        style = {{width: "260px"}}>                    
             <div className = 'row d-flex justify-content-between align-items-center'>
                 <div className = 'col d-flex justify-content-start'>
                     <div className = 'row d-flex justify-content-start align-items-center'>
                         <h5 >{task.name}</h5>
                     </div>
-                    
+                        
                 </div>
-                <div className = 'col-2 fa-solid fa-ellipsis-vertical' />
+                <div className = 'col-2 fa-solid fa-ellipsis-vertical pb-2' />
             </div>
 
             <div className = 'row d-flex justify-content-between align-items-center'>
                 <div className = 'col d-flex justify-content-start align-items-center'>
-                    <p>{task.description}</p> 
-                </div>
-                
+                    <p>{task.description}</p>
+                </div>    
             </div>
-                            
+                                
             <div className = 'row d-flex justify-content-between'>
                 <div className = 'col-3'> 
-                   <div className = 'row'>
+                <div className = 'row'>
                         <p>Mem</p>
                     </div>
                 </div>
                 <div className = 'col-8'>
                     <div className = 'row d-flex justify-content-end'>
-                        <div className =  'col-2 d-flex '>
-                            <span className = 'fas fa-circle-exclamation'/>
+                        <div className =  'col-2'>
+                            <span className = 'fas fa-circle-exclamation px-4'/>
                         </div>
-                        <div className =  'col-10 d-flex justify-content-start align-items-start'>
-                        <p> Feb.28,2023</p>
-                        </div>
-                            
+                        <div className =  'col-10 d-flex justify-content-end align-items-center'>
+                            <p> Feb.28,2023</p>
+                        </div>        
                     </div>                
                 </div>
                 <hr/>
             </div>
-  
+    
             <div className = 'row'>
                 <div className = 'col-2 d-flex align-items-start justify-content-start'>
                     <label>
-                        <input type = 'radio'/>
+                        <input id ='progress' type = 'radio'/>
                     </label>
                 </div>
                 <div className = 'col d-flex align-items-center justify-content-start'>
-                        <p>Subtask</p>
+                    <p>Subtask</p>
                 </div>
                 <hr/>
             </div>
-        
+            
             <div className = 'row d-flex justify-content-between'>
                 <div className = 'col-10 d-flex align-items-start'>
                     <progress className = 'w-100 h-75' value = {task.progressval} max = '100' />
@@ -118,22 +134,23 @@ const TaskCard = ({task}) => {
 }
 
 function ProjectList({list}) {
+    const [taskcardlist, setTaskcardlist] = useState([]);
 
-    const [taskcardlist, setTaskcardlist] = useState(
-        tasks.map((task) => <TaskCard key={task._id} task={task} />)
-    );
+    useEffect(() => {
+        const filteredTasks = tasks.filter((task) => task.p_id === list._id);
+        const taskCards = filteredTasks.map((task) => <TaskCard key={task._id} task={task} />);
+        setTaskcardlist(taskCards);
+    }, [list._id]);
 
     const addTaskCard = () => {
         const newTask = <TaskCard key={taskcardlist.length} />;
         setTaskcardlist([...taskcardlist, newTask]);
     };
 
-
     return (
-        <div className='col border rounded m-2'>
-            <div className='row'>
-                <h4 className = 'mt-3'>{list.name}</h4>
-            </div>
+        <div className='col border rounded m-1'
+        style = {{minWidth: "290px"}}>
+            <h4 className = 'mt-3'>{list.name}</h4>
             {taskcardlist}
             <button onClick = {addTaskCard}></button>
         </div>
@@ -147,23 +164,25 @@ const ProjectBody = () => {
 
     const addProjectList = () => {
         const newList = <ProjectList key={listNum.length}/>
-        setListNum ([...setListNum, newList]);
+        setListNum ([...listNum, newList]);
     }
 
     return (
-        <div className="row border border-primary border-2 my-2 d-flex justify-content-start" 
-        style = {{width: "100%"}}>
+        <div className="row border border-primary border-2 my-2 d-flex justify-content-center"
+        style = {{height: "680px" ,overflowX: "scroll"}}>
+            <div className="row">
                 {listNum}
+            </div>
+                
         </div>
     );
 };
 
 export default function Project (){
     return (
-        <div className='col min-vh-100 p-3 border m-2' style={{width: "100vh"}}>
+        <div className='col min-vh-100 p-3 m-2'>
             <ProjectHead />
             <ProjectBody />
         </div>
-        
     )
 }

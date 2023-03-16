@@ -25,9 +25,7 @@ const TaskCard = () =>  {
               <p class="text-dark" style = {{marginBottom: "0px", marginTop: "14px"}}>Due</p>
               <p class="text-black-50">Mem</p>
           </div>
-          
         </a>
-      
     </div>
   );
 }
@@ -50,7 +48,6 @@ const ProjectCards = () => {
                   <br></br>
                   <p class="Percentage">32% </p>
                   <p class="sub-task">Task |</p>
-                  
                   <progress id="file" value="32" max="100"> 32% </progress>
                 </a>
               </Link>
@@ -65,10 +62,7 @@ const ProjectCards = () => {
                 </ul>
               </div>
         </div>
-
-      
     );
-  
 }
 
 function Taskspace() {
