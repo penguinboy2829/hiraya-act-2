@@ -2,15 +2,16 @@ import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import '../OJT.css';
 
-function Addtask() {
-
+const AddProject = ({open}) => {
     const [date,setDate] = useState();
 
     console.log("date" , date);
 
+    if (!open) return null;
+
     return(
             <div class="container w-50 md mt-5 p-3">
-                <h2 contentEditable="true"> Task Name </h2>
+                <h2 contentEditable="true"> Project Name </h2>
                 Description
                 <div class="">
                 <p> Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem  </p>
@@ -52,4 +53,4 @@ function Addtask() {
     )
 
 }
-export default Addtask;
+export default AddProject;

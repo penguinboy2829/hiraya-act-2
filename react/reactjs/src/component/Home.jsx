@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import AddProject from "./AddProject";
 import '../home.css';
 
 const user = {
@@ -30,7 +31,9 @@ const TaskCard = () =>  {
   );
 }
 
-const ProjectCards = () => {
+function ProjectCards () {
+    const [isModalOpen, setIsModalOpen] = useState (false);
+
     return(
         <div id ="row" className='col-auto d-flex py-4 px-4 my-2 mx-2 h-50 bg-white shadow-sm ' aria-hidden="true">
             <div id="row " aria-hidden="true">
@@ -57,7 +60,7 @@ const ProjectCards = () => {
                 <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/project">Open</a></li>
-                  <li><a class="dropdown-item" href="/addtask">Edit</a></li>
+                  <button class="dropdown-item" onClick={() => setIsModalOpen(true)}>Edit</button>
                   <li><a class="dropdown-item" href="" onClick="">Delete</a></li>
                 </ul>
               </div>
@@ -120,35 +123,36 @@ function Projectspace() {
     );
 }
 
-
-function Home() {
+function HomeHead(){
   const [currentDate, setCurrentDate] = useState(new Date());
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const currentDay = daysOfWeek[currentDate.getDay()];
   currentDate.setHours(0, 0, 0, 0);
 
-  const [projects,setProjects] = useState ([]);
-
-  const addProjectCard = () => {
-    const newProject = <ProjectCards />;
-    setProjects([projects,newProject]);
-  }; 
-
-  return (
-    <div className='col min-vh-100 mx-5 py-5'>
-      <div id='greet' className='row justify-content-start'>
-        <div className = 'd-flex justify-content-start'>
+  return(
+    <>
+    <div className = 'd-flex justify-content-start'>
           <div className = 'col d-flex justify-content-start'> <h1>Hello, {user.name}!</h1></div>
           <div className = 'col d-flex justify-content-end align-items-center mx-4'> <span id="bell" class="fa fa-bell"> </span></div>
 
         </div>
         <div className = 'd-flex justify-content-start'>
           <p class="text-black-50">Today is {currentDay.toLocaleString()} ({currentDate.toLocaleString()})</p>
-        </div>
+    </div>
+    </>
+  );
+
+}
+
+function Home(isModalOpen) {
+
+  return (
+    <div className='col min-vh-100 mx-5 py-5'>
+      <AddProject open = {!isModalOpen}/>
+      <div id='greet' className='row justify-content-start'>
+        <HomeHead />
       </div>
     
-    
-
       <div className='row mt-3'>
         <Taskspace />
         <Projectspace />

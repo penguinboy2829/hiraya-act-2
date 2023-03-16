@@ -5,6 +5,7 @@ import Home from "./component/Home";
 import Landing from "./component/Landing";
 import Project2 from "./component/Project2";
 import Addtask from './component/Addtask';
+
 import React, { useState } from 'react';
 import SideNav from "./Sidenav";
 import './App.css';

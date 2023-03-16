@@ -37,7 +37,7 @@ const tasks = [
     { 
         name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
         progressval : 50, _id : 1, p_id: 2
-    },
+    }
 ];
 
 const lists = [
