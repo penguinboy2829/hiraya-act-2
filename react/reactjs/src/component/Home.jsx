@@ -31,9 +31,7 @@ const TaskCard = () =>  {
   );
 }
 
-function ProjectCards () {
-    const [isModalOpen, setIsModalOpen] = useState (false);
-
+function ProjectCards (setIsModalOpen) {
     return(
         <div id ="row" className='col-auto d-flex py-4 px-4 my-2 mx-2 h-50 bg-white shadow-sm ' aria-hidden="true">
             <div id="row " aria-hidden="true">
@@ -60,7 +58,8 @@ function ProjectCards () {
                 <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/project">Open</a></li>
-                  <button class="dropdown-item" onClick={() => setIsModalOpen(true)}>Edit</button>
+                  <button class="dropdown-item" onClick={() => {setIsModalOpen(true)}}>Edit</button>
+
                   <li><a class="dropdown-item" href="" onClick="">Delete</a></li>
                 </ul>
               </div>
@@ -144,18 +143,21 @@ function HomeHead(){
 
 }
 
-function Home(isModalOpen) {
-
+function Home() {
+  const [isModalOpen, setIsModalOpen] = useState (false);
+  
   return (
     <div className='col min-vh-100 mx-5 py-5'>
-      <AddProject open = {!isModalOpen}/>
+      <AddProject open = {isModalOpen}/>
+      <button class="dropdown-item" onClick={() => {setIsModalOpen(true)}}>Edit</button>
+      <button class="dropdown-item" onClick={() => {setIsModalOpen(false)}}>Edit</button>
       <div id='greet' className='row justify-content-start'>
         <HomeHead />
       </div>
     
       <div className='row mt-3'>
         <Taskspace />
-        <Projectspace />
+        <Projectspace setIsModalOpen={setIsModalOpen}/>
       </div>
     </div>
   );

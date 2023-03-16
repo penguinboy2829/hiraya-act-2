@@ -46,7 +46,9 @@ const AddProject = ({open}) => {
 
                         </div>
                         <div class=" justify-content-end"> 
+                        <Link to ="/project">
                             <button class="bg-info position-absolute bottom-0 end-0 mb-2 me-2">Confirm </button>
+                        </Link>
                         </div>
                     </div>
                 </div>
