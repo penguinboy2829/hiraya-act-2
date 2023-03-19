@@ -10,10 +10,11 @@ const AddProject = ({open}) => {
     if (!open) return null;
 
     return(
-            <div class="container w-50 md mt-5 p-3">
+        <div className = "absolute">
+            <div className ="container w-50 md mt-5 p-3">
                 <h2 contentEditable="true"> Project Name </h2>
                 Description
-                <div class="">
+                <div className ="">
                 <p> Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem  </p>
                     </div>
                     <div class="row h-100 p-2 mb-5">
@@ -51,6 +52,7 @@ const AddProject = ({open}) => {
                         </Link>
                         </div>
                     </div>
+                </div>
                 </div>
     )
 

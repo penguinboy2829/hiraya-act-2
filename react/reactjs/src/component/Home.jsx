@@ -129,16 +129,16 @@ function HomeHead(){
   currentDate.setHours(0, 0, 0, 0);
 
   return(
-    <>
-    <div className = 'd-flex justify-content-start'>
-          <div className = 'col d-flex justify-content-start'> <h1>Hello, {user.name}!</h1></div>
-          <div className = 'col d-flex justify-content-end align-items-center mx-4'> <span id="bell" class="fa fa-bell"> </span></div>
+    <div id='greet' className='row justify-content-start'>
+      <div className = 'd-flex justify-content-start'>
+            <div className = 'col d-flex justify-content-start'> <h1>Hello, {user.name}!</h1></div>
+            <div className = 'col d-flex justify-content-end align-items-center mx-4'> <span id="bell" class="fa fa-bell"> </span></div>
 
-        </div>
-        <div className = 'd-flex justify-content-start'>
-          <p class="text-black-50">Today is {currentDay.toLocaleString()} ({currentDate.toLocaleString()})</p>
+          </div>
+          <div className = 'd-flex justify-content-start'>
+            <p class="text-black-50">Today is {currentDay.toLocaleString()} ({currentDate.toLocaleString()})</p>
+      </div>
     </div>
-    </>
   );
 
 }
@@ -151,10 +151,7 @@ function Home() {
       <AddProject open = {isModalOpen}/>
       <button class="dropdown-item" onClick={() => {setIsModalOpen(true)}}>Edit</button>
       <button class="dropdown-item" onClick={() => {setIsModalOpen(false)}}>Edit</button>
-      <div id='greet' className='row justify-content-start'>
         <HomeHead />
-      </div>
-    
       <div className='row mt-3'>
         <Taskspace />
         <Projectspace setIsModalOpen={setIsModalOpen}/>

@@ -1,44 +1,35 @@
 import React, {useState,useEffect} from 'react';
 import '../sidebar.css';
 
+//onClick
+//onDragStart 
+//onDragOver
+///onDrop
+
 const projects = [
     {
         title: "Project", _id: 0
     }
-]
-
-const subtasks = [
-    {
-        description: "", _id: 0, t_id: 0
-    }
-]
+];
 
 const tasks = [
-    {   
-        name : "Hello", description : "Lorem Ipsum", due : "",
-        progressval : 0, _id : 0, p_id: 0
+    {
+      name: "Hello",
+      description: "Lorem Ipsum",
+      due: "",
+      progressval: 20,
+      _id: 0,
+      p_id: 0
     },
-    { 
-        name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
-        progressval : 50, _id : 1, p_id: 1
-    },
-    { 
-        name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
-        progressval : 50, _id : 1, p_id: 0
-    },
-    { 
-        name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
-        progressval : 50, _id : 1, p_id: 3
-    },
-    { 
-        name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
-        progressval : 50, _id : 1, p_id: 4
-    },
-    { 
-        name : "Hi", description : "Lorem Ipsum Lorem Ipsum", due : "",
-        progressval : 50, _id : 1, p_id: 2
+    {
+      name: "Hi",
+      description: "Lorem Ipsum",
+      due: "",
+      progressval: 0,
+      _id: 1,
+      p_id: 3
     }
-];
+  ];
 
 const lists = [
     {
@@ -55,7 +46,27 @@ const lists = [
     }
 ]
 
+const dragStart = (e, _id) => {
+    console.log(_id, "has been captured");
+    e.dataTransfer.setData("_id", _id);
+  };
+  
+  const dragOver = (e) => {
+    e.preventDefault();
+  };
+  
+  const dragDrop = (e, lid) => {
+    e.preventDefault();
+    let newID = e.dataTransfer.getData("_id");
+    let taskIndex = tasks.findIndex(task => task._id == newID);
+    
+    tasks[taskIndex].p_id = lid;
+    
+    let currLID = lid;
+    console.log("Task", newID, "placed in list", currLID);
 
+  };
+  
 const ProjectHead = ({}) => {
     return (
         <div className = 'row d-flex align-items-center'>
@@ -71,16 +82,16 @@ const ProjectHead = ({}) => {
 
 const TaskCard = ({task}) => {
     return(
-        <div className = 'row border rounded m-2 py-1 d-flex justify-content-center shadow-2'
+        <div draggable onDragStart = {(e) => dragStart(e,task._id)} className = 'row border rounded m-2 d-flex justify-content-center shadow-2'
         style = {{width: "260px"}}>                    
             <div className = 'row d-flex justify-content-between align-items-center'>
-                <div className = 'col d-flex justify-content-start'>
-                    <div className = 'row d-flex justify-content-start align-items-center'>
-                        <h5 >{task.name}</h5>
-                    </div>
-                        
+                <div className = 'col d-flex justify-content-start align-items-center'>
+                        <h4>{task.name}</h4>
                 </div>
-                <div className = 'col-2 fa-solid fa-ellipsis-vertical pb-2' />
+                <div className = 'col-2'>
+                    <button className = "fa-solid fa-ellipsis-vertical p-2"
+                    style= {{backgroundColor: "white", color: "black", border: "none"}} />
+                </div>
             </div>
 
             <div className = 'row d-flex justify-content-between align-items-center'>
@@ -91,40 +102,40 @@ const TaskCard = ({task}) => {
                                 
             <div className = 'row d-flex justify-content-between'>
                 <div className = 'col-3'> 
-                <div className = 'row'>
+                    <div className = 'row'>
                         <p>Mem</p>
                     </div>
                 </div>
                 <div className = 'col-8'>
                     <div className = 'row d-flex justify-content-end'>
-                        <div className =  'col-2'>
+                        <div className =  'col-1'>
                             <span className = 'fas fa-circle-exclamation px-4'/>
                         </div>
                         <div className =  'col-10 d-flex justify-content-end align-items-center'>
                             <p> Feb.28,2023</p>
-                        </div>        
-                    </div>                
+                        </div>   
+                    </div>                    
                 </div>
-                <hr/>
+                <hr/> 
             </div>
     
             <div className = 'row'>
-                <div className = 'col-2 d-flex align-items-start justify-content-start'>
-                    <label>
-                        <input id ='progress' type = 'radio'/>
-                    </label>
+                <div className = 'col-2 d-flex align-items-center justify-content-start'>
+                        <input id ='flexRadioDefault1' type = 'radio'/>
                 </div>
-                <div className = 'col d-flex align-items-center justify-content-start'>
-                    <p>Subtask</p>
+                <div className = 'col-8 d-flex align-items-start justify-content-start'>
+                    <label class="form-check-label" for="flexRadioDisabled">
+                        <p>Subtask</p>
+                    </label>
                 </div>
                 <hr/>
             </div>
             
             <div className = 'row d-flex justify-content-between'>
                 <div className = 'col-10 d-flex align-items-start'>
-                    <progress className = 'w-100 h-75' value = {task.progressval} max = '100' />
+                    <progress className = ' w-100 h-75' value = {task.progressval} max = '100' />
                 </div>
-                <div className = 'col-2 d-flex align-items-center'>
+                <div className = 'col-2 d-flex align-items-end justify-content-start'>
                     <p>{task.progressval}%</p>
                 </div>
                 <br/>
@@ -148,12 +159,17 @@ function ProjectList({list}) {
     };
 
     return (
-        <div className='col border rounded m-1'
+        <div
+        droppable 
+        onDragOver={(e)=>dragOver(e)} 
+        onDrop = {(e) => dragDrop (e,list._id)}
+        className='col border rounded m-1'
         style = {{minWidth: "290px"}}>
             <h4 className = 'mt-3'>{list.name}</h4>
             {taskcardlist}
-            <button onClick = {addTaskCard}></button>
+            
         </div>
+        
     )
 }
 

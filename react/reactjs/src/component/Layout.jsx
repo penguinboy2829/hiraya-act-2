@@ -12,8 +12,8 @@ const Layout = () => {
 
   return (
     <div className="App">
-      <div className = 'container-fluid'>
-        <div className = 'row'>
+      <div className = 'container-fluid position-fixed'>
+        <div className = 'row '>
           {location.pathname !== '/landing' && <SideNavBar />}
           <Outlet />
         </div>
