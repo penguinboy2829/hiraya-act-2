@@ -1,39 +1,165 @@
+
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
+    text-align: center;
+  }
+  
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
   }
-  to {
-    transform: rotate(360deg);
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+
   }
+  .header{
+    background-color: white;
+  }
+
+  
+  .card-container{
+    height: 300px;
+    width: 300px;
+    box-shadow: 0px 3px 50px #A5A5A5;
+   
+  }
+  
+  .card-wrapper{
+    width: 270px; 
+    height: 200px; 
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+    margin-bottom: 30px;
+  }
+  .card-wrapper:hover{
+ 
+    background-color: white;
+  }
+ 
+ 
+  
+  .card-top{
+    width: 100%;
+    height: 2%;
+  }
+
+  
+  .task-holder{
+    width: 100%;
+    height: 98%;
+    padding: 10px 10px;
+    display : flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+ 
+  
+  .card-header{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+    text-align: left;
+    font-size: 20px;
+  }
+  #ellipsis{
+    float: right;
+    margin-top: -32px;
+    margin-right: 5px;
+  }
+  
+  .task-container{
+    margin-left: 25%;
+    height: 500px;
+    width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #F6F7F8;
+    padding : 20px 90;
+  }
+  textarea{
+    margin-bottom: 5px;
+  }
+ 
+  #input{
+    
+    width: 225px;
+    margin-left: 3px;
+    border-radius: 10px;
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+#add-task{
+  background-color:  #00B7EB;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  height: 70px;
+  width: 180px;
+ float: right
+
+
 }
+#add-task:hover{
+  background-color:  white;
+  color: #00B7EB;
+  border-radius: 8px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  border: 1px solid #00B7EB;
+}
+#due-date{
+  float: left;
+  margin-left: 5px;
+  margin-top: 10px;
+}
+.due-date{
+  color: grey;
+}
+.sub-task{
+  float: right;
+  color: grey;
+  margin-bottom: 0px;
+}
+.Percentage{
+  float: right;
+  color: grey;
+  text-indent: 3px;
+  margin-bottom: 0px;
+}
+#file{
+  width: 250px;
+  margin-bottom: 0px;
+}
+#All-Projects{
+  justify-content: left;
+}
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
