@@ -14,53 +14,32 @@ const tasks = [
       description: "Lorem Ipsum",
       due: "",
       progressval: 20,
-      _id: 0,
-      p_id: 0
+      _id: "0",
     },
     {
       name: "Another Task",
       description: "Lorem Ipsum",
       due: "",
       progressval: 0,
-      _id: 1,
-      p_id: 2
+      _id: "1",
     }
   ];
 
 const lists = [
     {
-        name: "In Progress", _id: 0 
+        name: "In Progress", _id: "0"
     },
     {
-        name: "Testing", _id: 1 
+        name: "Testing", _id: "1", taskIds: ['0'],
     },
     {
-        name: "Revisions", _id: 2
+        name: "Revisions", _id: "2", 
     },
     {
-        name: "Deployment", _id: 3
+        name: "Deployment", _id: "3", 
     }
 ]
 
-const dragStart = (e, _id) => {
-    console.log(_id, "has been captured");
-    e.dataTransfer.setData("_id", _id);
-  };
-  
-const dragOver = (e) => {
-    e.preventDefault();
-};
-  
-const dragDrop = (e, _id) => {
-    e.preventDefault();
-    let newID = e.dataTransfer.getData("_id");
-    let taskIndex = tasks.findIndex(task => task._id == newID);
-    
-    tasks[taskIndex].p_id = _id;
-    let c_id = tasks[taskIndex].p_id
-    console.log("Task", newID, "placed in list", _id);
-};
-  
 const ProjectHead = ({}) => {
     return (
         <div className = 'row d-flex align-items-center'>
@@ -76,7 +55,7 @@ const ProjectHead = ({}) => {
 
 const TaskCard = ({task}) => {
     return(
-        <div draggable onDragStart = {(e) => dragStart(e,task._id)} className = 'row border rounded m-2 d-flex justify-content-center shadow-2'
+        <div className = 'row border rounded m-2 d-flex justify-content-center shadow-2'
         style = {{width: "260px"}}>                    
             <div className = 'row d-flex justify-content-between align-items-center'>
                 <div className = 'col d-flex justify-content-start align-items-center'>
@@ -148,10 +127,7 @@ function ProjectList({list}) {
     }, [list._id]);
 
     return (
-        <div   
-        onDragOver={(e)=>dragOver(e)} 
-        onDrop = {(e) => dragDrop (e,list._id)}
-        className='col border rounded m-1'
+        <div className='col border rounded m-1'
         style = {{minWidth: "290px"}}>
             <h4 className = 'mt-3'>{list.name}</h4>
             {taskcardlist}

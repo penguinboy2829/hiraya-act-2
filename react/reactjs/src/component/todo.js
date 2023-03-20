@@ -94,7 +94,6 @@ NewTaskSubTask1.addEventListener('click', function(){
   const element = document.getElementById("container");
   const nodes = element.getElementsByClassName("xxx");
   let Number = nodes.length
-  
  
   var count = 0;
    if (document.getElementById("contact").checked){
