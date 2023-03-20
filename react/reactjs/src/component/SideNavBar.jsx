@@ -53,13 +53,16 @@ const SideNavBar = () => {
 				</div>
 				<div className="nav-menu">
 					{menuItems.map(({ text, icon,page }) => (
-						<a
-						className={isExpanded ? "menu-item" : "menu-item menu-item-NX"}
-						href={page}
-						>
-							<img className="menu-item-icon" src={icon} alt="" srcset="" />
-							{isExpanded && <p className="text">{text}</p>}	
-						</a>
+						<Link to = {page}>
+							<a
+							className={isExpanded ? "menu-item" : "menu-item menu-item-NX"}
+							href={page}
+							>
+								<img className="menu-item-icon" src={icon} alt="" srcset="" />
+								{isExpanded && <p className="text">{text}</p>}	
+							</a>
+						</Link>
+						
 					
 					))}
 				</div>

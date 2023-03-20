@@ -1,47 +1,29 @@
-const initialData = {
-    projects: 
-    {
-        'proj-1': {
-            title: "Project", 
-            _id: 0
-        }
-    },
-    
-    tasks:
-    {
-        'task-1':{
-          name: "Hello",
-          description: "Lorem Ipsum",
-          due: "",
-          progressval: 20,
-          _id: 0,
-          p_id: 0
-        },
-        'task-2':{
-          name: "Hi",
-          description: "Lorem Ipsum",
-          due: "",
-          progressval: 0,
-          _id: 1,
-          p_id: 3
-        },
-    },
-    
-    lists:
-    {
-        'list-1': {
-            name: "In Progress", 
-            _id: 0,
-            task_ids: ['task-1','task-2'],
-
-        },
-        'list-2': {
-            name: "Testing", 
-            _id: 1,
-            task_ids: ['task-2','task-1'], 
-        },
-    }, 
-    ColumnOrder : ['list-1','list-2']
+export const initialTasks = [
+  { id: 'task-1', name: 'UI/UX', description: "Lorem Ipsum", due: "", progressval: 20 },
+  { id: 'task-2', name: 'Task 2', description: "Lorem Ipsum", due: "", progressval: 20 },
+  { id: 'task-3', name: 'Task 3', description: "Lorem Ipsum", due: "", progressval: 20 },
+  { id: 'task-4', name: 'Task 4', description: "Lorem Ipsum", due: "", progressval: 20 },
+  { id: 'task-5', name: 'Task 5', description: "Lorem Ipsum", due: "", progressval: 20 }
+];
+export const initialColumns = {
+  'column-1': {
+    id: 'column-1',
+    title: 'To Do',
+    taskIds: ['task-1'],
+  },
+  'column-2': {
+    id: 'column-2',
+    title: 'In Progress',
+    taskIds: ['task-3', 'task-2'],
+  },
+  'column-3': {
+    id: 'column-3',
+    title: 'Review',
+    taskIds: [],
+  },
+  'column-4': {
+    id: 'column-4',
+    title: 'Done',
+    taskIds: ['task-4', 'task-5'],
+  },
 };
-
-export default initialData;

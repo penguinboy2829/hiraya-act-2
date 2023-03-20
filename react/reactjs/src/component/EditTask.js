@@ -14,8 +14,6 @@ const EditTaskPopup = ({modal, toggle, updateTask, taskObj}) => {
         }else{
             setDescription(value)
         }
-
-
     }
 
     useEffect(() => {

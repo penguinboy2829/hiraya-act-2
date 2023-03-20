@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import EditTask from '../component/EditTask'
+import EditTaskPopup from './EditTask';
 
 const Card = ({taskObj, index, deleteTask, updateListArray}) => {
     const [modal, setModal] = useState(false);
@@ -41,15 +41,15 @@ const Card = ({taskObj, index, deleteTask, updateListArray}) => {
 
     return (
         <div class = "card-wrapper mr-5">
-            <div class = "card-top" style={{"background-color": colors[index%5].primaryColor}}></div>
+            <div class = "card-top" style={{"background-color": colors[index%5]?.primaryColor}}></div>
             <div class = "task-holder">
-                <span class = "card-header" style={{"background-color": colors[index%5].secondaryColor, "border-radius": "10px"}}>{taskObj.Name}</span>
+            <span class="card-header" style={{ "background-color": colors[index % 5]?.secondaryColor, "border-radius": "10px" }}>{taskObj.Name}</span>
                 <div class="dropdown">
                 <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/project">Open </a></li>
                   <button class="dropdown-item" onClick = {() => setModal(true)}>Edit</button>
-                  <li><a class="dropdown-item" onClick = {handleDelete}>Delete</a></li>
+                  <li><button class="dropdown-item" onClick = {handleDelete}>Delete</button></li>
                 </ul>
               </div>
               <div>
@@ -63,12 +63,9 @@ const Card = ({taskObj, index, deleteTask, updateListArray}) => {
                   <p class="Percentage">32% </p>
                   <p class="sub-task">Task |</p>
                   <progress id="file" value="32" max="100"> 32% </progress>
-
               </div>
-
-               
         </div>
-        <EditTask modal = {modal} toggle = {toggle} updateTask = {updateTask} taskObj = {taskObj}/>
+        <EditTaskPopup modal = {modal} toggle = {toggle} updateTask = {updateTask} taskObj = {taskObj}/>
         </div>
     );
 };
