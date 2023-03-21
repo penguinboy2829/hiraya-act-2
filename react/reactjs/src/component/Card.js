@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import EditTaskPopup from './EditTask';
+import EditTask from './EditTask'
 
 const Card = ({taskObj, index, deleteTask, updateListArray}) => {
-    const [modal, setModal] = useState(false);
+    const [modal, addProjectCard] = useState(false);
 
     const colors = [
         {
@@ -28,7 +28,7 @@ const Card = ({taskObj, index, deleteTask, updateListArray}) => {
     ]
 
     const toggle = () => {
-        setModal(!modal);
+        addProjectCard(!modal);
     }
 
     const updateTask = (obj) => {
@@ -40,32 +40,34 @@ const Card = ({taskObj, index, deleteTask, updateListArray}) => {
     }
 
     return (
-        <div class = "card-wrapper mr-5">
-            <div class = "card-top" style={{"background-color": colors[index%5]?.primaryColor}}></div>
+        <div class = "card-wrapper mr-5 mb-4">
+            <div class = "card-top" style={{"background-color": colors[index%5].primaryColor}}></div>
             <div class = "task-holder">
-            <span class="card-header" style={{ "background-color": colors[index % 5]?.secondaryColor, "border-radius": "10px" }}>{taskObj.Name}</span>
+                <span class = "card-header" style={{"background-color": colors[index%5].secondaryColor, "border-radius": "10px"}}>{taskObj.Name}</span>
                 <div class="dropdown">
                 <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/project">Open </a></li>
-                  <button class="dropdown-item" onClick = {() => setModal(true)}>Edit</button>
-                  <li><button class="dropdown-item" onClick = {handleDelete}>Delete</button></li>
+                  <button class="dropdown-item" onClick = {() => addProjectCard(true)}>Edit</button>
+                  <li><a class="dropdown-item" onClick = {handleDelete}>Delete</a></li>
                 </ul>
               </div>
               <div>
+                <div class="">
               <i id="due-date" class="fa fa-calendar-check"></i>
               <p id="due-date">Due Date:</p>
               <p id="due-date" className ="due-date">{taskObj.Description}</p>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
+              </div>
+                <div class="mt-5 p-3">
                   <p class="Percentage">32% </p>
                   <p class="sub-task">Task |</p>
                   <progress id="file" value="32" max="100"> 32% </progress>
+                  </div>
               </div>
+
+               
         </div>
-        <EditTaskPopup modal = {modal} toggle = {toggle} updateTask = {updateTask} taskObj = {taskObj}/>
+        <EditTask modal = {modal} toggle = {toggle} updateTask = {updateTask} taskObj = {taskObj}/>
         </div>
     );
 };
