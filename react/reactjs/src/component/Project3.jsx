@@ -1,31 +1,62 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { dragFunc } from './dragFunc';
 import { initialTasks, initialColumns } from './initialData';
+import  isExpanded  from './SideNavBar';
 
-const ProjectHead = () => {
-    return (
-        <div className = 'row d-flex align-items-center'>
-            <div className = 'col d-flex justify-content-start align-items-center'>
-                <h2>PROJECT TITLE</h2>
-            </div>
-            <div className = 'col d-flex justify-content-end align-items-center'>
-                <button className = 'rounded' onClick = {""}>ADD TASK BUTTON</button>
-            </div>
-        </div>
-    )
+function DroppableFunction(column, tasks) {
+  return <Droppable droppableId={column.id}>
+    {(provided, snapshot) => (
+      <div
+        ref={provided.innerRef}
+        {...provided.droppableProps}
+        className={`kanban-column__tasks row d-flex align-items-center ${snapshot.isDraggingOver ? 
+        'kanban-column__tasks--dragging-over row d-flex mx-2 border border-primary' : ''}`}
+      >
+        {column.taskIds.map((taskId, index) => {
+          const task = tasks.find((t) => t.id === taskId);
+          return (
+            DraggableFunction(task, index)
+          );
+        })}
+        {provided.placeholder}
+      </div>
+    )}
+  </Droppable>;
+}
+
+function DraggableFunction(task, index) {
+  return <Draggable key={task.id} draggableId={task.id} index={index}>
+    {(provided, snapshot) => (
+      <div
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        className={`kanban-task ${snapshot.isDragging ? 'kanban-task--dragging' : ''}`}
+      >
+        {taskCard(task)}
+      </div>
+    )}
+  </Draggable>;
 }
 
 function taskCard(task) {
+  
   return (
-  <div key={task.id} className='row border rounded pt-2 mx-2 my-2 d-flex justify-content-center shadow-2'>
+  <div key={task.id} className='row border rounded pt-2 mx-2 my-2 d-flex justify-content-center shadow-2'
+  style= {{width: "270px"}}>
     <div className='row d-flex justify-content-between align-items-center'>
-      <div className='col-6 d-flex justify-content-start align-items-center'>
-        <h4 className>{task.name}</h4>
+      <div className='col-8 d-flex justify-content-start align-items-center'>
+        <h5 className>{task.name}</h5>
       </div>
-      <div className='col-2 '>
-        <button className="fa-solid fa-ellipsis-vertical px-2 mb-2"
-          style={{ backgroundColor: "white", color: "black", border: "none" }} />
+      <div className='col-2 d-flex align-items-end justify-content-center p-4 pl-2 mt-2'>
+        <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/project">Open </a></li>
+            <li><a class="dropdown-item" href = {"() => setModal(true)"}>Edit</a></li>
+            <li><a class="dropdown-item" href = {"handleDelete"}>Delete</a></li>
+          </ul>
       </div>
     </div>
     <div className='row d-flex justify-content-between align-items-start'>
@@ -81,52 +112,33 @@ const KanbanBoard = () => {
   const [tasks, setTasks] = useState(initialTasks);
   const [columns, setColumns] = useState(initialColumns);
 
+
   const onDragEnd = dragFunc(columns, setColumns);
 
   return (
     <div className = "col min-vh-100 p-4 m-2">
-    <ProjectHead />
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="kanban-board row my-2 d-flex justify-content-center">
-        {Object.values(columns).map((column) => (
-          <div key={column.id} className="kanban-column col border rounded m-2 mx-3 py-2">
-            <h3>{column.title} </h3>
-            <Droppable droppableId={column.id}>
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className={`kanban-column__tasks row d-flex align-items-center ${
-                snapshot.isDraggingOver ? 'kanban-column__tasks--dragging-over row d-flex' : ''
-              }`}
-            >
-              {column.taskIds.map((taskId, index) => {
-                const task = tasks.find((t) => t.id === taskId);
-                return (
-                  <Draggable key={task.id} draggableId={task.id} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        className={`kanban-task ${
-                          snapshot.isDragging ? 'kanban-task--dragging' : ''
-                        }`}
-                      >
-                        {taskCard(task)}
-                      </div>
-                    )}
-                  </Draggable>
-                );
-              })}
-              {provided.placeholder}
+      {/* //Projecthead */}
+      
+      <div className = 'row d-flex align-items-center'>
+            <div className = 'col d-flex justify-content-start align-items-center'>
+                <h2>PROJECT TITLE</h2>
             </div>
-          )}
-        </Droppable>
+            <div className = 'col d-flex justify-content-end align-items-center'>
+                <button className = 'rounded' onClick = {""}>ADD TASK BUTTON</button>
+            </div>
+        </div>
+      {/* //Projecthead */}
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="kanban-board border col my-2 d-flex justify-content-center h-100">
+        {Object.values(columns).map((column) => (
+          <div key={column.id} className="kanban-column col border rounded m-2 mx-2 py-2"
+          style = {isExpanded ? ({ width: "200px"}):({ width: "100px"})}
+          >
+            <h4>{column.title} </h4>
+            {DroppableFunction(column, tasks)}
+          </div>))}
       </div>
-    ))}
-  </div>
-</DragDropContext>
+    </DragDropContext>
 </div>
 );
 };
