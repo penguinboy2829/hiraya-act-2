@@ -1,11 +1,14 @@
 {
-    "initialTasks": [
+    "tasks": [
       {
         "id": "task-1",
         "name": "UI/UX",
         "description": "Lorem Ipsum",
         "due": "",
-        "progressval": 20
+        "progressval": 20,
+        "subtasks": [
+          
+        ]
       },
       {
         "id": "task-2",
@@ -34,9 +37,17 @@
         "description": "Lorem Ipsum",
         "due": "",
         "progressval": 20
+      },
+      {
+        "id": "task-6",
+        "name": "Task 6",
+        "description": "Lorem Ipsum",
+        "due": "",
+        "progressval": 20
       }
     ],
-    "initialColumns": {
+
+    "list": {
       "1": {
         "id": 1,
         "title": "To Do",
@@ -55,7 +66,7 @@
       "3": {
         "id": 3,
         "title": "Review",
-        "taskIds": []
+        "taskIds": ["task-6"]
       },
       "4": {
         "id": 4,

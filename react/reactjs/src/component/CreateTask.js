@@ -14,8 +14,6 @@ const CreateTaskPopup = ({modal, toggle, save}) => {
         }else{
             setDescription(value)
         }
-
-
     }
 
     const handleSave = (e) => {

@@ -42,10 +42,9 @@ function DraggableFunction(task, index) {
 }
 
 function taskCard(task) {
-  
   return (
   <div key={task.id} className='row border rounded pt-2 mx-2 my-2 d-flex justify-content-center shadow-2'
-  style= {{width: "270px"}}>
+  style= {{width: "260px"}}>
     <div className='row d-flex justify-content-between align-items-center'>
       <div className='col-8 d-flex justify-content-start align-items-center'>
         <h5 className>{task.name}</h5>
@@ -67,17 +66,17 @@ function taskCard(task) {
 
     <div className='row d-flex justify-content-between pt-3'>
       <div className='col-3'>
-        <div className='row'>
+       
           <p>Mem</p>
-        </div>
+       
       </div>
       <div className='col-8'>
         <div className='row d-flex justify-content-end'>
-          <div className='col-1'>
-            <span className='fas fa-circle-exclamation px-4' />
+          <div className='col-2 d-flex align-items-start'>
+            <span className='fas fa-circle-exclamation px-1 py-1' />
           </div>
-          <div className='col-10 d-flex justify-content-end align-items-center'>
-            <p> Feb.28,2023</p>
+          <div className='col-8 d-flex justify-content-end align-items-center'>
+            <p>Feb.28,2023</p>
           </div>
         </div>
       </div>
@@ -108,7 +107,7 @@ function taskCard(task) {
   );
 }
 
-const KanbanBoard = () => {
+const Project = () => {
   const [tasks, setTasks] = useState(initialTasks);
   const [columns, setColumns] = useState(initialColumns);
 
@@ -116,23 +115,25 @@ const KanbanBoard = () => {
   const onDragEnd = dragFunc(columns, setColumns);
 
   return (
-    <div className = "col min-vh-100 p-4 m-2">
+    <div className = "col w-75 p-4 m-2">
       {/* //Projecthead */}
-      
       <div className = 'row d-flex align-items-center'>
             <div className = 'col d-flex justify-content-start align-items-center'>
                 <h2>PROJECT TITLE</h2>
             </div>
             <div className = 'col d-flex justify-content-end align-items-center'>
-                <button className = 'rounded' onClick = {""}>ADD TASK BUTTON</button>
+                <button className = 'rounded' onClick={this.toggle}>ADD TASK BUTTON</button>
             </div>
         </div>
+        
       {/* //Projecthead */}
+      
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="kanban-board border col my-2 d-flex justify-content-center h-100">
+      <div className="kanban-board col my-2 d-flex justify-content-center h-100"
+      style= {{width: "85vw"}}>
         {Object.values(columns).map((column) => (
           <div key={column.id} className="kanban-column col border rounded m-2 mx-2 py-2"
-          style = {isExpanded ? ({ width: "200px"}):({ width: "100px"})}
+          style = {{ width: "500px"}}
           >
             <h4>{column.title} </h4>
             {DroppableFunction(column, tasks)}
@@ -143,4 +144,4 @@ const KanbanBoard = () => {
 );
 };
 
-export default KanbanBoard;
+export default Project;
