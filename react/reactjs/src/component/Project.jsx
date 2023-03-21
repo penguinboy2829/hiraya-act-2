@@ -21,6 +21,7 @@ function DroppableFunction(column, tasks) {
           );
         })}
         {provided.placeholder}
+        
       </div>
     )}
   </Droppable>;
@@ -36,15 +37,17 @@ function DraggableFunction(task, index) {
         className={`kanban-task ${snapshot.isDragging ? 'kanban-task--dragging' : ''}`}
       >
         {taskCard(task)}
+        
       </div>
     )}
   </Draggable>;
 }
 
-function taskCard(task) {
+export function taskCard(task) {
   return (
   <div key={task.id} className='row border rounded pt-2 mx-2 my-2 d-flex justify-content-center shadow-2'
   style= {{width: "260px"}}>
+    
     <div className='row d-flex justify-content-between align-items-center'>
       <div className='col-8 d-flex justify-content-start align-items-center'>
         <h5 className>{task.name}</h5>
@@ -111,7 +114,6 @@ const Project = () => {
   const [tasks, setTasks] = useState(initialTasks);
   const [columns, setColumns] = useState(initialColumns);
 
-
   const onDragEnd = dragFunc(columns, setColumns);
 
   return (
@@ -122,7 +124,7 @@ const Project = () => {
                 <h2>PROJECT TITLE</h2>
             </div>
             <div className = 'col d-flex justify-content-end align-items-center'>
-                <button className = 'rounded' onClick={this.toggle}>ADD TASK BUTTON</button>
+                <button className = 'rounded' onClick={"this.toggle"}>ADD TASK BUTTON</button>
             </div>
         </div>
         

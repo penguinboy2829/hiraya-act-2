@@ -4,7 +4,7 @@ import Addtask from './Addtask';
 import AddProject from './AddProject';
 import SideNav from "../Sidenav";
 import SideNavBar from './SideNavBar';
-import Home from "./Home";
+import Home from "./Home2";
 import Landing from "./Landing"
 
 const Layout = () => {

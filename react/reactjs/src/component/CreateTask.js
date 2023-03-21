@@ -6,9 +6,7 @@ const CreateTaskPopup = ({modal, toggle, save}) => {
     const [description, setDescription] = useState('');
 
     const handleChange = (e) => {
-        
         const {name, value} = e.target
-
         if(name === "taskName"){
             setTaskName(value)
         }else{
@@ -22,7 +20,6 @@ const CreateTaskPopup = ({modal, toggle, save}) => {
         taskObj["Name"] = taskName
         taskObj["Description"] = description
         save(taskObj)
-
     }
 
     return (
