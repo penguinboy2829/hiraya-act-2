@@ -44,6 +44,7 @@ function DraggableFunction(task, index) {
 }
 
 export function taskCard(task) {
+  
   return (
   <div key={task.id} className='row border rounded pt-2 mx-2 my-2 d-flex justify-content-center shadow-2'
   style= {{width: "260px"}}>
@@ -56,8 +57,8 @@ export function taskCard(task) {
         <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/project">Open </a></li>
-            <li><a class="dropdown-item" href = {"() => setModal(true)"}>Edit</a></li>
-            <li><a class="dropdown-item" href = {"handleDelete"}>Delete</a></li>
+            <li><button class="dropdown-item" onClick = {"() => addProjectCard(true)"}>Edit</button></li>
+            <li><button class="dropdown-item" onClick = {"handleDelete"}>Delete</button></li>
           </ul>
       </div>
     </div>
@@ -127,7 +128,6 @@ const Project = () => {
                 <button className = 'rounded' onClick={"this.toggle"}>ADD TASK BUTTON</button>
             </div>
         </div>
-        
       {/* //Projecthead */}
       
     <DragDropContext onDragEnd={onDragEnd}>
