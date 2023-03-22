@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
-import CreateTask from '../component/CreateTask';
+import CreateProject from '../component/CreateProject';
 import Card from './Card';
 import '../home.css';
 
@@ -45,36 +45,36 @@ function Taskspace() {
 }
 function Projectspace() {
     const [modal, addProjectCard] = useState(false);
-    const [taskList, setTaskList] = useState([])
+    const [projectList, setProjectList] = useState([])
     useEffect(() => {
-        let arr = localStorage.getItem("taskList")
+        let arr = localStorage.getItem("projectList")
         if(arr){
             let obj = JSON.parse(arr)
-            setTaskList(obj)
+            setProjectList(obj)
         }
     }, [])
-    const deleteTask = (index) => {
-      let tempList = taskList
+    const deleteProject = (index) => {
+      let tempList = projectList
       tempList.splice(index, 1)
-      localStorage.setItem("taskList", JSON.stringify(tempList))
-      setTaskList(tempList)
+      localStorage.setItem("projectList", JSON.stringify(tempList))
+      setProjectList(tempList)
       window.location.reload()
   }
   const updateListArray = (obj, index) => {
-      let tempList = taskList
+      let tempList = projectList
       tempList[index] = obj
-      localStorage.setItem("taskList", JSON.stringify(tempList))
-      setTaskList(tempList)
+      localStorage.setItem("projectList", JSON.stringify(tempList))
+      setProjectList(tempList)
       window.location.reload()
   }
   const toggle = () => {
       addProjectCard(!modal);
   }
-  const saveTask = (taskObj) => {
-      let tempList = taskList
-      tempList.push(taskObj)
-      localStorage.setItem("taskList", JSON.stringify(tempList))
-      setTaskList(taskList)
+  const saveProject = (projectObj) => {
+      let tempList = projectList
+      tempList.push(projectObj)
+      localStorage.setItem("projectList", JSON.stringify(tempList))
+      setProjectList(projectList)
       addProjectCard(false)
   }
     return (
@@ -87,9 +87,9 @@ function Projectspace() {
             <p class="text-black-50">All Projects</p>
           </div>
           <div className = "task-container overflow-auto p-4">
-            {taskList && taskList.map((obj , index) => <Card taskObj = {obj} index = {index} deleteTask = {deleteTask} updateListArray = {updateListArray}/> )}
+            {projectList && projectList.map((obj , index) => <Card projectObj = {obj} index = {index} deleteProject = {deleteProject} updateListArray = {updateListArray}/> )}
             </div>
-            <CreateTask toggle = {toggle} modal = {modal} save = {saveTask}/>
+            <CreateProject toggle = {toggle} modal = {modal} save = {saveProject}/>
         </div>
     );
 }
