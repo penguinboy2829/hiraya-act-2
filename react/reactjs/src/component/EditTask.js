@@ -14,6 +14,8 @@ const EditTaskPopup = ({modal, toggle, updateTask, taskObj}) => {
         }else{
             setDescription(value)
         }
+
+
     }
 
     useEffect(() => {
@@ -35,7 +37,7 @@ const EditTaskPopup = ({modal, toggle, updateTask, taskObj}) => {
             <ModalBody>
             
                     <div className = "form-group">
-                        <label>Task Name</label>
+                        <label>Project Name</label>
                         <input type="text" className = "form-control" value = {taskName} onChange = {handleChange} name = "taskName"/>
                     </div>
                     <div>
@@ -45,8 +47,8 @@ const EditTaskPopup = ({modal, toggle, updateTask, taskObj}) => {
                 
             </ModalBody>
             <ModalFooter>
-            <Button color="primary" onClick={handleUpdate}>Update</Button>{' '}
-            <Button color="secondary" onClick={toggle}>Cancel</Button>
+            <Button id="button-create" onClick={handleUpdate}>Update</Button>{' '}
+            <Button id="button-cancel" onClick={toggle}>Cancel</Button>
             </ModalFooter>
       </Modal>
     );
