@@ -6,29 +6,43 @@ const CreateTaskPopup = ({modal, toggle, save}) => {
     const [description, setDescription] = useState('');
 
     const handleChange = (e) => {
+        
         const {name, value} = e.target
+
         if(name === "taskName"){
             setTaskName(value)
         }else{
             setDescription(value)
         }
+
+
     }
 
     const handleSave = (e) => {
-        e.preventDefault()
-        let taskObj = {}
-        taskObj["Name"] = taskName
-        taskObj["Description"] = description
-        save(taskObj)
+        //   e.preventDefault()
+        //   let taskObj = {}
+        //   taskObj["Name"] = taskName
+        //  taskObj["Description"] = description
+        //  save(taskObj)
+        fetch('https://jsonplaceholder.typicode.com/posts')
+      .then((res) => res.json())
+      .then((data) => {
+         console.log(data);
+       
+      })
+      .catch((err) => {
+         console.log(err.message);
+      });
+
     }
 
     return (
         <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle}>Create Task</ModalHeader>
+            <ModalHeader toggle={toggle}>Project Task</ModalHeader>
             <ModalBody>
             
                     <div className = "form-group">
-                        <label>Task Name</label>
+                        <label>Project Name</label>
                         <input type="text" className = "form-control" value = {taskName} onChange = {handleChange} name = "taskName"/>
                     </div>
                     <div>
@@ -38,8 +52,8 @@ const CreateTaskPopup = ({modal, toggle, save}) => {
                 
             </ModalBody>
             <ModalFooter>
-            <Button color="primary" onClick={handleSave}>Create</Button>{' '}
-            <Button color="secondary" onClick={toggle}>Cancel</Button>
+            <Button id="button-create"  onClick={handleSave}>Create</Button>{' '}
+            <Button id="button-cancel" onClick={toggle}>Cancel</Button>
             </ModalFooter>
       </Modal>
     );
