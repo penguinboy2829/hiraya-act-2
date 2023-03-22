@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import EditTask from './EditTask'
+import EditProject from './EditProject'
 
-const Card = ({taskObj, index, deleteTask, updateListArray}) => {
+const Card = ({projectObj, index, deleteProject, updateListArray}) => {
     const [modal, addProjectCard] = useState(false);
 
     const colors = [
@@ -31,19 +31,19 @@ const Card = ({taskObj, index, deleteTask, updateListArray}) => {
         addProjectCard(!modal);
     }
 
-    const updateTask = (obj) => {
+    const updateProject = (obj) => {
         updateListArray(obj, index)
     }
 
     const handleDelete = () => {
-        deleteTask(index)
+        deleteProject(index)
     }
 
     return (
         <div class = "card-wrapper mr-5 mb-4">
             <div class = "card-top" style={{"background-color": colors[index%5].primaryColor}}></div>
             <div class = "task-holder">
-                <span class = "card-header" style={{"background-color": colors[index%5].secondaryColor, "border-radius": "10px"}}>{taskObj.Name}</span>
+                <span class = "card-header" style={{"background-color": colors[index%5].secondaryColor, "border-radius": "10px"}}>{projectObj.Name}</span>
                 <div class="dropdown">
                 <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
                 <ul class="dropdown-menu">
@@ -56,7 +56,7 @@ const Card = ({taskObj, index, deleteTask, updateListArray}) => {
                 <div class="">
               <i id="due-date" class="fa fa-calendar-check"></i>
               <p id="due-date">Due Date:</p>
-              <p id="due-date" className ="due-date">{taskObj.Description}</p>
+              <p id="due-date" className ="due-date">{projectObj.Description}</p>
               </div>
                 <div class="mt-5 p-3">
                   <p class="Percentage">32% </p>
@@ -66,7 +66,7 @@ const Card = ({taskObj, index, deleteTask, updateListArray}) => {
               </div>
                
         </div>
-        <EditTask modal = {modal} toggle = {toggle} updateTask = {updateTask} taskObj = {taskObj}/>
+        <EditProject modal = {modal} toggle = {toggle} updateProject = {updateProject} projectObj = {projectObj}/>
         </div>
     );
 };
