@@ -3,24 +3,13 @@ import { Link } from "react-router-dom";
 import AddProject from "./AddProject";
 import '../home.css';
 
-const user = {
-  _id: 123,
-  name: 'Mc'
-};
-
-const taskinfo = {
-  _id: 12345,
-  name: 'task',
-  pname: 'Project Name',
-  };
-
 const TaskCard = () =>  {
   return(
     <div id="task" className = 'col d-flex border mb-2 w-100 align-items-center justify-content-center'>
         <a href = "/project" style = {{textDecoration: "none" }}>
           <div id="left-task-card">
               <h5 id="h5"class="text-dark">Task Name</h5>
-              <p class="text-black-50">{taskinfo.pname}</p>
+              <p class="text-black-50">Project Name</p>
           </div>
           <div id="right-task-card" style = {{marginLeft: "10px"}}>
               <p class="text-dark" style = {{marginBottom: "0px", marginTop: "14px"}}>Due</p>
@@ -131,7 +120,7 @@ function HomeHead(){
   return(
     <div id='greet' className='row justify-content-start'>
       <div className = 'd-flex justify-content-start'>
-            <div className = 'col d-flex justify-content-start'> <h1>Hello, {user.name}!</h1></div>
+            <div className = 'col d-flex justify-content-start'> <h1>Hello, Mc!</h1></div>
             <div className = 'col d-flex justify-content-end align-items-center mx-4'> <span id="bell" class="fa fa-bell"> </span></div>
 
           </div>

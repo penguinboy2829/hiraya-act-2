@@ -48,8 +48,8 @@ const Card = ({taskObj, index, deleteTask, updateListArray}) => {
                 <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/project">Open </a></li>
-                  <button class="dropdown-item" onClick = {() => addProjectCard(true)}>Edit</button>
-                  <li><a class="dropdown-item" onClick = {handleDelete}>Delete</a></li>
+                  <li><button class="dropdown-item" onClick = {() => addProjectCard(true)}>Edit</button></li>
+                  <li><button class="dropdown-item" onClick = {handleDelete}>Delete</button></li>
                 </ul>
               </div>
               <div>
@@ -64,7 +64,6 @@ const Card = ({taskObj, index, deleteTask, updateListArray}) => {
                   <progress id="file" value="32" max="100"> 32% </progress>
                   </div>
               </div>
-
                
         </div>
         <EditTask modal = {modal} toggle = {toggle} updateTask = {updateTask} taskObj = {taskObj}/>

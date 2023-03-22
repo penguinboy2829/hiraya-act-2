@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { dragFunc } from './dragFunc';
-import { initialTasks, initialColumns } from './initialData';
-import  isExpanded  from './SideNavBar';
+import { initialTasks, initialColumns, initialSubtasks } from './initialData';
+import ModifyTask from './ModifyTask';
 
 function DroppableFunction(column, tasks) {
-  return <Droppable droppableId={column.id}>
+  return ( 
+  <Droppable droppableId={column.id}>
     {(provided, snapshot) => (
       <div
         ref={provided.innerRef}
@@ -15,7 +15,7 @@ function DroppableFunction(column, tasks) {
         'kanban-column__tasks--dragging-over row d-flex mx-2 border border-primary' : ''}`}
       >
         {column.taskIds.map((taskId, index) => {
-          const task = tasks.find((t) => t.id === taskId);
+          const task = tasks.find((t) => t.public_id === taskId);
           return (
             DraggableFunction(task, index)
           );
@@ -24,11 +24,12 @@ function DroppableFunction(column, tasks) {
         
       </div>
     )}
-  </Droppable>;
+  </Droppable>
+  )
 }
 
 function DraggableFunction(task, index) {
-  return <Draggable key={task.id} draggableId={task.id} index={index}>
+  return <Draggable key={task.public_id} draggableId={task.public_id} index={index}>
     {(provided, snapshot) => (
       <div
         ref={provided.innerRef}
@@ -36,17 +37,21 @@ function DraggableFunction(task, index) {
         {...provided.dragHandleProps}
         className={`kanban-task ${snapshot.isDragging ? 'kanban-task--dragging' : ''}`}
       >
-        {taskCard(task)}
+        {TaskCard(task)}
         
       </div>
     )}
   </Draggable>;
 }
 
-export function taskCard(task) {
-  
+function TaskCard(task) {
+  const [modal,setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
   return (
-  <div key={task.id} className='row border rounded pt-2 mx-2 my-2 d-flex justify-content-center shadow-2'
+  <>
+  <div key={task.public_id} className='row border rounded pt-2 mx-2 my-2 d-flex justify-content-center shadow-2'
   style= {{width: "260px"}}>
     
     <div className='row d-flex justify-content-between align-items-center'>
@@ -57,7 +62,7 @@ export function taskCard(task) {
         <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/project">Open </a></li>
-            <li><button class="dropdown-item" onClick = {"() => addProjectCard(true)"}>Edit</button></li>
+            <li><button class="dropdown-item" onClick = {()=> setModal(true)}>Edit</button></li>
             <li><button class="dropdown-item" onClick = {"handleDelete"}>Delete</button></li>
           </ul>
       </div>
@@ -76,11 +81,11 @@ export function taskCard(task) {
       </div>
       <div className='col-8'>
         <div className='row d-flex justify-content-end'>
-          <div className='col-2 d-flex align-items-start'>
-            <span className='fas fa-circle-exclamation px-1 py-1' />
-          </div>
-          <div className='col-8 d-flex justify-content-end align-items-center'>
-            <p>Feb.28,2023</p>
+          {/* <div className='col-2 d-flex align-items-start'>
+            <span className='fas fa-circle-exclamation py-1' />
+          </div> */}
+          <div className='col-10 d-flex justify-content-end align-items-center'>
+            <p>{task.date_created}</p>
           </div>
         </div>
       </div>
@@ -94,20 +99,21 @@ export function taskCard(task) {
           <p>Subtask</p>
         </label>
       </div>
-
       <hr style={{ marginTop: "-10px", marginBottom: "-10px" }} />
     </div>
 
     <div className='row d-flex justify-content-between'>
       <div className='col-10 d-flex align-items-start'>
-        <progress className=' w-100 h-75' value={task.progressval} max='100' />
+        <progress className=' w-100 h-75' value="2" max='100' />
       </div>
       <div className='col-2 d-flex align-items-end justify-content-start'>
-        <p>{task.progressval}%</p>
+        <p>2%</p>
       </div>
       <br />
     </div>
   </div>
+  <ModifyTask toggle = {toggle} modal = {modal}/>
+  </>
   );
 }
 
@@ -116,6 +122,18 @@ const Project = () => {
   const [columns, setColumns] = useState(initialColumns);
 
   const onDragEnd = dragFunc(columns, setColumns);
+
+//   useEffect (() => {
+//     fetch('http://localhost:3000/initialData.json')
+//        .then((res) => res.json())
+//        .then((data) => {
+//           console.log(data);
+//           setTasks(data);
+//        })
+//        .catch((err) => {
+//           console.log(err.message);
+//        });
+//  }, []);
 
   return (
     <div className = "col w-75 p-4 m-2">

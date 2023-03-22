@@ -3,22 +3,14 @@ import { Link } from "react-router-dom";
 import CreateTask from '../component/CreateTask';
 import Card from './Card';
 import '../home.css';
-const user = {
-  _id: 123,
-  name: 'Mc'
-};
-const taskinfo = {
-  _id: 12345,
-  name: 'task',
-  pname: 'Project Name',
-  };
+
 const TaskCard = () =>  {
   return(
     <div id="task"  className = 'col d-flex me-5 border mb-2 w-100 align-items-center justify-content-center'>
         <a href = "/project" style = {{textDecoration: "none" }}>
           <div id="left-task-card" class="justify-content-start float-start">
               <h5 id="h5"class="text-dark mt-3 mb-0">Task Name</h5>
-              <p class="text-black-50">{taskinfo.pname}</p>
+              <p class="text-black-50">Project Name</p>
           </div>
           <div id="right-task-card" class="p-1 ms-3 float-end align-items-end" >
               <p class="text-dark mt-3 mb-0">Due</p>
@@ -53,7 +45,6 @@ function Taskspace() {
 }
 function Projectspace() {
     const [modal, addProjectCard] = useState(false);
-    const [projects, setProjects] = useState ([]);
     const [taskList, setTaskList] = useState([])
     useEffect(() => {
         let arr = localStorage.getItem("taskList")
@@ -107,15 +98,12 @@ function Home() {
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const currentDay = daysOfWeek[currentDate.getDay()];
   currentDate.setHours(0, 0, 0, 0);
-  const [projects,setProjects] = useState ([]);
-  const addProjectCard = () => {
- 
-  };
+  
   return (
     <div className='col min-vh-100 mx-5 py-5'>
       <div id='greet' className='row justify-content-start mb-0'>
         <div className = 'd-flex justify-content-start'>
-          <h1>Hello, {user.name}!</h1>
+          <h1>Hello, Mc!</h1>
           <span class="position-absolute top-0 end-0 fa fa-bell mt-5 fs-2"> </span>
         </div>
         <div className = 'd-flex justify-content-start'>

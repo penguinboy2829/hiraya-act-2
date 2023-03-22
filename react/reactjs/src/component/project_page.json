@@ -1,0 +1,45 @@
+{
+    "project_data": {
+        "public_id": "afde6a04-6709-4aae-9d3a-f8aea43c31e6",
+        "name": "Tixsys",
+        "date_created": "Wed, 22 Mar 2023 02:56:15 GMT",
+        "date_updated": "Wed, 22 Mar 2023 02:56:15 GMT",
+        "tasks": [
+            {
+                "public_id": "a5c235a2-a7b7-465e-8e6d-b36f75b7b1f0",
+                "name": "Frontend",
+                "description": "UI/UX ng app hahahahhah",
+                "progress": "In Progress",
+                "date_created": "Wed, 22 Mar 2023 03:00:05 GMT",
+                "date_due": null,
+                "subtasks": [
+                    {
+                        "public_id": "d319a96a-e204-4654-b5cf-e235b399bac8",
+                        "name": "Subtask 1",
+                        "done": true
+                    },
+                    {
+                        "public_id": "d3w19a96a-e204-4654-b5cf-e235b399bac8",
+                        "name": "Subtask 1",
+                        "done": true
+                    }
+                ]
+            },
+            {
+                "public_id": "b3424244234",
+                "name": "Task2",
+                "description": "UI/UX ng app.",
+                "progress": "To do",
+                "date_created": "Mar 22, 2023",
+                "date_due": null,
+                "subtasks": [
+                    {
+                        "public_id": "d3129a96a-e204-4654-b5cf-e235b399bac8",
+                        "name": "Subtask 12",
+                        "done": true
+                    }
+                ]
+            }
+        ]
+    }
+}

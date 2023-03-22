@@ -1,0 +1,31 @@
+{
+    "dashboard_data": [
+        {
+            "user": {
+                "public_id": "2844f040-1e42-44ed-97be-5031a42c5095",
+                "first_name": "Marc Chester",
+                "last_name": "Masakayan"
+            }
+        },
+        {
+            "projects": [
+                {
+                    "public_id": "afde6a04-6709-4aae-9d3a-f8aea43c31e6",
+                    "name": "Tixsys",
+                    "description": "",
+                    "date_created": "Wed, 22 Mar 2023 02:56:15 GMT",
+                    "date_updated": "Wed, 22 Mar 2023 02:56:15 GMT",
+                    "tasks": [
+                        {
+                            "public_id": "a5c235a2-a7b7-465e-8e6d-b36f75b7b1f0",
+                            "name": "Frontend",
+                            "progress": "In Progress",
+                            "date_created": "Wed, 22 Mar 2023 03:00:05 GMT",
+                            "date_due": null
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
