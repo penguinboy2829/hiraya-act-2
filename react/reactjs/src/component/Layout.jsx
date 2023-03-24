@@ -5,7 +5,7 @@ import AddProject from './AddProject';
 import SideNav from "../Sidenav";
 import SideNavBar from './SideNavBar';
 import Home from "./Home2";
-import Landing from "./Landing"
+import Landing from "./Landing";
 
 const Layout = () => {
   const location = useLocation();

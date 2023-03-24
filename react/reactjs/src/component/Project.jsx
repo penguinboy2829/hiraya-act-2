@@ -112,7 +112,7 @@ function TaskCard(task) {
       <br />
     </div>
   </div>
-  <ModifyTask toggle = {toggle} modal = {modal}/>
+  <ModifyTask toggle = {toggle} modal = {modal} task = {task}/>
   </>
   );
 }
@@ -122,6 +122,10 @@ const Project = () => {
   const [columns, setColumns] = useState(initialColumns);
 
   const onDragEnd = dragFunc(columns, setColumns);
+
+  // const saveData = () => {
+  //   fetch
+  // }
 
 //   useEffect (() => {
 //     fetch('http://localhost:3000/initialData.json')
