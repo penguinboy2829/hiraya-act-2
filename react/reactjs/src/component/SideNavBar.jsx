@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import "./SideNavBar.css";
 
-
 const SideNavBar = () => {
 	const [isExpanded, setExpendState] = useState(false);
 	const menuItems = [
@@ -15,7 +14,7 @@ const SideNavBar = () => {
 		{
 			text: "Project Page",
 			icon: "icons/layer2.svg",
-			page: "/project"
+			page: "/dashboard/project"
 		},
 		
 		{

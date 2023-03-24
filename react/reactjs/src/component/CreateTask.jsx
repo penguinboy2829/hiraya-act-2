@@ -1,11 +1,11 @@
 import React, { useState , useEffect} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-    const ModifyTask = ({modal, toggle, task}) => {
+const CreateTask = ({modal, toggle}) => {
     const [taskName, setTaskName] = useState('');
     const [description, setDescription] = useState('');
     const [due, setDue] = useState('');
-    const [subtask, setSubTasks] = useState([]);
+    const [subtask, setSubTasks] = useState(['']);
 
     const handleChange = (e) => {
         
@@ -23,16 +23,17 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
         }
     }
 
-    useEffect(() => {
-        setTaskName(task.name)
-        setDescription(task.description)
-        setDue(task.date_due)
-        setSubTasks(task.subtasks)
-    },[])
-
     const addSubTask = () => {
         setSubTasks([...subtask,''])
     }
+
+    // const handleSave = (e) => {
+    //     e.preventDefault()
+    //     let taskObj = {}
+    //     taskObj["Name"] = taskName
+    //     taskObj["Description"] = description
+    //     save(taskObj)
+    // }
 
     // const handleUpdate = (e) => {
     //     e.preventDefault();
@@ -63,15 +64,14 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
                     <hr />
                     <div>
                         <label>Subtasks</label>
-                        <br />
+                            <br />
                         {subtask.map(item => 
                             <div className = "row py-1" key={item.public_id}>
                                 <div className = "col-2">
-                                <input className='form-check-input p-2' id={`subtask-${subtask.public_id}`} type="checkbox" name="subtask-radio" 
-                                checked={subtask.done ? true:false}/>
+                                <input id={item.public_id} type="radio" name="subtask-radio" />
                                 </div>
                                 <div className = "col-10">
-                                <input type="form-check-input" className = "form-control" value = {item.name} onChange = {handleChange} name = "subtask"/>
+                                <input type="input" className = "form-control" value = {item.name} placeholder = "Input" onChange = {handleChange} name = "subtask"/>
                                 </div>
                             </div>
                         )}
@@ -89,4 +89,4 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
     );
 };
 
-export default ModifyTask;
+export default CreateTask;
