@@ -60,7 +60,9 @@ export function TaskCard(task, index) {
 
         {task.subtasks.map(subtask => <div className='row form-check' key={subtask.public_id}>
           <div className='col-2'>
-            <input className='form-check-input p-2' id={`${subtask.public_id}`} type="checkbox" name="subtask-radio" />
+            {subtask.done ? (<input className='form-check-input p-2' id={`${subtask.public_id}`} type="checkbox" name="subtask-radio" checked/>)
+            :(<input className='form-check-input p-2' id={`${subtask.public_id}`} type="checkbox" name="subtask-radio" />)}
+            
           </div>
           <div className='col-10 d-flex justify-content-start align-items-end'>
             <label className="form-check-label" for={`${subtask.public_id}`}>{subtask.name}</label>

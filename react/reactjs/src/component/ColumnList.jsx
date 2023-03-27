@@ -5,7 +5,8 @@ import { TaskCard } from "./TaskCard";
 export function DoneList(tasks1) {
   return <Droppable droppableId="Done" direction="vertical">
     {(provided) => (
-      <div className='row kanban-column__tasks border rounded d-flex justify-content-start mx-2'
+      <div className='row kanban-column__tasks border rounded d-flex justify-content-center
+        align-items-start mx-2'
         style={{ width: "330px" }}
         {...provided.droppableProps} ref={provided.innerRef}>
         <h2>Done</h2>
@@ -37,7 +38,8 @@ export function DoneList(tasks1) {
 export function InProgressList(tasks1) {
   return <Droppable droppableId="In Progress" direction="vertical">
     {(provided) => (
-      <div className='row kanban-column__tasks border rounded d-flex justify-content-start mx-2 '
+      <div className='row kanban-column__tasks border rounded d-flex justify-content-center 
+        align-items-start mx-2'
         style={{ width: "330px" }}
         {...provided.droppableProps} ref={provided.innerRef}>
         <h2>In Progress</h2>
@@ -69,7 +71,8 @@ export function InProgressList(tasks1) {
 export function ReviewList(tasks1) {
   return <Droppable droppableId="Review" direction="vertical">
     {(provided) => (
-      <div className='row kanban-column__tasks border rounded d-flex justify-content-start mx-2 '
+      <div className='row kanban-column__tasks border rounded d-flex justify-content-center 
+        align-items-start mx-2'
         style={{ width: "330px" }}
         {...provided.droppableProps} ref={provided.innerRef}>
         <h2>Review</h2>
@@ -101,7 +104,8 @@ export function ReviewList(tasks1) {
 export function ToDoList(tasks1) {
   return <Droppable droppableId="To Do" direction="vertical">
     {(provided) => (
-      <div className='row kanban-column__tasks border rounded d-flex justify-content-start mx-2 '
+      <div className='row kanban-column__tasks border rounded d-flex justify-content-center 
+        align-items-start mx-2'
         style={{ width: "330px" }}
         {...provided.droppableProps} ref={provided.innerRef}>
         <h2>To Do</h2>

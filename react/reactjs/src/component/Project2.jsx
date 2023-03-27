@@ -53,7 +53,7 @@ export default function Project2({projectObj}) {
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="kanban-board row my-2 d-flex justify-content-center align-items-start "
-        style= {{width: "100vw", height: "100vw"}}>
+        style= {{width: "90vw"}}>
           {projectData && (
             <div className="kanban-column row rounded w-100">
               <ColumnList tasks1={tasks1}/>
