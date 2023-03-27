@@ -98,7 +98,7 @@ function Home() {
   
   return (
     <div className='col min-vh-100 w-75 m-2 p-5'>
-      <div id='greet' className='row justify-content-start mb-0'>
+      <div id='greet' className='row justify-content-start mb-0 sticky-md-top bg-white'>
         <div className = 'd-flex justify-content-start'>
           <h1>Hello, Mc!</h1>
           <span class="position-absolute top-0 end-0 fa fa-bell mt-5 fs-2"> </span>
