@@ -1,7 +1,7 @@
 import React, { useState , useEffect} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-    const ModifyTask = ({modal, toggle, task}) => {
+    const ModifyTask = ({modal, toggle, task, listArray}) => {
     const [taskName, setTaskName] = useState('');
     const [description, setDescription] = useState('');
     const [due, setDue] = useState('');
