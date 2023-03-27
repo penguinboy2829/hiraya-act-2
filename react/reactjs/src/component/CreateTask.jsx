@@ -47,12 +47,12 @@ const CreateTask = ({modal, toggle}) => {
         <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader toggle={toggle}>Update Task</ModalHeader>
             <ModalBody>
-                    <div className = "form-group">
+                    <div className = "form-group mb-2">
                         <label>Task Name</label>
                         <input type="text" className = "form-control" value = {taskName} onChange = {handleChange} name = "taskName"/>
                     </div>
                     <div>
-                        <label>Description</label>
+                        <label className = "mb-2">Description</label>
                         <br />
                         <input type="text" className = "form-control" value = {description} onChange = {handleChange} name = "description"/>
                     </div>

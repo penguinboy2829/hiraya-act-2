@@ -27,7 +27,7 @@ const Card = ({projectObj, index, deleteProject, updateListArray}) => {
         }
     ]
 
-    const toggle = () => {
+    function toggle() {
         addProjectCard(!modal);
     }
 
@@ -47,7 +47,7 @@ const Card = ({projectObj, index, deleteProject, updateListArray}) => {
                 <div class="dropdown">
                 <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/project">Open </a></li>
+                  <li><a class="dropdown-item" href={`${projectObj.Name}`}>Open </a></li>
                   <li><button class="dropdown-item" onClick = {() => addProjectCard(true)}>Edit</button></li>
                   <li><button class="dropdown-item" onClick = {handleDelete}>Delete</button></li>
                 </ul>
@@ -70,5 +70,5 @@ const Card = ({projectObj, index, deleteProject, updateListArray}) => {
         </div>
     );
 };
-
+ 
 export default Card;

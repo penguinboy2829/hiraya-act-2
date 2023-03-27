@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { dragFunc } from './dragFunc';
-import { initialTasks, initialColumns, initialSubtasks } from './initialData';
+import { initialTasks, initialColumns, initialSubtasks, initialList } from './initialData';
 import ModifyTask from './ModifyTask';
 import CreateTask from './CreateTask';
 import axios from 'axios';
 
 
-function TaskCard(task, column) {
+function TaskCard(task, column, openTaskData) {
   const [modal,setModal] = ModalCheck();
-  const [check, setCheck] = useState(true);
+  const [check, setCheck] = useState(false);
 
   const toggle = () => setModal(!modal);
 
@@ -18,6 +18,7 @@ function TaskCard(task, column) {
   const dateObj = new Date(dateStr);
   const formattedDate = dateObj.toISOString().slice(0, 10);
 
+  //progress bar calculation
   const completedSubtasks = task.subtasks.filter((subtask) => subtask.done);
   const completedPercentage = (completedSubtasks.length / task.subtasks.length) * 100;
 
@@ -36,7 +37,7 @@ function TaskCard(task, column) {
       <div className='col-2 d-flex align-items-end justify-content-center p-4 pl-2 mt-2'>
         <i id="ellipsis" class="fa fa-ellipsis-v" type ="button" data-bs-toggle="dropdown" />
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/project">Open </a></li>
+            <li><button class="dropdown-item" onClick= {()=> openTaskData}>Open </button></li>
             <li><button class="dropdown-item" onClick = {()=> setModal(true)}>Edit</button></li>
             <li><button class="dropdown-item" onClick = {"handleDelete"}>Delete</button></li>
           </ul>
@@ -68,12 +69,10 @@ function TaskCard(task, column) {
     {task.subtasks.map(subtask => 
       <div className='row form-check' key={subtask.public_id}>
         <div className='col-2'>
-          <input className='form-check-input p-2' id={`subtask-${subtask.public_id}`} type="checkbox" name="subtask-radio" 
-          checked={subtask.done && check} onClick = {() => setCheck(!check)}
-          />
+          <input className='form-check-input p-2' id={`${subtask.public_id}`} type="checkbox" name="subtask-radio" />
         </div>
         <div className='col-10 d-flex justify-content-start align-items-end'>
-          <label className="form-check-label" for={`subtask-${subtask.public_id}`}>{subtask.name}</label>
+          <label className="form-check-label" for={`${subtask.public_id}`}>{subtask.name}</label>
         </div>
       </div>
     )}
@@ -94,108 +93,87 @@ function TaskCard(task, column) {
 }
 
 const Project = () => {
-  const [project, setProject] = useState([])
   const [tasks, setTasks] = useState(initialTasks);
-  const [columns, setColumns] = useState(initialColumns);
+  const [columns, setColumns] = useState(initialList);
   const [modal,setModal] = ModalCheck();
 
   const toggle = () => setModal(!modal);
 
   const onDragEnd = dragFunc(columns, setColumns);
 
-  // const saveData = () => {
-  //   fetch('http://localhost:3000/initialData.json')
-  //      .then((res) => res.json())
-  //      .then((data) => {
-  //         console.log(data);
-  //         setTasks(data);
-  //      })
-  //      .catch((err) => {
-  //         console.log(err.message);
-  //      });
-  // }
-
-  const saveData = () => {
+  const openTaskData = () => {
     axios
-      .get('localhost:3000/dashboard/<string:project_name>')
+      .get('http://localhost:3000/dashboard')
       .then((response) => {
-        setTasks(response.data);
+        setTasks(response.project_data);
+        console.log(response.project_data)
       })
       .catch((err) => {
         console.log(err);
       });
+      return <>
+        {tasks}
+      </>
   };
 
-//   useEffect (() => {
-//     fetch('http://localhost:3000/initialData.json')
-//        .then((res) => res.json())
-//        .then((data) => {
-//           console.log(data);
-//           setTasks(data);
-//        })
-//        .catch((err) => {
-//           console.log(err.message);
-//        });
-//  }, []);
-
   return (
-    <div className = "col w-75 p-4 m-2">
+    <div className = "col w-75 p-5 m-2">
       {/* //Projecthead */}
       <div className = 'row d-flex align-items-center'>
             <div className = 'col d-flex justify-content-start align-items-center'>
-                <h2>PROJECT TITLE</h2>
+                <h1>Name</h1>
             </div>
             <div className = 'col d-flex justify-content-end align-items-center'>
-                <button className = 'rounded' onClick={()=> setModal(true)}>ADD TASK BUTTON</button>
+                <button className = 'rounded' onClick={()=> openTaskData()}>ADD TASK BUTTON</button>
             </div>
         
         </div>
       {/* //Projecthead */}
       
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="kanban-board col my-2 d-flex justify-content-center h-100"
-      style= {{width: "85vw"}}>
-        {Object.values(columns).map((column) => (
-          <div key={column.id} className="kanban-column col border rounded m-2 mx-2 py-2"
-          style = {{ width: "500px"}}
-          >
-            <h4>{column.title} </h4>
-            <Droppable droppableId={column.id}>
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  className={`kanban-column__tasks row d-flex align-items-center ${snapshot.isDraggingOver ? 
-                  'kanban-column__tasks--dragging-over row d-flex mx-2 border border-primary' : ''}`}
-                >
-                  {column.taskIds.map((taskId, index) => {
-                    const task = tasks.find((t) => t.public_id === taskId);
-                    return (
-                      <Draggable key={task.public_id} draggableId={task.public_id} index={index}>
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className={`kanban-task ${snapshot.isDragging ? 'kanban-task--dragging' : ''}`}
-                          >
-                            {TaskCard(task)}
-                            
-                          </div>
-                        )}
-                      </Draggable>
-                    );
-                  })}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </div>))}
-      </div>
-    </DragDropContext>
-    <CreateTask toggle = {toggle} modal = {modal}/>
-</div>
-);
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="kanban-board col my-2 d-flex justify-content-center h-100"
+        style= {{width: "85vw"}}>
+          {Object.values(columns).map((column) => (
+            <div key={column.id} className="kanban-column col border rounded m-2 mx-2 py-2"
+            style = {{ width: "500px"}}
+            >
+              <Droppable droppableId={column.id}>
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className={`kanban-column__tasks row d-flex align-items-center ${snapshot.isDraggingOver ? 
+                    'kanban-column__tasks--dragging-over row d-flex mx-2 border border-primary' : ''}`}
+                  >
+                    <h4>{column.title} </h4>
+                    {column.taskIds.map((taskId, index) => {
+                      const task = tasks.find((t) => t.public_id === taskId);
+                      return (
+                        <Draggable key={task.public_id} draggableId={task.public_id} index={index}>
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              className={`kanban-task ${snapshot.isDragging ? 'kanban-task--dragging' : ''}`}
+                            >
+                              {TaskCard(task,openTaskData)}
+                              
+                            </div>
+                          )}
+                        </Draggable>
+                      );
+                    })}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </div>))}
+        </div>
+      </DragDropContext>
+      <CreateTask toggle = {toggle} modal = {modal}/>
+    </div>
+  );
 };
 
 export default Project;

@@ -14,7 +14,7 @@ const SideNavBar = () => {
 		{
 			text: "Project Page",
 			icon: "icons/layer2.svg",
-			page: "/dashboard/project"
+			page: "/project"
 		},
 		
 		{

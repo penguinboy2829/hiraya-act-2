@@ -36,9 +36,6 @@ function Taskspace() {
           <div id="Task" className='justify-content-center'>
             <TaskCard />
             {cards}
-              <button id="create" class="create rounded" onClick={addTaskCard}>
-                <h4>Create</h4>
-              </button>
           </div>
         </div>
     );
@@ -100,7 +97,7 @@ function Home() {
   currentDate.setHours(0, 0, 0, 0);
   
   return (
-    <div className='col min-vh-100 mx-5 py-5'>
+    <div className='col min-vh-100 w-75 m-2 p-5'>
       <div id='greet' className='row justify-content-start mb-0'>
         <div className = 'd-flex justify-content-start'>
           <h1>Hello, Mc!</h1>
