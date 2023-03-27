@@ -33,13 +33,20 @@ function Landing() {
 
   const handleRegister = () =>{
     console.log (fname, lname, uname, email, password)
-    axios.post('http',{
-      fname: fname,
-      lname: lname,
-      uname: uname,
-      email: email,
-      password: password
-    })
+    axios.post('http://127.0.0.1:5000/tixsys/register',
+    {
+        first_name: fname,
+        last_name: lname,
+        username: uname,
+        email: email,
+        password: password
+    },
+    {
+      headers: {
+        token: ""
+      }
+    }
+    )
       .then(result => {
       console.log(result.data)
       alert('Sign up success')

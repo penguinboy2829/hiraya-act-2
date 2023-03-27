@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { DragEndFunc } from './DragEndFunc';
 import { initialTasks } from './initialData';
@@ -24,10 +24,10 @@ export default function Project2({projectObj}) {
 
   const openTaskData = () => {
     axios
-      .get('./components/project_page.json')
+      .get('http://127.0.0.1:5000/tixsys/dashboard')
       .then((response) => {
-        setProjectData(response.dashboard_data);
-        console.log(response.dashboard_data)
+        setProjectData(response.data);
+        console.log(response.data)
       })
       .catch((err) => {
         console.log(err);
@@ -48,7 +48,7 @@ export default function Project2({projectObj}) {
           <h1>Name</h1>
         </div>
         <div className = 'col d-flex justify-content-end align-items-start'>
-          <button className = 'rounded' onClick={()=> setModal(true)}>ADD TASK BUTTON</button>
+          <button className = 'rounded' onClick={()=> openTaskData()}>ADD TASK BUTTON</button>
         </div>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
