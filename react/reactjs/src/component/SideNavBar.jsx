@@ -8,13 +8,13 @@ const SideNavBar = () => {
 		{
 			text: "Home",
 			icon: "icons/home1.svg",
-			page: "/"
+			page: "/tixsys"
 		},
 		
 		{
 			text: "Project Page",
 			icon: "icons/layer2.svg",
-			page: "/project"
+			page: "/tixsys/project"
 		},
 		
 		{

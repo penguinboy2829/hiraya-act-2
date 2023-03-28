@@ -130,7 +130,7 @@ function Landing() {
               <input className="login"  onChange= {handleEmail} value = {email} type="email" placeholder="Email" />
               <input type="password"  onChange= {handlePassword} value = {password} placeholder="Password" />
               <a id="forgot" href="#">Forgot your password?</a>
-              <a href ="/" className = 'button'>
+              <a href ="/tixsys" className = 'button'>
                 Log In
                 </a>
                 

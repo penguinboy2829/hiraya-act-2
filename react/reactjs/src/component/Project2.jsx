@@ -24,7 +24,7 @@ export default function Project2({projectObj}) {
 
   const openTaskData = () => {
     axios
-      .get('http://127.0.0.1:5000/tixsys/dashboard')
+      .get('http://127.0.0.1:5000/tixsys/dashboard/Project1')
       .then((response) => {
         setProjectData(response.data);
         console.log(response.data)
