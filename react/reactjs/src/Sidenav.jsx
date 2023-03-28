@@ -1,12 +1,10 @@
 import React, { useState,useEffect }  from "react";
-import logo from './logo.svg';
 import pficon from './icon2.png';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import "./sidebar.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-export default function SideNav({}){
+export default function SideNav(){
 
   const [isClosed,setIsClosed] = useState(false);
 
@@ -22,7 +20,7 @@ export default function SideNav({}){
       <header class="image-text d-flex justify-content-between align-items-center mt-2">
         <div class="image-text">
           <div class="image">
-            <img src={logo} alt=""/>
+            <img src="" alt=""/>
           </div>
           {isClosed 
           ? (<div class="text logo-text">

@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { API_URL } from './Landing';
 import CreateProject from '../component/CreateProject';
 import Card from './Card';
 import '../home.css';
@@ -76,7 +78,7 @@ function Projectspace() {
   }
     return (
         <div className='col w-50 px-5 mt-4 overflow-auto'>
-           <button id= "add-task" className = "fa fa-plus btn btn-primary mt-2 float-end" onClick = {() => addProjectCard(true)} ></button>
+           <button id= "add-task" className = "fa fa-plus btn btn-primary mt-2 float-end" onClick = {() => toggle()} ></button>
                    <div className = 'd-flex justify-content-start'>
             <h4 className = 'fw-bold text-black-80'>Projects</h4>
           </div>
@@ -95,12 +97,32 @@ function Home() {
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const currentDay = daysOfWeek[currentDate.getDay()];
   currentDate.setHours(0, 0, 0, 0);
+  const [data, setData] = useState(null);
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/tixsys/dashboard`,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+      })
+      .then(result => {
+        console.log(result);
+        setData(result.data);
+        
+      })
+      .catch(error => {
+        console.log(error);
+        
+      });
+  }, []);
   
   return (
     <div className='col min-vh-100 w-75 m-2 p-5'>
       <div id='greet' className='row justify-content-start mb-0 sticky-md-top bg-white'>
         <div className = 'd-flex justify-content-start'>
-          <h1>Hello, Mc!</h1>
+          {data && <h1>Hello, {data.user.first_name}</h1>}
           <span class="position-absolute top-0 end-0 fa fa-bell mt-5 fs-2"> </span>
         </div>
         <div className = 'd-flex justify-content-start'>

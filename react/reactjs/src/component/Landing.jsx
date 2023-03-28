@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import axios from "axios"
+import axios from "axios";
 import { useEffect, useEffectEvent } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
-import { Link } from "react-router-dom";
+import { Link, Route  } from "react-router-dom";
 import '../OJT.css';
+
+export const API_URL = "http://127.0.0.1:5000";
 
 function Landing() {
   const [fname, setFname] = useState('')
@@ -11,6 +13,7 @@ function Landing() {
   const [uname, setUname] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loggedIn, setLoggedIn] = useState(false);
   
 
   const handleFname = (event)=>{
@@ -33,18 +36,13 @@ function Landing() {
 
   const handleRegister = () =>{
     console.log (fname, lname, uname, email, password)
-    axios.post('http://127.0.0.1:5000/tixsys/register',
+    axios.post(`${API_URL}/tixsys/register`,
     {
         first_name: fname,
         last_name: lname,
         username: uname,
         email: email,
         password: password
-    },
-    {
-      headers: {
-        token: ""
-      }
     }
     )
       .then(result => {
@@ -59,28 +57,38 @@ function Landing() {
 
   const handleLogin = () =>{
     console.log (email, password)
-    axios.post('http://127.0.0.1:5000/tixsys/login',
-    {
-        email: email,
-        password: password
-    },
-    {
-      headers: {
-        token: 
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3OTk3NjcyOCwianRpIjoiNTg5Y2NiMGEtMmRkNy00YjRmLWI5NDktZGU0MzBkYjY1Y2RkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImYwMmQzMTAyLTY2MDgtNDBlNy1hNmI0LWEyYzkyNjRhNDlhYyIsIm5iZiI6MTY3OTk3NjcyOCwiZXhwIjoxNjc5OTc3NjI4fQ.2Di7sy3moozqaGAmWcW9qpI2JotE_H8gkNguZahxT68"
-      }
-    }
-    )
+
+    axios
+      .post(`${API_URL}/tixsys/login`,
+        {
+            email: email,
+            password: password
+        },
+        // {
+        //   // headers: {
+        //   //   Authorization: `Bearer ${token}` 
+        //   // }
+        // }
+      )
       .then(result => {
-      console.log(result.data)
-      alert('Login success')
-    })
+          if(email !== "" && password !== "" ){
+            const token = result.data.access_token;
+            localStorage.setItem('token', token);
+            console.log(token)
+            alert('Login success')
+            setLoggedIn(true);
+          }else{
+            alert('Error!')
+          }
+        }
+      )
     .catch(error => {
       alert('Service Error')
       console.log(error)
-    })
+      }
+    )
   }
-    
+
    useEffect(() => {
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
@@ -94,7 +102,6 @@ function Landing() {
       container.classList.remove("right-panel-active");
     });
 
-    // Cleanup function to remove event listeners
     return () => {
       signUpButton.removeEventListener('click', () => {
         container.classList.add("right-panel-active");
@@ -108,67 +115,73 @@ function Landing() {
  
 
     return (
-      <div className='col d-flex border align-items-center justify-content-center' 
-          style={{ height: "100vh", paddingLeft: "20vw", paddingRight: "20vw"}}>
-        <div className="container" id="container">
-          <div className="form-container sign-up-container">
-            <form action="#">
-              <h1>Create Account</h1>
-              
-              {/* <span>or use your email for registration</span> */}
-              <input className="login mb-2" onChange= {handleFname} value = {fname} type="text" placeholder="First Name" required/>
-              <input className="login mb-2" onChange= {handleLname} value = {lname} type="text" placeholder="Last Name" required/>
-              <input className="login mb-2" onChange= {handleUname} value = {uname} type="text" placeholder="Username" required/>
-              <input className="login mb-2" onChange= {handleEmail} value = {email} type="email" placeholder="Email" required/>
-              <input className="login mb-2" onChange= {handlePassword} value = {password} type="password" placeholder="Password" required/>
-              <button className = 'button' onClick={handleRegister}>Sign Up</button>
-            </form>
-          </div>
-      
-          <div className="form-container sign-in-container">
-            <form action="#">
-              <h1>Sign in</h1>
-              <div className="social-container">
-                <a href="#" className="social">
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-google-plus-g" />
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-slack" />
-                </a>
-              </div>
-              <span>or use your account</span>
-              <input className="login mb-2"  onChange= {handleEmail} value = {email} type="email" placeholder="Email" />
-              <input type="password"  onChange= {handlePassword} value = {password} placeholder="Password" />
-              <a id="forgot" href="#">Forgot your password?</a>
-              <button className = 'button' onClick={handleLogin}>Log in</button>
+      <>
+      {loggedIn? (window.location.href = '/tixsys'):(null)}
+        <div className='col d-flex border align-items-center justify-content-center' 
+        style={{ height: "100vh", paddingLeft: "20vw", paddingRight: "20vw"}}>
+          <div className="container" id="container">
+            <div className="form-container sign-up-container">
+              <form action="#">
+                <h1>Create Account</h1>
                 
-            </form>
-          </div>
-            
-          <div className="overlay-container">
-            <div className="overlay">
-              <div className="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your personal info</p>
-                <button  className="ghost" id="signIn">
-                  Sign In
-                </button>
-              </div>
-              <div className="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start journey with us</p>   
-                <button className="ghost" id="signUp">
-                  Sign Up
-                </button>  
+                {/* <span>or use your email for registration</span> */}
+                <input className="login mb-2" onChange= {handleFname} value = {fname} type="text" placeholder="First Name" required/>
+                <input className="login mb-2" onChange= {handleLname} value = {lname} type="text" placeholder="Last Name" required/>
+                <input className="login mb-2" onChange= {handleUname} value = {uname} type="text" placeholder="Username" required/>
+                <input className="login mb-2" onChange= {handleEmail} value = {email} type="email" placeholder="Email" required/>
+                <input className="login mb-2" onChange= {handlePassword} value = {password} type="password" placeholder="Password" required/>
+                <button className = 'button' onClick={handleRegister}>Sign Up</button>
+              </form>
+            </div>
+        
+            <div className="form-container sign-in-container">
+              <form action="#">
+                <h1>Sign in</h1>
+                <div className="social-container">
+                  <a href="#" className="social">
+                    <i className="fab fa-facebook-f" />
+                  </a>
+                  <a href="#" className="social">
+                    <i className="fab fa-google-plus-g" />
+                  </a>
+                  <a href="#" className="social">
+                    <i className="fab fa-slack" />
+                  </a>
+                </div>
+                <span>or use your account</span>
+                <input className="login mb-2"  onChange= {handleEmail} value = {email} type="email" placeholder="Email" />
+                <input type="password"  onChange= {handlePassword} value = {password} placeholder="Password" />
+                <a id="forgot" href="#">Forgot your password?</a>
+                <button className = 'button' onClick={handleLogin}>Log in</button>
+                  
+              </form>
+            </div>
+              
+            <div className="overlay-container">
+              <div className="overlay">
+                <div className="overlay-panel overlay-left">
+                  <h1>Welcome Back!</h1>
+                  <p>To keep connected with us please login with your personal info</p>
+                  <button  className="ghost" id="signIn">
+                    Sign In
+                  </button>
+                </div>
+                <div className="overlay-panel overlay-right">
+                  <h1>Hello, Friend!</h1>
+                  <p>Enter your personal details and start journey with us</p>   
+                  <button className="ghost" id="signUp">
+                    Sign Up
+                  </button>  
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
+      
     );
 }
 
 export default Landing;
+
+

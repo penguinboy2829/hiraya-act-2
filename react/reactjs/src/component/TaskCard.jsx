@@ -20,8 +20,7 @@ export function TaskCard(task, index) {
   // }
   return (
     <>
-      <div key={task.public_id} className='row border rounded py-1 mx-2 my-1 d-flex justify-content-center'
-        style={{ width: "260px" }}>
+      <div key={task.public_id} className='row border rounded py-1 mx-1 my-1 d-flex justify-content-center'>
         <div className='row d-flex justify-content-between align-items-center'>
           <div className='col-8 d-flex justify-content-start align-items-center'>
             <h5 className>{task.name}</h5>

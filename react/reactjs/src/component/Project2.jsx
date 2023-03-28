@@ -62,7 +62,7 @@ export default function Project2({projectObj}) {
   console.log(tasks1);
 
   return (
-    <div className = "col w-75 p-5 m-2">
+    <div className = "col w-75 p-5 ">
       <div className = 'row d-flex align-items-start'>
         <div className = 'col d-flex justify-content-start align-items-start'>
           <h1>Name</h1>
@@ -72,8 +72,8 @@ export default function Project2({projectObj}) {
         </div>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="kanban-board row my-2 d-flex justify-content-center align-items-start "
-        style= {{width: "90vw"}}>
+        <div className="kanban-board row my-2 d-flex align-items-start "
+        style= {{width: "100vw"}}>
           {projectData && (
             <div className="kanban-column row rounded w-100">
               <ColumnList tasks1={tasks1}/>
