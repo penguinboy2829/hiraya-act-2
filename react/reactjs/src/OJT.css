@@ -295,7 +295,8 @@
                 text-decoration: none;
             }
           #login{
-            margin-bottom: 8px;
+            
+            padding-bottom: 12px;
           }
           .signup{
             border-radius: 8px;

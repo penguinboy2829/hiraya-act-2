@@ -22,9 +22,9 @@ export default function Project2({projectObj}) {
   //     window.location.reload()
   // }
 
-  const openTaskData = () => {
+  const openTask = () => {
     axios
-      .get('http://127.0.0.1:5000/tixsys/dashboard/Project1')
+      .get('http://127.0.0.1:5000/tixsys/dashboard/<string:project_name>/open-task')
       .then((response) => {
         setProjectData(response.data);
         console.log(response.data)
@@ -33,6 +33,26 @@ export default function Project2({projectObj}) {
         console.log(err);
       });
   };
+
+  // const createTask = () =>{
+  //   console.log (publicID, name, description, date_due)
+  //   axios
+  //     .post('http://127.0.0.1:5000/tixsys/login',
+  //       {
+  //         public_id: publicID,
+  //         name: name,
+  //         description: description,
+  //         date_due: dateDue
+  //   })
+  //     .then(result => {
+  //       console.log(result.data)
+  //       alert('Sign up success')
+  //   })
+  //     .catch(error => {
+  //       alert('Service Error')
+  //       console.log(error)
+  //   })
+  // }
 
   if (!projectData) {
     return <div>Loading...</div>;
@@ -48,7 +68,7 @@ export default function Project2({projectObj}) {
           <h1>Name</h1>
         </div>
         <div className = 'col d-flex justify-content-end align-items-start'>
-          <button className = 'rounded' onClick={()=> openTaskData()}>ADD TASK BUTTON</button>
+          <button className = 'rounded' onClick={()=> openTask()}>ADD TASK BUTTON</button>
         </div>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>

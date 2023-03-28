@@ -49,7 +49,31 @@ function Landing() {
     )
       .then(result => {
       console.log(result.data)
-      alert('Sign up success')
+      alert('Sign up Success!')
+    })
+    .catch(error => {
+      alert('Service Error')
+      console.log(error)
+    })
+  }
+
+  const handleLogin = () =>{
+    console.log (email, password)
+    axios.post('http://127.0.0.1:5000/tixsys/login',
+    {
+        email: email,
+        password: password
+    },
+    {
+      headers: {
+        token: 
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3OTk3NjcyOCwianRpIjoiNTg5Y2NiMGEtMmRkNy00YjRmLWI5NDktZGU0MzBkYjY1Y2RkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImYwMmQzMTAyLTY2MDgtNDBlNy1hNmI0LWEyYzkyNjRhNDlhYyIsIm5iZiI6MTY3OTk3NjcyOCwiZXhwIjoxNjc5OTc3NjI4fQ.2Di7sy3moozqaGAmWcW9qpI2JotE_H8gkNguZahxT68"
+      }
+    }
+    )
+      .then(result => {
+      console.log(result.data)
+      alert('Login success')
     })
     .catch(error => {
       alert('Service Error')
@@ -62,7 +86,6 @@ function Landing() {
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
    
-
     signUpButton.addEventListener('click', () => {
       container.classList.add("right-panel-active");
     });
@@ -91,23 +114,13 @@ function Landing() {
           <div className="form-container sign-up-container">
             <form action="#">
               <h1>Create Account</h1>
-              <div className="social-container">
-                <a href="/" className="social">
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a href="/project" className="social">
-                  <i className="fab fa-google-plus-g" />
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-slack" />
-                </a>
-              </div>
-              <span>or use your email for registration</span>
-              <input className="login" onChange= {handleFname} value = {fname} type="text" placeholder="First Name" required/>
-              <input className="login" onChange= {handleLname} value = {lname} type="text" placeholder="Last Name" required/>
-              <input className="login" onChange= {handleUname} value = {uname} type="text" placeholder="Username" required/>
-              <input className="login" onChange= {handleEmail} value = {email} type="email" placeholder="Email" required/>
-              <input className="login" onChange= {handlePassword} value = {password} type="password" placeholder="Password" required/>
+              
+              {/* <span>or use your email for registration</span> */}
+              <input className="login mb-2" onChange= {handleFname} value = {fname} type="text" placeholder="First Name" required/>
+              <input className="login mb-2" onChange= {handleLname} value = {lname} type="text" placeholder="Last Name" required/>
+              <input className="login mb-2" onChange= {handleUname} value = {uname} type="text" placeholder="Username" required/>
+              <input className="login mb-2" onChange= {handleEmail} value = {email} type="email" placeholder="Email" required/>
+              <input className="login mb-2" onChange= {handlePassword} value = {password} type="password" placeholder="Password" required/>
               <button className = 'button' onClick={handleRegister}>Sign Up</button>
             </form>
           </div>
@@ -127,12 +140,10 @@ function Landing() {
                 </a>
               </div>
               <span>or use your account</span>
-              <input className="login"  onChange= {handleEmail} value = {email} type="email" placeholder="Email" />
+              <input className="login mb-2"  onChange= {handleEmail} value = {email} type="email" placeholder="Email" />
               <input type="password"  onChange= {handlePassword} value = {password} placeholder="Password" />
               <a id="forgot" href="#">Forgot your password?</a>
-              <a href ="/tixsys" className = 'button'>
-                Log In
-                </a>
+              <button className = 'button' onClick={handleLogin}>Log in</button>
                 
             </form>
           </div>
