@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import axios from "axios";
+import {LoginSocialFacebook} from 'reactjs-social-login'
+import {LoginSocialGoogle } from 'reactjs-social-login';
+import {LoginSocialGithub} from 'reactjs-social-login';
 import { useEffect, useEffectEvent } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
-import { Link, Route  } from "react-router-dom";
+import { Link, Navigate, Redirect  } from "react-router-dom";
+import axios from "axios";
 import '../OJT.css';
 
 export const API_URL = "http://127.0.0.1:5000";
@@ -63,12 +66,7 @@ function Landing() {
         {
             email: email,
             password: password
-        },
-        // {
-        //   // headers: {
-        //   //   Authorization: `Bearer ${token}` 
-        //   // }
-        // }
+        }
       )
       .then(result => {
           if(email !== "" && password !== "" ){
@@ -116,7 +114,7 @@ function Landing() {
 
     return (
       <>
-      {loggedIn? (window.location.href = '/tixsys'):(null)}
+      {loggedIn? (<Navigate to = '/tixsys' />):(null)}
         <div className='col d-flex border align-items-center justify-content-center' 
         style={{ height: "100vh", paddingLeft: "20vw", paddingRight: "20vw"}}>
           <div className="container" id="container">
@@ -135,27 +133,61 @@ function Landing() {
             </div>
         
             <div className="form-container sign-in-container">
-              <form action="#">
-                <h1>Sign in</h1>
-                <div className="social-container">
-                  <a href="#" className="social">
-                    <i className="fab fa-facebook-f" />
-                  </a>
-                  <a href="#" className="social">
-                    <i className="fab fa-google-plus-g" />
-                  </a>
-                  <a href="#" className="social">
-                    <i className="fab fa-slack" />
-                  </a>
-                </div>
-                <span>or use your account</span>
-                <input className="login mb-2"  onChange= {handleEmail} value = {email} type="email" placeholder="Email" />
-                <input type="password"  onChange= {handlePassword} value = {password} placeholder="Password" />
-                <a id="forgot" href="#">Forgot your password?</a>
-                <button className = 'button' onClick={handleLogin}>Log in</button>
-                  
-              </form>
-            </div>
+            <form action="#">
+              <h1>Sign in</h1>
+              <div className="social-container">
+                <a href="" className="social">
+                  <LoginSocialFacebook
+                      appId ="583228890409051"
+                      onResolve={(response) =>{
+                        console.log(response);
+                      }}
+                      onReject={(error) =>{
+                        alert('HAHA')
+                        console.log(error);
+                      }}
+                      >
+                        <i className="fab fa-facebook-f"/>
+                    </LoginSocialFacebook>
+                </a>
+                <a href="#" className="social">
+                <LoginSocialGoogle
+                     client_id ={"900638633715-m1nnngmr7931q6ch5pbusn0rur76h9tj.apps.googleusercontent.com"}
+                     scope ="openid profile email"
+                     discoveryDocs="claims_supported"
+                     access_type="offline"
+                     onResolve={({provider,data}) =>{
+                       console.log(provider,data);
+                     }}
+                     onReject={(error) =>{
+                       console.log(error);
+                     }}
+                     >
+                        <i className="fab fa-google" />
+                    </LoginSocialGoogle>
+                </a>
+                <a href="#" className="social">
+                <LoginSocialGithub
+                      appId ="583228890409051"
+                      onResolve={(response) =>{
+                        console.log(response);
+                      }}
+                      onReject={(error) =>{
+                        alert('HAHA')
+                        console.log(error);
+                      }}
+                      >
+                        <i className="fab fa-github" />
+                    </LoginSocialGithub>
+                </a>
+              </div>
+              <span>or use your account</span>
+              <input className="login mb-2"  onChange= {handleEmail} value = {email} type="email" placeholder="Email" />
+              <input type="password"  onChange= {handlePassword} value = {password} placeholder="Password" />
+              <a id="forgot" href="#">Forgot your password?</a>
+              <button className = 'button' onClick={handleLogin}>Login</button>
+            </form>
+          </div>
               
             <div className="overlay-container">
               <div className="overlay">

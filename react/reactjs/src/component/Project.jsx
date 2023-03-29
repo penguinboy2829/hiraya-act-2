@@ -6,7 +6,7 @@ import ColumnList from './ColumnList';
 import CreateTask from './CreateTask';
 import axios from 'axios';
 
-export default function Project2({projectObj}) {
+export default function Project({projectObj}) {
   const [projectData, setProjectData] = useState(initialTasks);
   const [modal,setModal] = useState(false);
 
