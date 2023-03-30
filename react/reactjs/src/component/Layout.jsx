@@ -14,7 +14,7 @@ const Layout = () => {
     <div className="App">
       <div className = 'container-fluid'>
         <div className = 'row '>
-          {location.pathname !== '/tixsys/login' && <SideNavBar />}
+          {location.pathname !== '/tixsys' && <SideNavBar />}
           <Outlet />
         </div>
       </div>

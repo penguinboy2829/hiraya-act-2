@@ -20,7 +20,7 @@ export function TaskCard(task, index) {
   // }
   return (
     <>
-      <div key={task.public_id} className='row border rounded py-1 mx-1 my-1 d-flex justify-content-center'>
+      <div key={task.public_id} className='row border rounded mx-1 my-1 d-flex justify-content-center'>
         <div className='row d-flex justify-content-between align-items-center'>
           <div className='col-8 d-flex justify-content-start align-items-center'>
             <h5 className>{task.name}</h5>
@@ -33,11 +33,7 @@ export function TaskCard(task, index) {
               <li><button class="dropdown-item" onClick={"handleDelete"}>Delete</button></li>
             </ul>
           </div>
-        </div>
-        <div className='row d-flex justify-content-between align-items-start'>
-          <div className='col d-flex justify-content-start align-items-start'>
-            <p>{task.description}</p>
-          </div>
+          <p className='d-flex justify-content-start align-items-start text-left'>{task.description}</p>
         </div>
 
         <div className='row d-flex justify-content-between pt-3'>

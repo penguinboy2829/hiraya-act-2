@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { DragEndFunc } from './DragEndFunc';
 import { initialTasks } from './initialData';
+import { API_URL } from './Landing';
 import ColumnList from './ColumnList';
 import CreateTask from './CreateTask';
 import axios from 'axios';
@@ -24,7 +25,7 @@ export default function Project({projectObj}) {
 
   const openTask = () => {
     axios
-      .get('http://127.0.0.1:5000/tixsys/dashboard/<string:project_name>/open-task')
+      .get(`${API_URL}/dashboard/<string:project_name>/open-task`)
       .then((response) => {
         setProjectData(response.data);
         console.log(response.data)
@@ -68,7 +69,7 @@ export default function Project({projectObj}) {
           <h1>Name</h1>
         </div>
         <div className = 'col d-flex justify-content-end align-items-start'>
-          <button className = 'rounded' onClick={()=> openTask()}>ADD TASK BUTTON</button>
+          <button className = 'rounded' onClick={()=> toggle()}>ADD TASK BUTTON</button>
         </div>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>

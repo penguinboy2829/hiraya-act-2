@@ -11,10 +11,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/tixsys" element={<Layout />}>
-          <Route index element={<Home />} />
+        <Route exact path="/tixsys" element={<Layout />}>
+          <Route index element={<Landing />} />
           <Route path="/tixsys/project" element={<Project/>} />
-          <Route path="/tixsys/login" element={<Landing />} />
+          <Route path="/tixsys/dashboard" element={<Home />} />
         </Route>
       </Routes>
     </BrowserRouter>

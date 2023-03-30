@@ -1,14 +1,12 @@
-import { useState } from 'react';
-import {LoginSocialFacebook} from 'reactjs-social-login'
-import {LoginSocialGoogle } from 'reactjs-social-login';
-import {LoginSocialGithub} from 'reactjs-social-login';
-import { useEffect, useEffectEvent } from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
-import { Link, Navigate, Redirect  } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { LoginSocialFacebook } from 'reactjs-social-login'
+import { LoginSocialGoogle } from 'reactjs-social-login';
+import { LoginSocialGithub } from 'reactjs-social-login';
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import '../OJT.css';
 
-export const API_URL = "http://127.0.0.1:5000";
+export const API_URL = "http://127.0.0.1:5000/tixsys";
 
 function Landing() {
   const [fname, setFname] = useState('')
@@ -39,7 +37,7 @@ function Landing() {
 
   const handleRegister = () =>{
     console.log (fname, lname, uname, email, password)
-    axios.post(`${API_URL}/tixsys/register`,
+    axios.post(`${API_URL}/register`,
     {
         first_name: fname,
         last_name: lname,
@@ -60,19 +58,18 @@ function Landing() {
 
   const handleLogin = () =>{
     console.log (email, password)
-
     axios
-      .post(`${API_URL}/tixsys/login`,
+      .post(`${API_URL}/login`,
         {
             email: email,
             password: password
         }
       )
       .then(result => {
-          if(email !== "" && password !== "" ){
-            const token = result.data.access_token;
-            localStorage.setItem('token', token);
-            console.log(token)
+        const token = result.data.access_token;
+        localStorage.setItem('token', token);
+        console.log(token)
+          if(token){ 
             alert('Login success')
             setLoggedIn(true);
           }else{
@@ -80,11 +77,11 @@ function Landing() {
           }
         }
       )
-    .catch(error => {
-      alert('Service Error')
-      console.log(error)
-      }
-    )
+      .catch(error => {
+        alert('Service Error')
+        console.log(error)
+        }
+      )
   }
 
    useEffect(() => {
@@ -114,7 +111,7 @@ function Landing() {
 
     return (
       <>
-      {loggedIn? (<Navigate to = '/tixsys' />):(null)}
+      {loggedIn? (<Navigate to = '/tixsys/dashboard' />):(null)}
         <div className='col d-flex border align-items-center justify-content-center' 
         style={{ height: "100vh", paddingLeft: "20vw", paddingRight: "20vw"}}>
           <div className="container" id="container">

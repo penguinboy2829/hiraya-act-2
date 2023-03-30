@@ -7,7 +7,7 @@ export function DoneList(tasks1) {
     {(provided) => (
       <div className='row kanban-column__tasks border rounded d-flex justify-content-center
         align-items-start mx-2'
-        style={{ width: "300px" }}
+        style={{ width: "22vw" }}
         {...provided.droppableProps} ref={provided.innerRef}>
         <h2>Done</h2>
         <div className='row d-flex align-items-start'>
@@ -40,7 +40,7 @@ export function ReviewList(tasks1) {
     {(provided) => (
       <div className='row kanban-column__tasks border rounded d-flex justify-content-center 
         align-items-start mx-2'
-        style={{ width: "300px" }}
+        style={{ width: "22vw" }}
         {...provided.droppableProps} ref={provided.innerRef}>
         <h2>Review</h2>
         <div className='row d-flex align-items-start'>
@@ -73,7 +73,7 @@ export function InProgressList(tasks1) {
     {(provided) => (
       <div className='row kanban-column__tasks border rounded d-flex justify-content-center 
         align-items-start mx-2'
-        style={{ width: "300px" }}
+        style={{ width: "22vw" }}
         {...provided.droppableProps} ref={provided.innerRef}>
         <h2>In Progress</h2>
         <div className='row d-flex align-items-start'>
@@ -106,7 +106,7 @@ export function ToDoList(tasks1) {
     {(provided) => (
       <div className='row kanban-column__tasks border rounded d-flex justify-content-center 
         align-items-start mx-2'
-        style={{ width: "300px" }}
+        style={{ width: "22vw" }}
         {...provided.droppableProps} ref={provided.innerRef}>
         <h2>To Do</h2>
         <div className='row d-flex align-items-start'>

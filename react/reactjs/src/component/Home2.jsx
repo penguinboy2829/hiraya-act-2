@@ -43,15 +43,16 @@ function Taskspace() {
     );
 }
 function Projectspace() {
-    const [modal, addProjectCard] = useState(false);
-    const [projectList, setProjectList] = useState([])
-    useEffect(() => {
-        let arr = localStorage.getItem("projectList")
-        if(arr){
-            let obj = JSON.parse(arr)
-            setProjectList(obj)
-        }
-    }, [])
+  const [modal, addProjectCard] = useState(false);
+  const [projectList, setProjectList] = useState([])
+  useEffect(() => {
+    let arr = localStorage.getItem("projectList")
+      if(arr){
+        let obj = JSON.parse(arr)
+        setProjectList(obj)
+      }
+    }, 
+  [])
     const deleteProject = (index) => {
       let tempList = projectList
       tempList.splice(index, 1)
@@ -102,13 +103,13 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/tixsys/dashboard`,{
+      .get(`${API_URL}/dashboard`,{
           headers: {
             Authorization: `Bearer ${token}`
           }
       })
       .then(result => {
-        console.log(result);
+        console.log(result.data);
         setData(result.data);
         
       })
