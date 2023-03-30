@@ -8,6 +8,12 @@ import '../OJT.css';
 
 export const API_URL = "http://127.0.0.1:5000/tixsys";
 
+const CLIENT_ID = "840fbd6329d3b87f6d7a"
+
+function loginWithGithub(){
+  window.location.assign("https://github.com/login/oauth/authorize?client_id=" + CLIENT_ID);
+}
+
 function Landing() {
   const [fname, setFname] = useState('')
   const [lname, setLname] = useState('')
@@ -165,16 +171,9 @@ function Landing() {
                 </a>
                 <a href="#" className="social">
                 <LoginSocialGithub
-                      appId ="583228890409051"
-                      onResolve={(response) =>{
-                        console.log(response);
-                      }}
-                      onReject={(error) =>{
-                        alert('HAHA')
-                        console.log(error);
-                      }}
+              
                       >
-                        <i className="fab fa-github" />
+                        <i className="fab fa-github"  onClick={loginWithGithub}/>
                     </LoginSocialGithub>
                 </a>
               </div>
@@ -212,5 +211,3 @@ function Landing() {
 }
 
 export default Landing;
-
-
