@@ -1,68 +1,98 @@
 import React, { useState , useEffect} from 'react';
+import axios from 'axios';
+import { API_URL } from './Landing';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-const CreateTask = ({modal, toggle}) => {
-    const [taskName, setTaskName] = useState('');
-    const [description, setDescription] = useState('');
-    const [due, setDue] = useState('');
+const CreateTask = ({modal, toggle, taskData, setTaskData}) => {
+    const [data, setData] = useState({
+        date_due: "",
+        name: "",
+        description: ""
+        
+    })
     const [subtask, setSubTasks] = useState(['']);
+    const progress = "To do";
 
     const handleChange = (e) => {
-        
-        const {name, value} = e.target
+        const value = e.target.value;
+        setData({
+          ...data,
+          [e.target.name]: value
+        });
+      };
 
-        if(name === "taskName"){
-            setTaskName(value)
-        }else if(name === "description"){
-            setDescription(value)
-        }else if (name === "subtask"){
-            const subtasksArray = value.split(",");
-            setSubTasks(subtasksArray);
-        }else{
-            setDue(value)
-        }
-    }
-
-    const addSubTask = () => {
-        setSubTasks([...subtask,''])
-    }
-
-    // const handleSave = (e) => {
-    //     e.preventDefault()
-    //     let taskObj = {}
-    //     taskObj["Name"] = taskName
-    //     taskObj["Description"] = description
-    //     save(taskObj)
+    // const addSubTask = () => {
+    //     setSubTasks([...subtask,''])
     // }
 
-    // const handleUpdate = (e) => {
-    //     e.preventDefault();
-    //     let tempObj = {}
-    //     tempObj['Name'] = taskName
-    //     tempObj['Description'] = description
-    //     updateTask(tempObj)
-    // }
+    const token = localStorage.getItem('token');
+
+    const handleSave = (e) => {
+        const newTaskData = {
+            date_due: data.date_due,
+            name: data.name,
+            description: data.description,
+            progress: "To do"
+        };
+
+        console.log(newTaskData);
+    
+        axios.post(`${API_URL}/dashboard/project/create-task`, newTaskData,{
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+            })
+            .then(result => {
+                console.log(result.data);
+                setTaskData(
+                    taskData,
+                    result.data
+                )
+            })
+            .catch(error => {
+                console.log(error.response);
+                if (error.response && error.response.status === 401) {
+                    alert('You are not authorized to perform this action.');
+                } else {
+                    alert('An error occurred while saving the task.');
+                }
+            });
+        toggle();
+    };
 
     return (
         <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle}>Update Task</ModalHeader>
+            <ModalHeader toggle={toggle}>Create Task</ModalHeader>
             <ModalBody>
                     <div className = "form-group mb-2">
-                        <label>Task Name</label>
-                        <input type="text" className = "form-control" value = {taskName} onChange = {handleChange} name = "taskName"/>
+                        <label htmlFor='name'>Task Name</label>
+                        <input type="text" 
+                        className = "form-control" 
+                        value = {data.name} 
+                        onChange = {handleChange} 
+                        name = "name"/>
                     </div>
                     <div>
-                        <label className = "mb-2">Description</label>
+                        <label className = "form-group mb-2">Description</label>
                         <br />
-                        <input type="text" className = "form-control" value = {description} onChange = {handleChange} name = "description"/>
+                        <input type="text" 
+                        className = "form-control" 
+                        value = {data.description} 
+                        onChange = {handleChange} 
+                        name = "description"/>
                     </div>
                     <div>
                         <label>Due Date</label>
                         <br />
-                        <input id="input" className="bg-info" type="date" value = {due} onChange = {handleChange} name = "due"/>
+                        <input id="input" 
+                        className="bg-info" 
+                        type="date" 
+                        value = {data.date_due} 
+                        onChange = {handleChange} 
+                        name = "date_due"/>
                     </div>
                     <hr />
-                    <div>
+                    {/* <div>
                         <label>Subtasks</label>
                             <br />
                         {subtask.map(item => 
@@ -78,11 +108,11 @@ const CreateTask = ({modal, toggle}) => {
                     </div>
                     <div className='d-flex justify-content-center'>
                         <button className='button flex-fill' onClick={addSubTask}> Add Subtask </button>
-                    </div>
+                    </div> */}
                 
             </ModalBody>
             <ModalFooter>
-            <Button color="primary" onClick={toggle}>Update</Button>{' '}
+            <Button color="primary" onClick={handleSave}>Save</Button>
             <Button color="secondary" onClick={toggle}>Cancel</Button>
             </ModalFooter>
       </Modal>

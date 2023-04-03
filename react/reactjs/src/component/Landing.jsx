@@ -21,7 +21,6 @@ function Landing() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loggedIn, setLoggedIn] = useState(false);
-  
 
   const handleFname = (event)=>{
     setFname(event.target.value)
@@ -43,23 +42,22 @@ function Landing() {
 
   const handleRegister = () =>{
     console.log (fname, lname, uname, email, password)
-    axios.post(`${API_URL}/register`,
-    {
+    axios
+      .post(`${API_URL}/register`,{
         first_name: fname,
         last_name: lname,
         username: uname,
         email: email,
         password: password
-    }
-    )
+      })
       .then(result => {
-      console.log(result.data)
-      alert('Sign up Success!')
-    })
-    .catch(error => {
-      alert('Service Error')
-      console.log(error)
-    })
+        console.log(result.data)
+        alert('Sign up Success!')
+      })
+      .catch(error => {
+        alert('Service Error')
+        console.log(error)
+      })
   }
 
   const handleLogin = () =>{
@@ -75,12 +73,8 @@ function Landing() {
         const token = result.data.access_token;
         localStorage.setItem('token', token);
         console.log(token)
-          if(token){ 
-            alert('Login success')
-            setLoggedIn(true);
-          }else{
-            alert('Error!')
-          }
+        alert('Login success')
+        setLoggedIn(true);
         }
       )
       .catch(error => {
@@ -114,7 +108,6 @@ function Landing() {
     };
   }) 
  
-
     return (
       <>
       {loggedIn? (<Navigate to = '/tixsys/dashboard' />):(null)}

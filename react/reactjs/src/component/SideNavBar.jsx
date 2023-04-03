@@ -8,7 +8,7 @@ const SideNavBar = () => {
 		{
 			text: "Home",
 			icon: "icons/home1.svg",
-			page: "/tixsys"
+			page: "/tixsys/dashboard"
 		},
 		
 		{
@@ -20,7 +20,7 @@ const SideNavBar = () => {
 		{
 			text: "Settings",
 			icon: "icons/settings2.svg",
-			page: "/settings"
+			page: "/tixsys/settings"
 		},
 	];
 	return (

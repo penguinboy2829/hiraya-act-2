@@ -76,8 +76,15 @@
 }
 #ellipsis{
   float: right;
-  margin-top: -32px;
   margin-right: 5px;
+}
+
+.custom-toggle::after {
+  display: none !important;
+}
+
+.color-link{
+  color: black;
 }
 
 .task-container{

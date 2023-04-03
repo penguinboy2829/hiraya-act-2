@@ -88,7 +88,7 @@ function Projectspace() {
           </div>
           <div className = "task-container overflow-auto p-4">
             {projectList && projectList.map((obj , index) => <Card projectObj = {obj} index = {index} deleteProject = {deleteProject} updateListArray = {updateListArray}/> )}
-            </div>
+          </div>
             <CreateProject toggle = {toggle} modal = {modal} save = {saveProject}/>
         </div>
     );
@@ -102,22 +102,21 @@ function Home() {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/dashboard`,{
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(`${API_URL}/dashboard`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
-      })
-      .then(result => {
+        });
         console.log(result.data);
         setData(result.data);
-        
-      })
-      .catch(error => {
+      } catch (error) {
         console.log(error);
-        
-      });
-  }, []);
+      }
+    };
+    fetchData();
+  }, [token]);
   
   return (
     <div className='col min-vh-100 w-75 m-2 p-5'>
