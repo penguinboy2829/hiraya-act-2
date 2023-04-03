@@ -50,13 +50,14 @@
   background-color: white;
 }
 
-
-
 .card-top{
   width: 100%;
   height: 2%;
 }
 
+.dropdown{
+  margin-top: -5px;
+}
 
 .task-holder{
   width: 100%;

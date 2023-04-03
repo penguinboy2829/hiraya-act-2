@@ -7,7 +7,7 @@ import { faEllipsisVertical, faEllipsisH, faTrashAlt } from "@fortawesome/free-s
 import { API_URL } from './Landing';
 import axios from 'axios';
 
-export function TaskCard(task, index) {
+export function TaskCard(task, index, userData) {
   const token = localStorage.getItem('token');
   const [modal, setModal] = useState(false);
 
@@ -55,18 +55,10 @@ const archiveTask = () => {
   // }
   return (
     <>
-      <div key={task.public_id} className='row border rounded my-1 py-3 px-1 d-flex justify-content-center'>
+      <div key={task.public_id} className='row border rounded my-1 py-3 px-1 d-flex justify-content-center bg-white'>
         <div className='col d-flex justify-content-between align-items-start'>
           <h5>{task.name}</h5>
-          {/* <div className="dropdown">
-            <span id="ellipsis" className="fa fa-ellipsis-h" role="button" data-bs-toggle="dropdown" />
-            <ul className="dropdown-menu">
-              
-              <li><button className="dropdown-item" onClick={() => setModal(true)}>Edit</button></li>
-
-            </ul>
-          </div> */}
-          <Dropdown>
+          <Dropdown classname = "dropdown">
             <Dropdown.Toggle id="dropdown" 
             className="custom-toggle color-link" 
             variant= "link" 
@@ -89,7 +81,7 @@ const archiveTask = () => {
           <div className='col d-flex justify-content-between align-items-center'>
             {/* <p>Mem</p>
             <img classname="" src={user} alt='Member'/> */}
-            <p className='bg-primary px-2 py-1 rounded-circle text-white'>M</p>
+            <p className='bg-primary px-2 py-1 rounded-circle text-white'>{userData && userData.first_name.charAt(0)}</p>
             {/* <div className='col-2 d-flex align-items-start'>
               <span className='fas fa-circle-exclamation py-1' />
             </div> */}

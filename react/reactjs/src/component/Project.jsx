@@ -9,12 +9,13 @@ import axios from 'axios';
 
 export default function Project() {
   const [projectData, setProjectData] = useState([]);
+  const [userData, setUserData] = useState('');
   const [modal,setModal] = useState(false);
   const [taskData, setTaskData] = useState([]);
 
   const toggle = () => setModal(!modal);
 
-  const onDragEnd = DragEndFunc(projectData, setProjectData);
+  const onDragEnd = DragEndFunc(projectData, setProjectData, taskData);
   const token = localStorage.getItem('token');
 
   const save = (taskData) => {
@@ -29,7 +30,8 @@ export default function Project() {
             Authorization: `Bearer ${token}`,
           }
         });
-        console.log(result.data.projects);
+        console.log(result.data);
+        setUserData(result.data.user)
         setProjectData(result.data.projects[0]);
         setTaskData(result.data.projects[0].tasks)
 
@@ -38,15 +40,14 @@ export default function Project() {
       }
     };
     fetchData();
-
-    const intervalId = setInterval(() => {
-      fetchData();
-    }, 1000);
+    // const intervalId = setInterval(() => {
+    //   fetchData();
+    // }, 1000);
   
-    return () => clearInterval(intervalId);
+    // return () => clearInterval(intervalId);
   }, [token]);
 
-  if (!projectData) {
+  if (!token) {
     return <div>Loading...</div>;
   }
 
@@ -71,7 +72,7 @@ export default function Project() {
         style= {{width: "100vw"}}>
           {projectData && (
             <div className="kanban-column row rounded d-flex align-items-start">
-              <ColumnList tasks={tasks}/>
+              <ColumnList tasks={tasks} userData={userData}/>
             </div>
           )}
         </div>

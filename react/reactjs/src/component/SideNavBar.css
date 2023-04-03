@@ -1,5 +1,9 @@
 /* NX = not expanded */
 
+.app-name{
+	text-indent: 10px;
+}
+
 .side-nav-container {
 	background: linear-gradient(180deg, #00B7EB 60.94%, #00EB96 100%);
 	width: 300px;
@@ -37,7 +41,6 @@
 }
 h2{
 	margin-top: 10px;
-	text-indent: 20px ;
 }
 .nav-brand img {
 	width: 50px;

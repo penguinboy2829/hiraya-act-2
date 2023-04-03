@@ -15,12 +15,20 @@ const CreateTask = ({modal, toggle, taskData, setTaskData}) => {
 
     const handleChange = (e) => {
         const value = e.target.value;
-        setData({
-          ...data,
-          [e.target.name]: value
-        });
-      };
-
+        
+        if (value.indexOf("?") !== -1) {
+          setData({
+            ...data,
+            [e.target.name]: value.replace("?", "")
+          });
+        } else {
+          setData({
+            ...data,
+            [e.target.name]: value
+          });
+        }
+    };
+      
     // const addSubTask = () => {
     //     setSubTasks([...subtask,''])
     // }

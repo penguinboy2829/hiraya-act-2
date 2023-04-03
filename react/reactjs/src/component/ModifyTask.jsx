@@ -11,7 +11,7 @@ const ModifyTask = ({modal, toggle, task}) => {
         public_id: task.public_id
     });
     // const [subtask, setSubTasks] = useState([]);
-    const [check, setCheck] = useState(true);
+    // const [check, setCheck] = useState(true);
     const token = localStorage.getItem('token');
     const taskData = {
         name: data.name,
@@ -22,15 +22,23 @@ const ModifyTask = ({modal, toggle, task}) => {
 
     const handleChange = (e) => {
         const value = e.target.value;
-        setData({
+        if (value.indexOf("?") !== -1) {
+          setData({
+            ...data,
+            [e.target.name]: value.replace("?", "")
+          });
+        } else {
+          setData({
             ...data,
             [e.target.name]: value
-        });
+          });
+        }
     };
     
     const handleUpdate = () => {
         axios
-            .patch(`${API_URL}/dashboard/project/${task.name}/modify-task`, taskData,{
+            .patch(`${API_URL}/dashboard/project/${task.name}/modify-task`, taskData,
+            {
                 headers:{ Authorization: `Bearer ${token}` }
             })
             .then(result => {
@@ -44,9 +52,7 @@ const ModifyTask = ({modal, toggle, task}) => {
 
     const deleteTask = () => {
         axios
-            .patch(`${API_URL}/dashboard/project/${task.name}/delete-task`,{
-                public_id: taskData.public_id
-            },
+        .patch(`${API_URL}/dashboard/project/${task.name}/delete-task`, task.public_id,
             {
                 headers: { Authorization: `Bearer ${token}` }
             })

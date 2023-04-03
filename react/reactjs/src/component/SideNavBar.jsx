@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import logo1 from "./logo1.svg";
+import logout from "./logout.svg";
+import home from "./home1.svg";
+import layer from "./layer2.svg";
+import settings from "./settings2.svg";
+import admin from "./admin-avatar.svg";
 import "./SideNavBar.css";
 
 const SideNavBar = () => {
@@ -7,19 +13,19 @@ const SideNavBar = () => {
 	const menuItems = [
 		{
 			text: "Home",
-			icon: "icons/home1.svg",
+			icon: home,
 			page: "/tixsys/dashboard"
 		},
 		
 		{
 			text: "Project Page",
-			icon: "icons/layer2.svg",
-			page: "/tixsys/project"
+			icon: layer,
+			page: "/tixsys/dashboard/project"
 		},
 		
 		{
 			text: "Settings",
-			icon: "icons/settings2.svg",
+			icon: settings,
 			page: "/tixsys/settings"
 		},
 	];
@@ -35,8 +41,8 @@ const SideNavBar = () => {
 				<div className="nav-heading">
 					{isExpanded && (
 						<div className="nav-brand">
-							<img src="icons/logo1.svg" alt="" srcset="" />
-							<h2>Workspace</h2>
+							<img src={logo1} alt="" srcset="" />
+							<h2 id="app-name">Workspace</h2>
 						</div>
 					)}
 					<button
@@ -62,7 +68,6 @@ const SideNavBar = () => {
 							</a>
 						</Link>
 						
-					
 					))}
 				</div>
 			</div>
@@ -71,7 +76,7 @@ const SideNavBar = () => {
 					<div className="nav-details">
 						<img
 							className="nav-footer-avatar"
-							src="icons/admin-avatar.svg"
+							src = {admin}
 							alt=""
 							srcset=""
 						/>
@@ -81,7 +86,10 @@ const SideNavBar = () => {
 						</div>
 					</div>
 				)}
-				<img className="logout-icon" src="icons/logout.svg" alt="Log out" srcset="" />
+				<Link to = "/tixsys">
+					<img className="logout-icon" src = {logout} alt="Log out" srcset="" />
+				</Link>
+				
 			</div>
 		</div>
 	);

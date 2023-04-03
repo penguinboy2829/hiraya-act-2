@@ -137,6 +137,8 @@ function Landing() {
                       appId ="583228890409051"
                       onResolve={(response) =>{
                         console.log(response);
+                        localStorage.setItem("token",response.access_token)
+                        setLoggedIn(true);
                       }}
                       onReject={(error) =>{
                         alert('HAHA')
@@ -154,6 +156,8 @@ function Landing() {
                      access_type="offline"
                      onResolve={({provider,data}) =>{
                        console.log(provider,data);
+                       localStorage.setItem("token",provider.access_token)
+                       setLoggedIn(true);
                      }}
                      onReject={(error) =>{
                        console.log(error);
@@ -163,9 +167,7 @@ function Landing() {
                     </LoginSocialGoogle>
                 </a>
                 <a href="#" className="social">
-                <LoginSocialGithub
-              
-                      >
+                  <LoginSocialGithub>
                         <i className="fab fa-github"  onClick={loginWithGithub}/>
                     </LoginSocialGithub>
                 </a>

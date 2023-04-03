@@ -13,7 +13,7 @@ export default function App() {
       <Routes>
         <Route exact path="/tixsys" element={<Layout />}>
           <Route index element={<Landing />} />
-          <Route path="/tixsys/project" element={<Project/>} />
+          <Route path="/tixsys/dashboard/project" element={<Project/>} />
           <Route path="/tixsys/dashboard" element={<Home />} />
         </Route>
       </Routes>
