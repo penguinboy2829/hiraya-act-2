@@ -71,7 +71,7 @@ def transfer_task(project_name, task_name, data, get_opened_entity):
     progress_list = {1:"In Progress", 2:"Testing", 3:"Revision", 4:"Deployment"}
 
     project = get_opened_entity(entity=Project, name=project_name, archived=False, select='first')
-    task = get_opened_entity(entity=Task, public_id=data['task_id'], name=task_name, archived=False, select='first')
+    task = get_opened_entity(entity=Task, public_id=data['public_id'], name=task_name, archived=False, select='first')
 
     if not project and not task:
         return jsonify({'status':0,
@@ -85,7 +85,7 @@ def transfer_task(project_name, task_name, data, get_opened_entity):
 
 def dump_task(project_name, task_name, data, get_opened_entity):
     project = get_opened_entity(entity=Project, name=project_name, archived=False, select='first')
-    task = get_opened_entity(entity=Task, public_id=data['task_id'], name=task_name, archived=False, select='first')
+    task = get_opened_entity(entity=Task, public_id=data['public_id'], name=task_name, archived=False, select='first')
     subtasks = get_opened_entity(entity=Subtask, task_id=task.public_id, archived=False, select='all')
     
     if not project and not task:
