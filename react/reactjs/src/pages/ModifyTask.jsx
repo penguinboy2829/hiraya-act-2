@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { API_URL } from './Landing';
 import axios from 'axios';
@@ -47,22 +47,27 @@ const ModifyTask = ({modal, toggle, task}) => {
             .catch(error => {
                 console.log(error)
             })
+            
         toggle();
     }
 
     const deleteTask = () => {
         axios
-        .patch(`${API_URL}/dashboard/project/${task.name}/delete-task`, task.public_id,
+            .patch(`${API_URL}/dashboard/project/${task.name}/delete-task`, 
             {
-                headers: { Authorization: `Bearer ${token}` }
+              public_id : task.public_id,
+              name : task.name
+            },
+            {
+              headers: { Authorization: `Bearer ${token}` }
             })
             .then((result) => {
-                console.log(result.data);
+              console.log(result.data);
             })
             .catch((error) => {
-                console.log(error);
+              console.log(task)
+              console.log(error);
             });
-        toggle();
     };
 
     return (

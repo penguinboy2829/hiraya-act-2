@@ -14,19 +14,19 @@ const SideNavBar = () => {
 		{
 			text: "Home",
 			icon: home,
-			page: "/tixsys/dashboard"
+			page: "/dashboard"
 		},
 		
 		{
 			text: "Project Page",
 			icon: layer,
-			page: "/tixsys/dashboard/project"
+			page: "/dashboard/project"
 		},
 		
 		{
 			text: "Settings",
 			icon: settings,
-			page: "/tixsys/settings"
+			page: "/settings"
 		},
 	];
 	return (
@@ -86,7 +86,7 @@ const SideNavBar = () => {
 						</div>
 					</div>
 				)}
-				<Link to = "/tixsys">
+				<Link to = "/">
 					<img className="logout-icon" src = {logout} alt="Log out" srcset="" />
 				</Link>
 				

@@ -27,33 +27,50 @@ export function DragEndFunc(projectData, setProjectData) {
     } else if (destination.droppableId === 'Done') {
       progress = 'Done';
     }
+
     const taskToUpdate = newTasks.find((task) => task.public_id === removedTask.public_id);
     taskToUpdate.progress = progress;
-    
+
     setProjectData({
       ...projectData,
       tasks: newTasks
     });
 
-    const newData = {
-      progress: taskToUpdate.progress,
-      public_id: taskToUpdate.public_id
+    let convProg;
+    if(progress === 'To do'){
+      convProg = 1;
+    } else if(progress === 'In Progress'){
+      convProg = 2;
+    } else if(progress === 'Review'){
+      convProg = 3;
+    } else if(progress === 'Done'){
+      convProg = 4;
     }
 
+    const taskToUpdate2 = taskToUpdate;
+    taskToUpdate2.progress = convProg;
+    
     const token = localStorage.getItem('token');
-    axios
-    .patch(`${API_URL}/dashboard/project/${taskToUpdate.name}/move-task`, newData,{
+
+    axios.patch(`${API_URL}/dashboard/project/${taskToUpdate2.name}/move-task`, 
+    {
+      progress: taskToUpdate2.progress ,
+      public_id: taskToUpdate2.public_id
+    }, {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
     .then(result => {
       console.log(result.data)
+      setProjectData({
+        ...projectData,
+        tasks: result.data
+      });
     })
     .catch(error => {
-      console.log(newData)
+      console.log(taskToUpdate2)
       console.log(error)
-    })
+    });
   };
 }

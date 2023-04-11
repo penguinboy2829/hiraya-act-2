@@ -22,6 +22,8 @@ function Landing() {
   const [password, setPassword] = useState('')
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const [accesstoken, setAccessToken] = useState('');
+
   const handleFname = (event)=>{
     setFname(event.target.value)
   }
@@ -40,50 +42,43 @@ function Landing() {
     setPassword(event.target.value)
   }
 
-  const handleRegister = () =>{
-    console.log (fname, lname, uname, email, password)
-    axios
-      .post(`${API_URL}/register`,{
+  const handleRegister = async () => {
+    console.log(fname, lname, uname, email, password);
+    try {
+      const result = await axios.post(`${API_URL}/register`, {
         first_name: fname,
         last_name: lname,
         username: uname,
         email: email,
+        password: password,
+      });
+      console.log(result.data);
+      alert('Sign up Success!');
+    } catch (error) {
+      alert('Service Error');
+      console.log(error);
+    }
+  };
+  
+  const handleLogin = async () => {
+    console.log(email, password);
+    try {
+      const result = await axios.post(`${API_URL}/login`, {
+        email: email,
         password: password
-      })
-      .then(result => {
-        console.log(result.data)
-        alert('Sign up Success!')
-      })
-      .catch(error => {
-        alert('Service Error')
-        console.log(error)
-      })
-  }
-
-  const handleLogin = () =>{
-    console.log (email, password)
-    axios
-      .post(`${API_URL}/login`,
-        {
-            email: email,
-            password: password
-        }
-      )
-      .then(result => {
-        const token = result.data.access_token;
-        localStorage.setItem('token', token);
-        console.log(token)
-        alert('Login success')
-        setLoggedIn(true);
-        }
-      )
-      .catch(error => {
-        alert('Service Error')
-        console.log(error)
-        }
-      )
-  }
-
+      });
+      const token = result.data.access_token;
+      setAccessToken(token);
+      localStorage.setItem('token', token);
+      console.log(token);
+      alert('Login success');
+      setLoggedIn(true);
+    } catch (error) {
+      alert('Service Error');
+      console.log(error);
+    }
+  };
+  
    useEffect(() => {
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
@@ -110,7 +105,7 @@ function Landing() {
  
     return (
       <>
-      {loggedIn? (<Navigate to = '/tixsys/dashboard' />):(null)}
+      {loggedIn? (<Navigate to = '/dashboard' />):(null)}
         <div className='col d-flex border align-items-center justify-content-center' 
         style={{ height: "100vh", paddingLeft: "20vw", paddingRight: "20vw"}}>
           <div className="container" id="container">
@@ -206,3 +201,4 @@ function Landing() {
 }
 
 export default Landing;
+

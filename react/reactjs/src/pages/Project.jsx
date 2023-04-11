@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { DragEndFunc } from './DragEndFunc';
-import { initialTasks } from './initialData';
 import { API_URL } from './Landing';
 import ColumnList from './ColumnList';
 import CreateTask from './CreateTask';
@@ -15,12 +14,8 @@ export default function Project() {
 
   const toggle = () => setModal(!modal);
 
-  const onDragEnd = DragEndFunc(projectData, setProjectData, taskData);
+  const onDragEnd = DragEndFunc(projectData, setProjectData, taskData, setTaskData);
   const token = localStorage.getItem('token');
-
-  const save = (taskData) => {
-    setProjectData(taskData)
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,15 +35,15 @@ export default function Project() {
       }
     };
     fetchData();
-    // const intervalId = setInterval(() => {
-    //   fetchData();
-    // }, 1000);
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 10000);
   
-    // return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId);
   }, [token]);
 
-  if (!token) {
-    return <div>Loading...</div>;
+  if (projectData === []) {
+    return <>Loading...</>;
   }
 
   const tasks = taskData;
@@ -56,23 +51,23 @@ export default function Project() {
 
   return (
     <div className = "col w-75 p-5 pl-2">
-      <div className = 'row d-flex align-items-start justify-content-between sticky-top bg-white pt-2'>
-        <div className = 'col d-flex justify-content-start align-items-start'>
+      <div className='row d-flex align-items-start justify-content-between sticky-top bg-white pt-2'>
+        <div className='col d-flex justify-content-start align-items-start'>
           {projectData && <h1>{projectData.name}</h1>}
           {/* <h1>Project Name</h1> */}
         </div>
-        <div className = 'col d-flex justify-content-end align-items-start'>
-          <button className = 'rounded' onClick={()=> toggle()}>ADD TASK BUTTON</button>
+        <div className='col d-flex justify-content-end align-items-start'>
+          <button className='rounded' onClick={() => toggle()}>ADD TASK BUTTON</button>
         </div>
-        <hr/>
-      </div>
+        <hr />
+      </div>;
       
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="kanban-board row my-2 d-flex align-items-start justify-content-center"
         style= {{width: "100vw"}}>
           {projectData && (
             <div className="kanban-column row rounded d-flex align-items-start">
-              <ColumnList tasks={tasks} userData={userData}/>
+              <ColumnList tasks={tasks} userData={userData} />
             </div>
           )}
         </div>
@@ -81,5 +76,4 @@ export default function Project() {
     </div>
   );  
 }
-
 
