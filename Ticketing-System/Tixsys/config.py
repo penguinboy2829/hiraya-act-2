@@ -1,12 +1,12 @@
 import os
-import sys
-from model.init_db import db, url
+from model.init_db import url
+from datetime import timedelta
 
 SECRET_KEY = 'hirayamnl'
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
+BLUEPRINT_URL_PREFIX = '/tixsys'
 
-sys.path.append(dir_path)
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
 
@@ -14,10 +14,14 @@ SQLALCHEMY_DATABASE_URI = url
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-SESSION_PERMANENT = True
-
-SESSION_TYPE = 'sqlalchemy'
-
-SESSION_SQLALCHEMY = db
-
 JSON_SORT_KEYS = False
+
+JWT_COOKIE_SECURE = False
+
+JWT_TOKEN_LOCATION = 'cookies'
+
+JWT_SECRET_KEY = 'hirayamnl'
+
+JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=30)
+
+JWT_COOKIE_CSRF_PROTECT = False
