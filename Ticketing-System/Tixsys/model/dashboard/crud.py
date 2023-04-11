@@ -9,8 +9,7 @@ def view_dashboard(user_id, get_opened_entity):
     tasks = get_opened_entity(entity=Task, archived=False, join=Project.tasks, select='join')
 
     data = {}
-    user_data = {'public_id':user.public_id,
-                 'first_name':user.first_name,
+    user_data = {'first_name':user.first_name,
                  'last_name':user.last_name}
     project_data = [{'public_id':project.public_id,
                      'name':project.name,

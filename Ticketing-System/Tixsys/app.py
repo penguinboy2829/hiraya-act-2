@@ -1,22 +1,15 @@
 from flask import Flask
-from flask_cors import CORS
-from flask_migrate import Migrate
-from flask_sessionstore import Session
-from flask_jwt_extended import JWTManager
-from routes.blueprint import bp
+from extensions import migrate, jwt, cors
+from routes.blueprint import bp, google_bp, facebook_bp, slack_bp
 from model.init_db import db
-
-from datetime import timedelta
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config')
  
-    JWTManager(app)
-    Session(app)
-    CORS(app)
+    jwt.init_app(app)
+    cors.init_app(app)
     
-    app.permanent_session_lifetime = timedelta(hours=24)
     with app.test_request_context():
         db.init_app(app)
         
@@ -26,8 +19,11 @@ def create_app():
     return app
 
 app = create_app()
-app.register_blueprint(bp, url_prefix='/tixsys')
-Migrate(app, db)
+app.register_blueprint(bp)
+app.register_blueprint(google_bp)
+app.register_blueprint(facebook_bp)
+app.register_blueprint(slack_bp)
+migrate.init_app(app, db)
 
 if __name__ == '__main__':
     app.run()

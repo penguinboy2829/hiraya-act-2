@@ -9,20 +9,23 @@ def save_project(user_id, data, get_opened_entity):
     project = get_opened_entity(entity=Project, name=data['name'], archived=False, select='first')
 
     if project:
-        return jsonify({'message':f'Project {project.name} already exists.'})
+        return jsonify({'status':0,
+                        'message':f'Project {project.name} already exists.'})
     
     project = Project(public_id=str(uuid4()), user_id=user_id, name=data['name'], description=data['description'])
     
     db.session.add(project)
     db.session.commit()
 
-    return jsonify({'message':f'Project {project.name} saved.'})
+    return jsonify({'status':1,
+                    'message':f'Project {project.name} saved.'})
 
 def view_project(project_name, data, get_opened_entity):
     project = get_opened_entity(entity=Project, public_id=data['public_id'], name=project_name, archived=False, select='first')
 
     if not project:
-        return jsonify({'message':f'Project {project_name} does not exist.'})
+        return jsonify({'status':0,
+                        'message':f'Project {project_name} does not exist.'})
     
     tasks = get_opened_entity(entity=Task, project_id=project.public_id, archived=False, select='all')
     subtasks = get_opened_entity(entity=Subtask, archived=False, join=Task.subtasks, select='join')
@@ -49,14 +52,17 @@ def edit_project(project_name, data, get_opened_entity, change_entity_values):
     project = get_opened_entity(entity=Project, public_id=data['public_id'], name=project_name, archived=False, select='first')
 
     if not project:
-        return jsonify({'message':f'Project {project_name} does not exist.'})
+        return jsonify({'status':0,
+                        'message':f'Project {project_name} does not exist.'})
     
     modified = change_entity_values(entity=project, data=data)
     
     if modified:
-        return jsonify({'message':f'Project {project.name} modified.'})
+        return jsonify({'status':1,
+                        'message':f'Project {project.name} modified.'})
     
-    return jsonify({'message':f'Project {project.name} not modified.'})
+    return jsonify({'status':0,
+                    'message':f'Project {project.name} not modified.'})
     
 def dump_project(project_name, data, get_opened_entity):
     project = get_opened_entity(entity=Project, public_id=data['public_id'], name=project_name, archived=False, select='first')
@@ -64,7 +70,8 @@ def dump_project(project_name, data, get_opened_entity):
     subtasks = get_opened_entity(entity=Subtask, archived=False, join=Task.subtasks, select='join')
 
     if not project:
-        return jsonify({'message':f'Project {project_name} does not exist.'})
+        return jsonify({'status':0,
+                        'message':f'Project {project_name} does not exist.'})
         
     for task in tasks:
         for subtask in subtasks.filter_by(task.public_id):
@@ -77,4 +84,5 @@ def dump_project(project_name, data, get_opened_entity):
     project.archived = True
     db.session.commit()
 
-    return jsonify({'message':f'Project {project.name} archived.'})
+    return jsonify({'status':1,
+                    'message':f'Project {project.name} archived.'})
