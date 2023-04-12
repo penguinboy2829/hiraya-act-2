@@ -58,18 +58,6 @@ function Landing() {
       console.log(error);
     }
   };
-
-  const parseSetCookieHeader = (header) => {
-    const cookies = header.split(';')
-      .map(cookie => cookie.trim()) // Remove whitespace around each cookie
-      .reduce((cookieObj, cookie) => {
-        const [key, value] = cookie.split('=');
-        cookieObj[key] = value;
-        return cookieObj;
-      }, {});
-  
-    return cookies;
-  };
   
   const handleLogin = async () => {
     console.log(email, password);
@@ -78,7 +66,6 @@ function Landing() {
         email,
         password
       });
-      console.log(result.headers['Set-Cookie']);
       const token = result.data.access_token;
       const refreshToken = result.data.refresh_token; 
       localStorage.setItem('token', token);
@@ -91,52 +78,53 @@ function Landing() {
       console.log(error);
     }
   };
-  
-   useEffect(() => {
-    const signUpButton = document.getElementById('signUp');
-    const signInButton = document.getElementById('signIn');
-    const container = document.getElementById('container');
-   
-    signUpButton.addEventListener('click', () => {
-      container.classList.add("right-panel-active");
-    });
-        
-    signInButton.addEventListener('click', () => {
-      container.classList.remove("right-panel-active");
-    });
-
-    return () => {
-      signUpButton.removeEventListener('click', () => {
-        container.classList.add("right-panel-active");
-      });
-        
-      signInButton.removeEventListener('click', () => {
-        container.classList.remove("right-panel-active");
-      });
-    };
-  }) 
  
     return (
       <>
-      {loggedIn? (<Navigate to = '/dashboard' />):(null)}
+      {loggedIn? (<Navigate to = '/dashboard' />):(
         <div className='col d-flex border align-items-center justify-content-center' 
         style={{ height: "100vh", paddingLeft: "20vw", paddingRight: "20vw"}}>
           <div className="container" id="container">
             <div className="form-container sign-up-container">
-              <form>
+              <form action='#'>
                 <h1>Create Account</h1>
                
-                <input className="login mb-2" onChange= {handleFname} value = {fname} type="text" placeholder="First Name" required/>
-                <input className="login mb-2" onChange= {handleLname} value = {lname} type="text" placeholder="Last Name" required/>
-                <input className="login mb-2" onChange= {handleUname} value = {uname} type="text" placeholder="Username" required/>
-                <input className="login mb-2" onChange= {handleEmail} value = {email} type="email" placeholder="Email" required/>
-                <input className="login mb-2" onChange= {handlePassword} value = {password} type="password" placeholder="Password" required/>
-                <button className = 'button' onClick={handleRegister}>Sign Up</button>
+                <input className="login mb-2" 
+                  onChange= {handleFname} 
+                  value = {fname} 
+                  type="text" 
+                  placeholder="First Name" 
+                  required/>
+                <input className="login mb-2" 
+                  onChange= {handleLname} 
+                  value = {lname} 
+                  type="text" 
+                  placeholder="Last Name" 
+                  required/>
+                <input className="login mb-2" 
+                  onChange= {handleUname} 
+                  value = {uname}
+                  type="text" 
+                  placeholder="Username" 
+                  required/>
+                <input className="login mb-2" 
+                  onChange= {handleEmail} 
+                  value = {email} 
+                  type="email" 
+                  placeholder="Email" 
+                  required/>
+                <input className="login mb-2" 
+                  onChange= {handlePassword} 
+                  value = {password} 
+                  type="password" 
+                  placeholder="Password" 
+                  required/>
+                <button className = 'button'  onClick = {handleRegister}>Sign Up</button>
               </form>
             </div>
         
             <div className="form-container sign-in-container">
-            <form action='#'>
+            <form action='?#'>
               <h1>Sign in</h1>
               <div className="social-container">
                 <a href="" className="social">
@@ -207,6 +195,7 @@ function Landing() {
             </div>
           </div>
         </div>
+        )}
       </>
       
     );

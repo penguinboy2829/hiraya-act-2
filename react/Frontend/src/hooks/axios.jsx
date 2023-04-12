@@ -1,6 +1,5 @@
 import { API_URL } from '../pages/Landing';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 export const GetDashboard = async (setData) => {
   try {
