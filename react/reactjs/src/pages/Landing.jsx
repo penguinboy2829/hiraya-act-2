@@ -22,8 +22,6 @@ function Landing() {
   const [password, setPassword] = useState('')
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [accesstoken, setAccessToken] = useState('');
-
   const handleFname = (event)=>{
     setFname(event.target.value)
   }
@@ -52,6 +50,7 @@ function Landing() {
         email: email,
         password: password,
       });
+      
       console.log(result.data);
       alert('Sign up Success!');
     } catch (error) {
@@ -59,17 +58,31 @@ function Landing() {
       console.log(error);
     }
   };
+
+  const parseSetCookieHeader = (header) => {
+    const cookies = header.split(';')
+      .map(cookie => cookie.trim()) // Remove whitespace around each cookie
+      .reduce((cookieObj, cookie) => {
+        const [key, value] = cookie.split('=');
+        cookieObj[key] = value;
+        return cookieObj;
+      }, {});
+  
+    return cookies;
+  };
   
   const handleLogin = async () => {
     console.log(email, password);
     try {
       const result = await axios.post(`${API_URL}/login`, {
-        email: email,
-        password: password
+        email,
+        password
       });
+      console.log(result.headers['Set-Cookie']);
       const token = result.data.access_token;
-      setAccessToken(token);
+      const refreshToken = result.data.refresh_token; 
       localStorage.setItem('token', token);
+      localStorage.setItem('refresh_token', refreshToken); 
       console.log(token);
       alert('Login success');
       setLoggedIn(true);
@@ -110,10 +123,9 @@ function Landing() {
         style={{ height: "100vh", paddingLeft: "20vw", paddingRight: "20vw"}}>
           <div className="container" id="container">
             <div className="form-container sign-up-container">
-              <form action="#">
+              <form>
                 <h1>Create Account</h1>
-                
-                {/* <span>or use your email for registration</span> */}
+               
                 <input className="login mb-2" onChange= {handleFname} value = {fname} type="text" placeholder="First Name" required/>
                 <input className="login mb-2" onChange= {handleLname} value = {lname} type="text" placeholder="Last Name" required/>
                 <input className="login mb-2" onChange= {handleUname} value = {uname} type="text" placeholder="Username" required/>
@@ -124,7 +136,7 @@ function Landing() {
             </div>
         
             <div className="form-container sign-in-container">
-            <form action="#">
+            <form action='#'>
               <h1>Sign in</h1>
               <div className="social-container">
                 <a href="" className="social">

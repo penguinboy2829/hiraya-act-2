@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import logo1 from "./logo1.svg";
-import logout from "./logout.svg";
-import home from "./home1.svg";
-import layer from "./layer2.svg";
-import settings from "./settings2.svg";
-import admin from "./admin-avatar.svg";
+import { Link } from "react-router-dom";
+import logo1 from "../assets/logo1.svg";
+import logout from "../assets/logout.svg";
+import home from "../assets/home1.svg";
+import layer from "../assets/layer2.svg";
+import settings from "../assets/settings2.svg";
+import admin from "../assets/admin-avatar.svg";
 import "./SideNavBar.css";
 
 const SideNavBar = () => {

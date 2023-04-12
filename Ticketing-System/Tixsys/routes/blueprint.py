@@ -56,7 +56,7 @@ bp.route('/dashboard/<string:project_name>/modify-project', methods=['PATCH'])(P
 bp.route('/dashboard/<string:project_name>/delete-project', methods=['PATCH'])(ProjectController().archive_project)
 bp.route('/dashboard/<string:project_name>/open-task', methods=['GET'])(TaskController().open_task)
 bp.route('/dashboard/<string:project_name>/create-task', methods=['POST'])(TaskController().create_task)
-bp.route('/dashboard/<string:project_name>/move-task', methods=['PATCH'])(TaskController().move_task)
+bp.route('/dashboard/<string:project_name>/<string:task_name>/move-task', methods=['PATCH'])(TaskController().move_task)
 
 #Task System
 bp.route('/dashboard/<string:project_name>/<string:task_name>', methods=['GET'])(TaskController().show_task_data)

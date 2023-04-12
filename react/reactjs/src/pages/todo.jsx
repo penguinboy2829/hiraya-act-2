@@ -172,11 +172,6 @@ function NewTasksCheck(){
   });
 }
 
-
-
-    
-    return (
-     
-    );
+  
   }
 

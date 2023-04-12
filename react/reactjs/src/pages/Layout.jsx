@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Outlet, useLocation} from "react-router-dom";
-import Addtask from './Addtask';
-import AddProject from './AddProject';
-import SideNav from "../Sidenav";
 import SideNavBar from './SideNavBar';
-import Home from "./Home2";
-import Landing from "./Landing"
 
 const Layout = () => {
   const location = useLocation();

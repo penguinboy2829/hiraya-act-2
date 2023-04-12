@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { DragEndFunc } from './DragEndFunc';
-import { API_URL } from './Landing';
 import ColumnList from './ColumnList';
 import CreateTask from './CreateTask';
-import axios from 'axios';
+import { GetProject } from '../hooks/axios';
 
 export default function Project() {
   const [projectData, setProjectData] = useState([]);
@@ -15,32 +14,10 @@ export default function Project() {
   const toggle = () => setModal(!modal);
 
   const onDragEnd = DragEndFunc(projectData, setProjectData, taskData, setTaskData);
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await axios.get(`${API_URL}/dashboard`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
-        });
-        console.log(result.data);
-        setUserData(result.data.user)
-        setProjectData(result.data.projects[0]);
-        setTaskData(result.data.projects[0].tasks)
-
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-    const intervalId = setInterval(() => {
-      fetchData();
-    }, 10000);
-  
-    return () => clearInterval(intervalId);
-  }, [token]);
+    return GetProject(setUserData, setProjectData, setTaskData);
+  }, []);
 
   if (projectData === []) {
     return <>Loading...</>;
@@ -54,7 +31,6 @@ export default function Project() {
       <div className='row d-flex align-items-start justify-content-between sticky-top bg-white pt-2'>
         <div className='col d-flex justify-content-start align-items-start'>
           {projectData && <h1>{projectData.name}</h1>}
-          {/* <h1>Project Name</h1> */}
         </div>
         <div className='col d-flex justify-content-end align-items-start'>
           <button className='rounded' onClick={() => toggle()}>ADD TASK BUTTON</button>
@@ -76,4 +52,5 @@ export default function Project() {
     </div>
   );  
 }
+
 

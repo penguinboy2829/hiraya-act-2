@@ -1,6 +1,6 @@
-import React, { useState,useEffect }  from "react";
-import pficon from './icon2.png';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import React, { useState }  from "react";
+import pficon from '../assets/icon2.png';
+import { Link } from "react-router-dom";
 import "./sidebar.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 

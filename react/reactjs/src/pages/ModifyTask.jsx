@@ -10,8 +10,7 @@ const ModifyTask = ({modal, toggle, task}) => {
         description: task.description,
         public_id: task.public_id
     });
-    // const [subtask, setSubTasks] = useState([]);
-    // const [check, setCheck] = useState(true);
+
     const token = localStorage.getItem('token');
     const taskData = {
         name: data.name,
@@ -50,25 +49,6 @@ const ModifyTask = ({modal, toggle, task}) => {
             
         toggle();
     }
-
-    const deleteTask = () => {
-        axios
-            .patch(`${API_URL}/dashboard/project/${task.name}/delete-task`, 
-            {
-              public_id : task.public_id,
-              name : task.name
-            },
-            {
-              headers: { Authorization: `Bearer ${token}` }
-            })
-            .then((result) => {
-              console.log(result.data);
-            })
-            .catch((error) => {
-              console.log(task)
-              console.log(error);
-            });
-    };
 
     return (
         <Modal isOpen={modal} toggle={toggle}>
@@ -136,7 +116,6 @@ const ModifyTask = ({modal, toggle, task}) => {
             </ModalBody>
             <ModalFooter>
                 <Button color="primary" onClick={handleUpdate}>Update</Button>{' '}
-                <Button color="danger" onClick={deleteTask}>Delete</Button>
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
             </ModalFooter>
       </Modal>
