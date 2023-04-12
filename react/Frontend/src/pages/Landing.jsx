@@ -5,7 +5,7 @@ import { LoginSocialGithub } from 'reactjs-social-login';
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import '../OJT.css';
-
+import { token } from '../hooks/axios';
 export const API_URL = "http://127.0.0.1:5000/tixsys";
 
 const CLIENT_ID = "840fbd6329d3b87f6d7a"
@@ -63,13 +63,11 @@ function Landing() {
     console.log(email, password);
     try {
       const result = await axios.post(`${API_URL}/login`, {
-        email,
-        password
+        username: uname,
+        password: password
       });
-      const token = result.data.access_token;
-      const refreshToken = result.data.refresh_token; 
-      localStorage.setItem('token', token);
-      localStorage.setItem('refresh_token', refreshToken); 
+      
+      const token = localStorage.setItem('access_token', result.data.access_token)
       console.log(token);
       alert('Login success');
       setLoggedIn(true);
@@ -124,7 +122,7 @@ function Landing() {
             </div>
         
             <div className="form-container sign-in-container">
-            <form action='?#'>
+            <form action='#'>
               <h1>Sign in</h1>
               <div className="social-container">
                 <a href="" className="social">
@@ -168,7 +166,7 @@ function Landing() {
                 </a>
               </div>
               <span>or use your account</span>
-              <input className="login mb-2"  onChange= {handleEmail} value = {email} type="email" placeholder="Email" />
+              <input className="login mb-2"  onChange= {handleUname} value = {uname} type="text" placeholder="Username" />
               <input type="password"  onChange= {handlePassword} value = {password} placeholder="Password" />
               <a id="forgot" href="#">Forgot your password?</a>
               <button className = 'button' onClick={handleLogin}>Login</button>

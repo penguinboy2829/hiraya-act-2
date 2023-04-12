@@ -1,14 +1,16 @@
 import { API_URL } from '../pages/Landing';
 import axios from 'axios';
 
+export const token = localStorage.getItem('access_token');
+
 export const GetDashboard = async (setData) => {
   try {
-    const token = localStorage.getItem('token');
     const response = await axios.get(`${API_URL}/dashboard`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
+  
     console.log(response.data);
     setData(response.data);
   } catch (error) {
