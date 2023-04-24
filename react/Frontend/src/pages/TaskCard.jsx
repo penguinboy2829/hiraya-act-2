@@ -31,30 +31,30 @@ export function TaskCard(task, index, userData) {
         });
   };
 
-  useEffect(() => {
-    const fetchSubtaskData = async () => {
-      try {
-        const result = await axios.get(`${API_URL}/dashboard/project/${task.name}`, 
-        {
-          public_id: task.public_id,
-          name: task.name
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        console.log(result.data.subtasks);
-        setSubtaskData([
-          ...subtaskData,
-          result.data.subtasks
-        ]);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchSubtaskData();
-  }, [token]);
+  // useEffect(() => {
+  //   const fetchSubtaskData = async () => {
+  //     try {
+  //       const result = await axios.get(`${API_URL}/dashboard/project/${task.name}`, 
+  //       {
+  //         public_id: task.public_id,
+  //         name: task.name
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`
+  //         }
+  //       });
+  //       console.log(result.data.subtasks);
+  //       setSubtaskData([
+  //         ...subtaskData,
+  //         result.data.subtasks
+  //       ]);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchSubtaskData();
+  // }, [token]);
 
   //Date Format
   const dateStr = task.date_created;

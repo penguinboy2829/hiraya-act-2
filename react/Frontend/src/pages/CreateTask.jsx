@@ -15,45 +15,32 @@ const CreateTask = ({modal, toggle, taskData, setTaskData}) => {
     const handleChange = (e) => {
         const value = e.target.value;
         const name = e.target.name;
-    
-        if (name === "subtask") {
-            // If the input is for subtask, update subtaskData array
-            const updatedSubtaskData = subtaskData.map(item => {
-                if (item.public_id === e.target.id) {
-                    return {
-                        ...item,
-                        name: value
-                    }
-                }
-                return item;
-            });
-            setSubtaskData(updatedSubtaskData);
-        } else {
-            setData({
-                ...data,
-                [name]: value
-            });
-        }
+        
+        setData({
+            ...data,
+            [name]: value
+        });
+        
     };
 
-    const handleSubtaskChange = (e, index) => {
-        const { name, value } = e.target;
-        const updatedSubtaskData = [...subtaskData];
-        updatedSubtaskData[index] = { ...updatedSubtaskData[index], [name]: value };
-        setSubtaskData(updatedSubtaskData);
-    };
+    // const handleSubtaskChange = (e, index) => {
+    //     const { name, value } = e.target;
+    //     const updatedSubtaskData = [...subtaskData];
+    //     updatedSubtaskData[index] = { ...updatedSubtaskData[index], [name]: value };
+    //     setSubtaskData(updatedSubtaskData);
+    // };
 
     const token = localStorage.getItem('token');
     const projectname = 'project';
       
-    const addSubTask = () => {
-        const newSubtask = {
-            public_id: new Date().getTime(),
-            name: ''
-        };
+    // const addSubTask = () => {
+    //     const newSubtask = {
+    //         public_id: new Date().getTime(),
+    //         name: ''
+    //     };
     
-        setSubtaskData(prevSubtaskData => [...prevSubtaskData, newSubtask]);
-    };    
+    //     setSubtaskData(prevSubtaskData => [...prevSubtaskData, newSubtask]);
+    // };    
 
     const handleSave = (e) => {
         const newTaskData = {
@@ -143,7 +130,7 @@ const CreateTask = ({modal, toggle, taskData, setTaskData}) => {
                         name = "date_due"/>
                     </div>
                     <hr />
-                    <div className = "form-group mb-2">
+                    {/* <div className = "form-group mb-2">
                         <label>Subtasks</label>
                         <br />
                         {subtaskData.map((item, index) => 
@@ -175,7 +162,7 @@ const CreateTask = ({modal, toggle, taskData, setTaskData}) => {
                             Add Subtask
                         </button>
                         </div>
-                    </div>
+                    </div> */}
                 
             </ModalBody>
             <ModalFooter>

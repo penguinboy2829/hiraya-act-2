@@ -14,6 +14,7 @@ export default function Project() {
   const toggle = () => setModal(!modal);
 
   const onDragEnd = DragEndFunc(projectData, setProjectData, taskData, setTaskData);
+  
 
   useEffect(() => {
     return GetProject(setUserData, setProjectData, setTaskData);
@@ -35,7 +36,7 @@ export default function Project() {
         <div className='col d-flex justify-content-end align-items-start'>
           <button className='rounded' onClick={() => toggle()}>ADD TASK BUTTON</button>
         </div>
-        <hr />
+      
       </div>;
       
       <DragDropContext onDragEnd={onDragEnd}>
