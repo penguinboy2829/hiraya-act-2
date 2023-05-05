@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import axios from "axios";
+import { API_URL } from './Landing';
+
+const token = localStorage.getItem('token');
+
 
 const CreateProjectPopup = ({modal, toggle, save}) => {
     const [taskName, setTaskName] = useState('');
@@ -12,19 +17,53 @@ const CreateProjectPopup = ({modal, toggle, save}) => {
         }else{
             setDescription(value)
         }
+    
     }
 
     const handleSave = (e) => {
-        e.preventDefault()
         let taskObj = {}
         taskObj["Name"] = taskName
         taskObj["Description"] = description
         save(taskObj)
+
+        console.log (taskName, description)
+        axios
+          .post(`${API_URL}/dashboard/create-project`,
+            {
+                // name: taskName,
+                // description: "lorem ipsum",
+                // date_due: description,
+                
+                name : taskName,
+                date_due: description
+                
+                
+            },
+            {
+                headers:{
+                  Authorization: `Bearer ${token}`
+               }
+              },   
+          )
+          .then(result => {
+            localStorage.setItem("currentprojectname", taskName)
+            
+            console.log(result.data)
+            alert('Save successfuly')
+         
+            }
+          )
+          .catch(error => {
+            alert('Service Error')
+            console.log(taskName)
+            console.log(error)
+            }
+          )
     }
 
     return (
         <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle}>Create Task</ModalHeader>
+            <ModalHeader toggle={toggle}>Create Project</ModalHeader>
             <ModalBody>
             
                     <div className = "form-group">
